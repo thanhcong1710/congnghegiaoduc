@@ -21,31 +21,12 @@
             <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
             <span class="ml-2">Tài khoản</span>
           </li>
-          <li v-if="activeUserInfo.menuroles == 'admin' || activeUserInfo.menuroles == 'user'"
-            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/user/products').catch(() => {})">
-            <feather-icon icon="PackageIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Sản phẩm</span>
-          </li>
-          <li v-if="activeUserInfo.menuroles == 'admin' || activeUserInfo.menuroles == 'user'"
-            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/user/payments').catch(() => {})">
-            <feather-icon icon="CheckSquareIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Thanh toán</span>
-          </li>
-           <li v-if="activeUserInfo.menuroles == 'admin' || activeUserInfo.menuroles == 'law'"
-            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/user/calendar').catch(() => {})">
-            <feather-icon icon="CalendarIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Đặt lịch</span>
-          </li>
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="$router.push('/user/wish-list').catch(() => {})">
-            <feather-icon icon="HeartIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Ưu thích</span>
+            @click="$router.push('/').catch(() => {})">
+            <feather-icon icon="StarIcon" svgClasses="w-4 h-4" />
+            <span class="ml-2">Gói dịch vụ</span>
           </li>
-
           <vs-divider class="m-1" />
 
           <li
