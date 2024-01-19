@@ -44,6 +44,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapLandingPageRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -76,5 +78,12 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapLandingPageRoutes()
+    {
+        Route::prefix('landing-page')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/landing-page.php'));
     }
 }
