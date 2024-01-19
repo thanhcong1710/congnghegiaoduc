@@ -27,8 +27,6 @@ import './http/axios.js'
 // API Calls
 import './http/requests'
 
-// mock
-import './fake-db/index.js'
 
 // Theme Configurations
 import '../themeConfig.js'
