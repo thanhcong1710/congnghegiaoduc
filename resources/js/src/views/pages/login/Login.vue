@@ -24,8 +24,8 @@
               <div class="px-8 pt-8 login-tabs-container">
 
                 <div class="vx-card__title mb-4">
-                  <h4 class="mb-4">Login</h4>
-                  <p>Welcome back, please login to your account.</p>
+                  <h4 class="mb-4">ĐĂNG NHẬP</h4>
+                  <p>Chào mừng trở lại, vui lòng đăng nhập vào tài khoản của bạn.</p>
                 </div>
                 <br>
                 <login-jwt></login-jwt>

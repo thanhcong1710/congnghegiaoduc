@@ -41,67 +41,19 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
         {
-          path: '/',
-          redirect: '/dashboard/analytics'
+          path: '/admin/index',
+          redirect: '/admin/dashboard'
         },
         {
-          path: '/law/list',
-          name: 'law-list',
-          component: () => import('./views/law/list.vue'),
+          path: '/admin/dashboard',
+          name: 'admin-dashboard',
+          component: () => import('./views/DashboardAnalytics.vue'),
           meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Danh sách luật sư', active: true }
-            ],
-            pageTitle: 'Danh sách luật sư',
             rule: 'editor'
           }
         },
         {
-          path: '/law/item/:item_id',
-          name: 'law-item-detail-view',
-          component: () => import('./views/law/ItemDetailView.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Danh sách luật sư', url: {name: 'law-list'} },
-              { title: 'Thông tin chi tiết', active: true }
-            ],
-            parent: 'law-item-detail-view',
-            pageTitle: 'Thông tin chiết',
-            rule: 'editor'
-          }
-        },
-        {
-          path: '/law/checkout',
-          name: 'law-checkout',
-          component: () => import('./views/law/Checkout.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Danh sách luật sư', url: {name: 'law-list'} },
-              { title: 'Giỏ hàng', active: true }
-            ],
-            pageTitle: 'Giỏ hàng',
-            rule: 'editor'
-          }
-        },
-        {
-          path: '/user/wish-list',
-          name: 'user-wish-list',
-          component: () => import('./views/users/WishList.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Tài khoản', url:'/user/profile'},
-              { title: 'Ưa thích', active: true }
-            ],
-            pageTitle: 'Ưa thích',
-            rule: 'editor'
-          }
-        },
-        {
-          path: '/user/profile',
+          path: '/admin/user/profile',
           name: 'user-profile',
           component: () => import('@/views/users/UserSettings.vue'),
           meta: {
@@ -110,51 +62,6 @@ const router = new Router({
               { title: 'Tài khoản', active: true }
             ],
             pageTitle: 'Tài khoản',
-            rule: 'editor'
-          }
-        },
-
-        {
-          path: '/user/payments',
-          name: 'user-payments',
-          component: () => import('@/views/users/PaymentListView.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Tài khoản', url:'/user/profile'},
-              { title: 'Thanh toán', active: true }
-            ],
-            pageTitle: 'Thanh toán',
-            rule: 'editor'
-          }
-        },
-
-        {
-          path: '/user/products',
-          name: 'user-products',
-          component: () => import('@/views/users/ProductList.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Tài khoản', url:'/user/profile'},
-              { title: 'Sản phẩm', active: true }
-            ],
-            pageTitle: 'Sản phẩm',
-            rule: 'editor'
-          }
-        },
-
-        {
-          path: '/user/calendar',
-          name: 'user-calendar',
-          component: () => import('@/views/users/Calendar.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Tài khoản', url:'/user/profile'},
-              { title: 'Đặt lịch', active: true }
-            ],
-            pageTitle: 'Đặt lịch',
             rule: 'editor'
           }
         },

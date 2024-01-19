@@ -33,20 +33,10 @@ Route::group(['middleware' => 'api'], function ($router) {
     });
     Route::group(['middleware' => 'jwt.auth'], function ($router) {
         Route::post('auth/logout', 'AuthController@logout');
-        Route::prefix('payment')->group(function () {
-            Route::post('add', 'PaymentController@add');
-            Route::post('list', 'PaymentController@list');
-            Route::post('delete', 'PaymentController@delete');
-            Route::post('items', 'PaymentController@items');
-        });
         Route::prefix('user')->group(function () {
             Route::post('update-info', 'UserController@updateInfo');
             Route::post('change-password', 'UserController@changePassword');
-            Route::post('law-schedules', 'UserController@lawSchedules');
-            Route::post('law-schedules/add', 'UserController@addLawSchedules');
-            Route::post('law-schedules/delete', 'UserController@deleteLawSchedules');
         });
-        Route::post('payment', 'ApplicationController@demo');
         Route::prefix('video-call')->group(function () {
             Route::post('create', 'VideoCallController@create');
             Route::post('join', 'VideoCallController@join');

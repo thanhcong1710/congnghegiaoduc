@@ -22,28 +22,29 @@ class AuthController extends Controller
     public function register(Request $request){
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
-            'phone'     => ['required','unique:users','regex:/^(84[3|5|7|8|9]|0[3|5|7|8|9])+([0-9]{8})\b$/'],
+            'email'      => ['required', 'email', 'unique:users'],
+            // 'phone'     => ['required','unique:users','regex:/^(84[3|5|7|8|9]|0[3|5|7|8|9])+([0-9]{8})\b$/'],
             'password'  => 'required|min:4|confirmed',
         ]);        
         if ($validate->fails()){
             return response()->json([
-                'status' => 'error',
-                'errors' => $validate->errors()
-            ], 422);
+                'status' => 0,
+                'message' => 'Email đã tồn tại trên hệ thống.'
+            ], 200);
         }        
         $user = new User;
         $user->name = $request->name;
-        $user->phone = u::convertPhoneNumber($request->phone);
+        $user->email = u::convertPhoneNumber($request->email);
+        // $user->phone = u::convertPhoneNumber($request->phone);
         $user->password = bcrypt($request->password);
-        $user->status = 'Active';
+        $user->menuroles = 'user';
+        $user->status = '0';
         $user->save(); 
         
-        $credentials = request(['phone', 'password']);
-        if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-      
-        return $this->respondWithToken($token, $request->phone);
+        return response()->json([
+            'status' => 1,
+            'message' => 'successfully'
+        ]);
     } 
 
     /**
@@ -53,14 +54,25 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = request(['phone', 'password']);
-        $credentials['phone'] = u::convertPhoneNumber($credentials['phone']);
-
-        if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $credentials = request(['email', 'password']);
+        $user = u::getObject(array('email'=>$request->email), 'users');
+        if($user && $user->status!=1){
+            return response()->json([
+                'status' => 0,
+                'type' => 'inactive',
+                'message'=>'Tài khoản chưa được kích hoạt, vui lòng truy cập email để kích hoạt.'
+            ]);
         }
 
-        return $this->respondWithToken($token, $request->phone);
+        if (! $token = JWTAuth::attempt($credentials)) {
+            return response()->json([
+                'status' => 0, 
+                'type' => 'account',
+                'message'=>'Email hoặc mật khẩu không chính xác.'
+            ]);
+        }
+
+        return $this->respondWithToken($token, $request->email);
     }
 
     /**
@@ -99,6 +111,7 @@ class AuthController extends Controller
     protected function respondWithToken($token, $email)
     {
         return response()->json([
+            'status' => 1,
             'accessToken' => $token,
             'userData' => [
                 'displayName' => auth()->user()->name,

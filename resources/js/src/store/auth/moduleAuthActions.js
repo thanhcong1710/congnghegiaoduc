@@ -43,13 +43,13 @@ export default {
   // JWT
   loginJWT ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      jwt.login(payload.userDetails.phone, payload.userDetails.password)
+      jwt.login(payload.userDetails.email, payload.userDetails.password)
         .then(response => {
           // If there's user data in response
-          if (response.data && response.data.userData) {
+          if (response.data && response.data.status && response.data.userData) {
 
             // Navigate User to homepage
-            router.push(payload.redirect_url || '/')
+            router.push(payload.redirect_url || '/admin/dashboard')
 
             // Set accessToken
             localStorage.setItem('accessToken', response.data.accessToken)
@@ -57,12 +57,11 @@ export default {
             // Update user details
             commit('UPDATE_USER_INFO', response.data.userData, {root: true})
 
-            // Set bearer token in axios
-            // commit('SET_BEARER', response.data.accessToken)
-
             resolve(response)
+          } else if (response.data && !response.data.status) {
+            reject({message: response.data.message, type: response.data.type})
           } else {
-            reject({message: 'Wrong Phone or Password'})
+            reject({message: 'Lỗi hệ thống vui lòng thử lại'})
           }
 
         })
@@ -71,27 +70,25 @@ export default {
   },
   registerUserJWT ({ commit }, payload) {
 
-    const { displayName, phone, password, confirmPassword } = payload.userDetails
+    const { displayName, email, password, confirmPassword } = payload.userDetails
 
     return new Promise((resolve, reject) => {
 
       // Check confirm password
       if (password !== confirmPassword) {
-        reject({message: 'Password doesn\'t match. Please try again.'})
+        reject({message: 'Mật khẩu không khớp. Vui lòng thử lại.'})
       }
 
-      jwt.registerUser(displayName, phone, password, confirmPassword)
+      jwt.registerUser(displayName, email, password, confirmPassword)
         .then(response => {
-          // Redirect User
-          router.push(payload.redirect_url || '/')
+          if (response.data && response.data.status) {
+            // Redirect User
+            router.push('/pages/notify-active')
 
-          // Update data in localStorage
-          localStorage.setItem('accessToken', response.data.accessToken)
-          commit('UPDATE_USER_INFO', response.data.userData, {root: true})
-          // Set bearer token in axios
-          // commit('SET_BEARER', response.data.accessToken)
-
-          resolve(response)
+            resolve(response)
+          } else{
+            reject({message: response.data.message})
+          }
         })
         .catch(error => { reject(error) })
     })
