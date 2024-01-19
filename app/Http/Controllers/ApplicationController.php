@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\View;
 
 class ApplicationController extends Controller
 {
-    public function __invoke()
+    public function page()
     {
         return view('application');
     }
-    public function landingPage(){
-        return view('landing-page.index');
+    public function __invoke(){
+        return view('index');
     }
 }

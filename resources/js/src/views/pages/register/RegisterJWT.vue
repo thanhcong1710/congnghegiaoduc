@@ -108,7 +108,7 @@ export default {
           confirmPassword: this.confirm_password
         },
         notify: this.$vs.notify,
-        redirect_url : this.$store.state.eCommerce.cartItems.length > 0  ? '/law/checkout':''
+        redirect_url : '/admin/dashboad'
       }
       this.$store.dispatch('auth/registerUserJWT', payload)
     }

@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapLandingPageRoutes();
+        $this->mapPageRoutes();
 
         $this->mapWebRoutes();
 
@@ -80,10 +80,13 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/api.php'));
     }
 
-    protected function mapLandingPageRoutes()
+    protected function mapPageRoutes()
     {
-        Route::prefix('landing-page')
+        Route::prefix('pages')
             ->namespace($this->namespace)
-            ->group(base_path('routes/landing-page.php'));
+            ->group(base_path('routes/page.php'));
+        Route::prefix('admin')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page.php'));
     }
 }

@@ -95,7 +95,7 @@ export default {
           phone: this.phone,
           password: this.password
         },
-        redirect_url : this.$store.state.eCommerce.cartItems.length > 0  ? '/law/checkout':''
+        redirect_url :  '/admin/dashboad'
       }
 
       this.$store.dispatch('auth/loginJWT', payload)
