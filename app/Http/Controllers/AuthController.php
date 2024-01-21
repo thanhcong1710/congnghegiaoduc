@@ -10,6 +10,7 @@ use Exception;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Providers\UtilityServiceProvider as u;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 { 
@@ -128,5 +129,12 @@ class AuthController extends Controller
                 'menuroles' => auth()->user()->menuroles,
             ]
         ]);
+    }
+
+    public function testMail(){
+        $result = Mail::send('mail.test', array('title'=>'Xin Chào', 'content'=>'Nội dung email'), function($message){
+	        $message->to('thanhcong1710@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+	    });
+        var_dump($result);die('ok');
     }
 }
