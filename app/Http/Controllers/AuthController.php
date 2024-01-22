@@ -40,6 +40,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->menuroles = 'user';
         $user->status = '0';
+        $user->email_verified_code = uniqid();
         $user->save(); 
         
         return response()->json([
@@ -130,11 +131,46 @@ class AuthController extends Controller
             ]
         ]);
     }
+    public function viewMail(){
+        $data = [
+            'image_url_logo' => 'http://local.congnghegiaoduc.com/static/logo.png',
+            'domain' =>'congnghegiaoduc.com',
+            'url_active' => 'https://onboarding-api.brevo.com/account/activate/fa08ee5b71d4785903d9acd3697253c8',
+            'to_mail' =>'thanhcong1710@gmail.com',
+            'url_website'=> 'http://local.congnghegiaoduc.com',
+            'link_active'=> 'http://local.congnghegiaoduc.com',
+        ];
+        return view('mail.activeAccount', ['data'=>$data]);
+    }
+
+    private function sendActiveAccount($email){
+        $user_info = u::getObject(array('email'=>$email),'users');
+        if($user_info){
+            $data = [
+                'image_url_logo' => 'http://local.congnghegiaoduc.com/static/logo.png',
+                'domain' =>'congnghegiaoduc.com',
+                'url_active' => 'https://onboarding-api.brevo.com/account/activate/fa08ee5b71d4785903d9acd3697253c8',
+                'to_mail' =>'thanhcong1710@gmail.com',
+                'url_website'=> 'http://local.congnghegiaoduc.com',
+                'link_active'=> 'http://local.congnghegiaoduc.com',
+            ];
+            $result = Mail::send('mail.activeAccount', array('data'=>$data), function($message) use ($user_info){
+                $subject = "[Công nghệ giáo dục] Hoàn tất đăng ký";
+                $message->to($user_info->email, $user_info->name)->subject($subject);
+            });
+        }
+        
+    }
 
     public function testMail(){
-        $result = Mail::send('mail.test', array('title'=>'Xin Chào', 'content'=>'Nội dung email'), function($message){
-	        $message->to('thanhcong1710@gmail.com', 'Visitor')->subject('Visitor Feedback!');
-	    });
-        var_dump($result);die('ok');
+        $this->sendActiveAccount('thanhcong1710@gmail.com');
+        // $result = Mail::send('mail.test', array('title'=>'Xin Chào', 'content'=>'Nội dung email'), function($message){
+	    //     $message->to('thanhcong1710@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+	    // });
+        // var_dump($result);die('ok');
+    }
+
+    public function activeAccount(Request $request){
+
     }
 }
