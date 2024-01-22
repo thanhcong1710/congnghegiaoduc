@@ -24,11 +24,13 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('bbb/record/delete', 'BigBluButtonController@deleteRecord');
     Route::get('testMail', 'AuthController@testMail');
     Route::get('viewMail', 'AuthController@viewMail');
-    Route::get('account/active/{key}', 'AuthController@activeAccount');
+    Route::get('account/activate/{key}', 'AuthController@activeAccount');
 
     Route::prefix('auth')->group(function () {
         Route::post('login', 'AuthController@login');
         Route::post('register', 'AuthController@register');
+        Route::post('forgot-password', 'AuthController@forgotPassword');
+        Route::post('reset-password', 'AuthController@resetPassword');
     });
     Route::prefix('law')->group(function () {
         Route::post('list', 'LawController@list');

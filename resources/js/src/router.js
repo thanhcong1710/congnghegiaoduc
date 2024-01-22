@@ -99,6 +99,14 @@ const router = new Router({
           }
         },
         {
+          path: '/pages/active-account',
+          name: 'page-active-account',
+          component: () => import('@/views/pages/ActiveAccount.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
+        {
           path: '/pages/forgot-password',
           name: 'page-forgot-password',
           component: () => import('@/views/pages/ForgotPassword.vue'),

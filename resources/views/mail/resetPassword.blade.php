@@ -6,7 +6,7 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="format-detection" content="telephone=no">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>[{{data_get($data, 'domain')}}] Hoàn thành đăng ký</title>
+   <title>[{{data_get($data, 'domain')}}] Đặt lại mật khẩu</title>
    <style type="text/css" emogrify="no">
       #outlook a {
          padding: 0;
@@ -547,7 +547,7 @@
                                                                                                    style="margin-left: 30px;"><span
                                                                                                       style="font-size: 22px; font-weight: bold; display: block;"><span
                                                                                                          style="color: #0B996E;">
-                                                                                                Hoàn tất việc tạo tài khoản của bạn.</span></span></strong></span>
+                                                                                                         Đặt lại mật khẩu của bạn</span></span></strong></span>
                                                                                           </p>
                                                                                        </div>
                                                                                     </td>
@@ -602,10 +602,15 @@
                                                                                        class="r20-i nl2go-default-textstyle"
                                                                                        style="color: #474747; font-family: Inter,Arial; font-size: 14px; word-break: break-word; text-align: center;">
                                                                                        <div>
+                                                                                       <p
+                                                                                             style="margin: 0; font-family: Inter, arial; font-size: 14px; color: #474747;">
+                                                                                             <span><span><span
+                                                                                                      style="background-color: transparent; color: #474747;">Xin chào</span></span></span>
+                                                                                          </p>
                                                                                           <p
                                                                                              style="margin: 0; font-family: Inter, arial; font-size: 14px; color: #474747;">
                                                                                              <span><span><span
-                                                                                                      style="background-color: transparent; color: #474747;">Địa chỉ email của bạn đã được đăng ký với {{data_get($data, 'domain')}} Để xác thực tài khoản của bạn và kích hoạt khả năng gửi chiến dịch email, vui lòng hoàn tất hồ sơ của bạn bằng cách nhấp vào liên kết bên dưới:</span></span></span>
+                                                                                                      style="background-color: transparent; color: #474747;">Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu tài khoản {{data_get($data,'domain')}} của bạn. Vui lòng nhấp vào nút bên dưới để thiết lập lại mật khẩu:</span></span></span>
                                                                                           </p>
                                                                                        </div>
                                                                                     </td>
@@ -663,12 +668,12 @@
                                                                                        style="color: #474747; font-family: Inter,Arial; font-size: 14px; word-break: break-word;">
                                                                                        <!--[if mso]> <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://beeag.r.bh.d.sendibt3.com/tr/cl/fE0cCqakjsvthr9CWUFBKctWRs8hdvXCmzToNkEp3FMyCxisxY96HI6LgRhq7B05960OU9mv1pzx5RHjfdOxseG1wq3NDww0AUldCAMlBUltgoh_sD5nR36Z3GD0yoAJzCMbdLwkxtJyr0Zh-co8g17nAeId5-214RMUVm9BvV6SqIGKQ418CaeHF6qYN3qQ6JKLNqGkkXA5dv_GHd_FN7AHw5T7zGxizRWQZMiC8WTisKrKuj6NN2iVCGtX_SXCME3jn1a6dl3xG22oKSlxtG0vhS8Uo_TsBHO4RdeTwj9NrJFlGznnpAvkV24DD_HB8etvHsoDgXTFlPZPDtgVVIHg2QOK4082nEOIiFUKhJjkzg" style="v-text-anchor:middle; height: 37px; width: 274px;" arcsize="40%" fillcolor="#000000" strokecolor="#000000" strokeweight="1px" data-btn="1"> <w:anchorlock> </w:anchorlock> <v:textbox inset="0,0,0,0"> <div style="display:none;"> <center class="default-button"><span style="color:#ffffff;font-family:&amp;#39;Open Sans&amp;#39;,&amp;#39;Arial&amp;#39;,Helvetica,sans-serif;font-size:18px">Confirm my email address</span></center> </div> </v:textbox> </v:roundrect> <![endif]-->
                                                                                        <!--[if !mso]><!-- --> <a
-                                                                                          href="{{data_get($data,'url_active')}}"
+                                                                                          href="{{data_get($data,'url_reset_pass')}}"
                                                                                           class="r23-r default-button"
                                                                                           target="_blank" data-btn="1"
                                                                                           style="font-style: normal; font-weight: normal; line-height: 1.15; text-decoration: none; word-break: break-word; border-style: solid; word-wrap: break-word; display: block; -webkit-text-size-adjust: none; background-color: #000000; border-bottom-width: 0px; border-color: #000000; border-left-width: 0px; border-radius: 15px; border-right-width: 0px; border-top-width: 0px; color: #FFFFFF; font-family: Inter, Arial; font-size: 16px; height: 20px; mso-hide: all; padding-bottom: 9px; padding-left: 5px; padding-right: 5px; padding-top: 9px; width: 265px;">
                                                                                           <span
-                                                                                             style="color: #ffffff; font-family: 'Open Sans','Arial',Helvetica,sans-serif; font-size: 18px;">Xác nhận địa chỉ email</span></a>
+                                                                                             style="color: #ffffff; font-family: 'Open Sans','Arial',Helvetica,sans-serif; font-size: 18px;">Thay đổi mật khẩu</span></a>
                                                                                        <!--<![endif]-->
                                                                                     </td>
                                                                                  </tr>
@@ -725,8 +730,8 @@
                                                                                           <p
                                                                                              style="margin: 0; font-family: Inter, arial; font-size: 14px; color: #474747;">
                                                                                              <span><span><span
-                                                                                                      style="background-color: transparent; color: #474747;">Nếu bạn không liên kết địa chỉ của mình với tài khoản {{data_get($data,'domain')}}, vui lòng bỏ qua thông báo này và không nhấp vào liên kết ở trên.</span></span></span><br><span><span><br><span
-                                                                                                      style="color: #474747; background-color: transparent;">Nếu bạn gặp bất kỳ vấn đề nào với nút ở trên, hãy sao chép và dán URL bên dưới vào trình duyệt web của bạn.</span></span><br><span>&nbsp;</span><br><span>{{data_get($data, 'url_active')}}</span></span>
+                                                                                                      style="background-color: transparent; color: #474747;">Nếu bạn không yêu cầu đặt lại mật khẩu này, vui lòng bỏ qua email này hoặc liên hệ với nhóm hỗ trợ của chúng tôi nếu bạn có bất kỳ câu hỏi nào.</span></span></span><br><span><span><br><span
+                                                                                                      style="color: #474747; background-color: transparent;">Nếu bạn gặp bất kỳ vấn đề nào với nút ở trên, hãy sao chép và dán URL bên dưới vào trình duyệt web của bạn.</span></span><br><span>&nbsp;</span><br><span>{{data_get($data, 'url_reset_pass')}}</span></span>
                                                                                           </p>
                                                                                        </div>
                                                                                     </td>
@@ -786,7 +791,7 @@
                                                                                                 to&nbsp; {{data_get($data,'to_mail')}}</span>
                                                                                           </p>
                                                                                           <p style="margin: 0;"><span
-                                                                                                style="font-size: 11px;">Bạn nhận được email này vì bạn đã tạo tài khoản {{data_get($data, 'domain')}}</span>
+                                                                                                style="font-size: 11px;">Bạn nhận được email này vì bạn đã yêu cầu cài đặt lại mật khẩu</span>
                                                                                           </p>
                                                                                           
                                                                                        </div>

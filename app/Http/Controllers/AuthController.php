@@ -10,6 +10,7 @@ use Exception;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Providers\UtilityServiceProvider as u;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
@@ -131,28 +132,17 @@ class AuthController extends Controller
             ]
         ]);
     }
-    public function viewMail(){
-        $data = [
-            'image_url_logo' => 'http://local.congnghegiaoduc.com/static/logo.png',
-            'domain' =>'congnghegiaoduc.com',
-            'url_active' => 'https://onboarding-api.brevo.com/account/activate/fa08ee5b71d4785903d9acd3697253c8',
-            'to_mail' =>'thanhcong1710@gmail.com',
-            'url_website'=> 'http://local.congnghegiaoduc.com',
-            'link_active'=> 'http://local.congnghegiaoduc.com',
-        ];
-        return view('mail.activeAccount', ['data'=>$data]);
-    }
+   
 
     private function sendActiveAccount($email){
         $user_info = u::getObject(array('email'=>$email),'users');
         if($user_info){
             $data = [
-                'image_url_logo' => 'http://local.congnghegiaoduc.com/static/logo.png',
-                'domain' =>'congnghegiaoduc.com',
-                'url_active' => 'https://onboarding-api.brevo.com/account/activate/fa08ee5b71d4785903d9acd3697253c8',
-                'to_mail' =>'thanhcong1710@gmail.com',
-                'url_website'=> 'http://local.congnghegiaoduc.com',
-                'link_active'=> 'http://local.congnghegiaoduc.com',
+                'image_url_logo' => config('app.url').'/static/logo.png',
+                'domain' => config('app.name'),
+                'url_active' => config('app.url').'/api/account/activate/'.$user_info->email_verified_code,
+                'to_mail' =>$user_info->email,
+                'url_website'=> config('app.url'),
             ];
             $result = Mail::send('mail.activeAccount', array('data'=>$data), function($message) use ($user_info){
                 $subject = "[Công nghệ giáo dục] Hoàn tất đăng ký";
@@ -161,16 +151,84 @@ class AuthController extends Controller
         }
         
     }
+    public function viewMail(){
+        $data = [
+            'image_url_logo' => 'http://local.congnghegiaoduc.com/static/logo.png',
+            'domain' =>'congnghegiaoduc.com',
+            'url_active' => 'https://onboarding-api.brevo.com/account/activate/fa08ee5b71d4785903d9acd3697253c8',
+            'to_mail' =>'thanhcong1710@gmail.com',
+            'url_website'=> 'http://local.congnghegiaoduc.com',
+        ];
+        return view('mail.activeAccount', ['data'=>$data]);
+    }
 
     public function testMail(){
         $this->sendActiveAccount('thanhcong1710@gmail.com');
-        // $result = Mail::send('mail.test', array('title'=>'Xin Chào', 'content'=>'Nội dung email'), function($message){
-	    //     $message->to('thanhcong1710@gmail.com', 'Visitor')->subject('Visitor Feedback!');
-	    // });
-        // var_dump($result);die('ok');
     }
 
     public function activeAccount(Request $request){
+        $key = $request->key;
+        $user_info = u::getObject(array('email_verified_code'=>$key), 'users');
+        if($user_info){
+            u::updateSimpleRow(array(
+                'status' => 1,
+                'email_verified_at' => date('Y-m-d H:i:s')
+            ), array('id'=>$user_info->id),'users');
+            $link = config('app.url').'/pages/active-account?status=1&email='.$user_info->email;
+        }else{
+            $link = config('app.url').'/pages/active-account?status=0';
+        }
+        return redirect($link);
+    }
 
+    public function forgotPassword(Request $request){
+        $user_info = u::getObject(array('email'=>$request->email), 'users');
+        if($user_info){
+            $data = [
+                'image_url_logo' => config('app.url').'/static/logo.png',
+                'domain' => config('app.name'),
+                'url_reset_pass' => config('app.url').'/pages/reset-password?email='.$user_info->email.'&key_reset='.md5($user_info->email."CNGD@1234"),
+                'to_mail' =>$user_info->email,
+                'url_website'=> config('app.url'),
+            ];
+            $result = Mail::send('mail.resetPassword', array('data'=>$data), function($message) use ($user_info){
+                $subject = "[Công nghệ giáo dục] Đặt lại mật khẩu";
+                $message->to($user_info->email, $user_info->name)->subject($subject);
+            });
+            return response()->json([
+                'status' => 1,
+                'message' => 'Một email đã được gửi đến hộp thư của bạn.'
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'Email không hợp lệ, vui lòng liên hệ với quản trị viên để được hỗ trợ.'
+            ], 200);
+        }
+    }
+
+    public function resetPassword(Request $request){
+        $user_info = u::getObject(array('email'=>$request->email), 'users');
+        if($user_info){
+            if($request->key_reset == md5($user_info->email."CNGD@1234")){
+                u::updateSimpleRow(array(
+                    'password' => Hash::make($request->password)
+                ), array('id' => $user_info->id), 'users');
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'Đổi mật khẩu thành công.'
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Mã cập nhật không hợp lệ, vui lòng liên hệ với quản trị viên để được hỗ trợ.'
+                ], 200); 
+            }
+        }else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'Email không hợp lệ, vui lòng liên hệ với quản trị viên để được hỗ trợ.'
+            ], 200);
+        }
     }
 }
