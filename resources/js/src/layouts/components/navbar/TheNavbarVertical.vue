@@ -19,15 +19,15 @@
         <!-- SM - OPEN SIDEBAR BUTTON -->
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
 
-        <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" />
+        <!-- <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" /> -->
 
         <vs-spacer />
 
-        <i18n />
+        <!-- <i18n /> -->
 
-        <search-bar />
+        <!-- <search-bar /> -->
 
-        <notification-drop-down />
+        <!-- <notification-drop-down /> -->
 
         <profile-drop-down />
 

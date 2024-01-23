@@ -41,7 +41,7 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
         {
-          path: '/admin/index',
+          path: '/',
           redirect: '/admin/dashboard'
         },
         {
@@ -49,7 +49,8 @@ const router = new Router({
           name: 'admin-dashboard',
           component: () => import('./views/DashboardAnalytics.vue'),
           meta: {
-            rule: 'editor'
+            rule: 'editor',
+            authRequired: true
           }
         },
         {
@@ -62,7 +63,37 @@ const router = new Router({
               { title: 'Tài khoản', active: true }
             ],
             pageTitle: 'Tài khoản',
-            rule: 'editor'
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+        {
+          path: '/admin/rooms',
+          name: 'rooms',
+          component: () => import('@/views/rooms/list.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Phòng họp', active: true }
+            ],
+            pageTitle: 'Phòng họp',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+        {
+          path: '/admin/rooms/:id',
+          name: 'room-detail-view',
+          component: () => import('@/views/rooms/detail.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Phòng họp', url: '/' },
+              { title: 'Chi tiết', active: true },
+            ],
+            pageTitle: 'Chi tiết phòng họp',
+            rule: 'editor',
+            authRequired: true
           }
         },
         
@@ -202,7 +233,7 @@ router.afterEach(() => {
 
 router.beforeEach((to, from, next) => {
   if (to.meta.authRequired) {
-    if (!(auth.isAuthenticated() || firebaseCurrentUser)) {
+    if (!(auth.isAuthenticated())) {
       router.push({ path: '/pages/login', query: { to: to.path } })
     }
   }

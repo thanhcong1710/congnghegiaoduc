@@ -20,24 +20,24 @@
 
 
 export default [
-  {
-    url: '/',
-    name: 'Dashboard',
-    tagColor: 'warning',
-    icon: 'HomeIcon',
-    i18n: 'Dashboard'
-  },
+  // {
+  //   url: '/',
+  //   name: 'Dashboard',
+  //   tagColor: 'warning',
+  //   icon: 'HomeIcon',
+  //   i18n: 'Dashboard'
+  // },
   {
     header: 'Ứng dụng',
     icon: 'PackageIcon',
     i18n: 'Ứng dụng',
     items: [
       {
-        url: '/apps/email',
-        name: 'Cuộc họp',
+        url: '/admin/rooms',
+        name: 'Phòng họp',
         slug: 'rooms',
         icon: 'VideoIcon',
-        i18n: 'Cuộc họp'
+        i18n: 'Phòng họp'
       },
       {
         url: '/apps/chat',
@@ -54,7 +54,7 @@ export default [
     i18n: 'Tài khoản',
     items: [
       {
-        url: '/apps/email',
+        url: '/admin/user/profile',
         name: 'Cài đặt tài khoản',
         slug: 'user',
         icon: 'SettingsIcon',

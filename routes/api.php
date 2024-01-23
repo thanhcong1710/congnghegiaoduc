@@ -42,9 +42,12 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('update-info', 'UserController@updateInfo');
             Route::post('change-password', 'UserController@changePassword');
         });
-        Route::prefix('video-call')->group(function () {
-            Route::post('create', 'VideoCallController@create');
-            Route::post('join', 'VideoCallController@join');
+        Route::prefix('rooms')->group(function () {
+            Route::post('create', 'RoomsController@create');
+            Route::post('list', 'RoomsController@list');
+            Route::post('list', 'RoomsController@list');
+            Route::get('info/{id}', 'RoomsController@info');
+            Route::post('upload-file', 'RoomsController@uploadFile');
         });
     });
 });

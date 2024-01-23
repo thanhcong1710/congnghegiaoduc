@@ -19,19 +19,22 @@ class BigBluButtonController extends Controller
     public function createRoom(Request $request)
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo4';
-        $meetingName = 'DEMO 4';
+        $meetingID = 'demo9';
+        $meetingName = 'DEMO 7';
         $attendee_password = '123456';
         $moderator_password = 'acbd1234';
-        $duration = 6000000;
+        $duration = 300;
         $urlLogout = 'https://law.dapanh.com/';
         $isRecordingTrue = true;
+        $welcomeMessage = "Welcome to congnghegiaoduc.com";
 
         $createMeetingParams = new CreateMeetingParameters($meetingID, $meetingName);
         $createMeetingParams->setAttendeePassword($attendee_password);
         $createMeetingParams->setModeratorPassword($moderator_password);
         $createMeetingParams->setDuration($duration);
         $createMeetingParams->setLogoutUrl($urlLogout);
+        $createMeetingParams->setWelcomeMessage($welcomeMessage);
+        $createMeetingParams->addPresentation('https://didongviet.vn/dchannel/wp-content/uploads/2023/08/hinh-nen-3d-hinh-nen-iphone-dep-3d-didongviet@2x.jpg');
         if ($isRecordingTrue) {
             $createMeetingParams->setRecord(true);
             $createMeetingParams->setAllowStartStopRecording(true);
@@ -51,9 +54,9 @@ class BigBluButtonController extends Controller
     public function joinRoom(Request $request)
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo4';
+        $meetingID = 'demo9';
         $name = 'conglt';
-        $password = '123456';
+        $password = 'acbd1234';
 
         $joinMeetingParams = new JoinMeetingParameters($meetingID, $name, $password);
         $joinMeetingParams->setRedirect(true);
@@ -66,7 +69,7 @@ class BigBluButtonController extends Controller
     public function endRoom(Request $request)
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo4';
+        $meetingID = 'demo6';
         $moderator_password = 'acbd1234';
 
         $endMeetingParams = new EndMeetingParameters($meetingID, $moderator_password);
@@ -78,7 +81,7 @@ class BigBluButtonController extends Controller
     public function getRoomInfo()
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo4';
+        $meetingID = 'demo7';
         $moderator_password = 'acbd1234';
 
         $getMeetingInfoParams = new GetMeetingInfoParameters($meetingID, $moderator_password);
