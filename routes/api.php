@@ -46,6 +46,8 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('create', 'RoomsController@create');
             Route::post('list', 'RoomsController@list');
             Route::get('info/{id}', 'RoomsController@info');
+            Route::get('slides/{id}', 'RoomsController@getSlides');
+            Route::get('slides-delete/{id}', 'RoomsController@deleteSlide');
             Route::post('upload-file', 'RoomsController@uploadFile');
         });
     });

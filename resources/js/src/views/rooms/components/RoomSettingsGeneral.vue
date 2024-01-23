@@ -115,11 +115,6 @@
             console.log(error);
             this.$vs.loading.close();
           })
-      },
-      reset() {
-        this.phone = this.$store.state.AppActiveUser.phone
-        this.name = this.$store.state.AppActiveUser.name
-        this.email = this.$store.state.AppActiveUser.email
       }
     },
   }

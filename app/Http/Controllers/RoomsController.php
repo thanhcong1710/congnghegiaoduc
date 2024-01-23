@@ -77,9 +77,63 @@ class RoomsController extends Controller
         return response()->json($result);
     }
 
-    public function uploadFile()
+    public function uploadFile(Request $request)
     {
+        $total = count($_FILES['files']['name']);
+        for( $i=0 ; $i < $total ; $i++ ) {
+            $tmpFilePath = $_FILES['files']['tmp_name'][$i];
+            if ($tmpFilePath != ""){
+                $dir = __DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/';
+                if(!file_exists($dir)){
+                    mkdir($dir);
+                }
+                $newFilePath = $dir . $_FILES['files']['name'][$i];
+                $newFilePath = u::update_file_name($newFilePath);
+                $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
+                $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
+                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+                    u::insertSimpleRow(array(
+                        'title' => $title,
+                        'file_url' => $dir_file_insert,
+                        'type' => 1,
+                        'data_id' => $request->room_id,
+                        'status' => 1,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'creator_id' => Auth::user()->id,
+                    ), 'upload_files');
+                }
+            }
+        }
         return response()->json("ok");
     }
 
+    public function getSlides(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            $data = u::getMultiObject(array('data_id'=>$request->id, 'type'=>1, 'status'=>1),'upload_files', 0, 'id', true);
+            foreach($data AS $k => $row){
+                $data[$k]->file_url = config('app.url')."/".$row->file_url;
+            }
+            $result = [
+                'status' => 1,
+                'message' => 'success full',
+                'data' => $data
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function deleteSlide(Request $request){
+        u::updateSimpleRow(array(
+            'status'=>0,
+            'updated_at'=>date('Y-m-d H:i:s'),
+            'updator_id'=>Auth::user()->id
+        ), array('id'=>$request->id), 'upload_files');
+        return response()->json("ok");
+    }
 }

@@ -98,7 +98,7 @@
           lpage: 1,
           cpage: 1,
           total: 0,
-          limit: 10,
+          limit: 12,
           pages: [],
           init: 0
         },

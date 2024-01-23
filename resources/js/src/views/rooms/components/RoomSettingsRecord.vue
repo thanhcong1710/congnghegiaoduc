@@ -65,6 +65,8 @@
 
   export default {
     components: {},
+    
+
     data() {
       return {
         note: this.$store.state.AppActiveUser.note,

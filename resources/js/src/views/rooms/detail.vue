@@ -29,17 +29,17 @@
       <!-- GENERAL -->
       <vs-tab icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'Cài đặt' : ''">
         <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-          <room-settings-general :data="room" />
+          <room-settings-general :room="room" />
         </div>
       </vs-tab>
       <vs-tab icon-pack="feather" icon="icon-file-text" :label="!isSmallerScreen ? 'Slide thuyết trình' : ''">
         <div class="tab-info md:ml-4 md:mt-0 mt-4 ml-0">
-          <room-settings-slide />
+          <room-settings-slide :room="room"/>
         </div>
       </vs-tab>
       <vs-tab icon-pack="feather" icon="icon-save" :label="!isSmallerScreen ? 'Bản ghi hình' : ''">
         <div class="tab-info md:ml-4 md:mt-0 mt-4 ml-0">
-          <room-settings-record />
+          <room-settings-record :room="room"/>
         </div>
       </vs-tab>
     </vs-tabs>
