@@ -11,47 +11,40 @@
               <tr>
                 <!---->
                 <th colspan="1" rowspan="1">
-                  <div class="vs-table-text">Email
+                  <div class="vs-table-text">Mã
                     <!---->
                   </div>
                 </th>
                 <th colspan="1" rowspan="1">
-                  <div class="vs-table-text">Name
+                  <div class="vs-table-text">Bắt đầu
                     <!---->
                   </div>
                 </th>
                 <th colspan="1" rowspan="1">
-                  <div class="vs-table-text">Website
+                  <div class="vs-table-text">Kết thúc
                     <!---->
                   </div>
                 </th>
                 <th colspan="1" rowspan="1">
-                  <div class="vs-table-text">Nro
+                  <div class="vs-table-text">Ghi hình
                     <!---->
                   </div>
                 </th>
               </tr>
             </thead>
-            <tr class="tr-values vs-table--tr tr-table-state-null">
+            <tr class="tr-values vs-table--tr tr-table-state-null" v-for="item in sessions" :key="item.id">
               <!---->
-              <td class="td vs-table--td"><span>
-                  <!---->
-                  Sincere@april.biz
-                  <!----></span></td>
-              <td class="td vs-table--td"><span>
-                  <!---->
-                  Leanne Graham
-                  <!----></span></td>
-              <td class="td vs-table--td"><span>
-                  <!---->
-                  hildegard.org
-                  <!----></span></td>
-              <td class="td vs-table--td"><span>
-                  <!---->
-                  1
-                  <!----></span></td>
+              <td class="td vs-table--td">{{item.code}}</td>
+              <td class="td vs-table--td">{{item.start_time}}</td>
+              <td class="td vs-table--td">{{item.end_time}}</td>
+              <td class="td vs-table--td"></td>
             </tr>
           </table>
+          <vs-pagination
+            v-if="Math.ceil(pagination.total / pagination.limit) >1"
+            :total="Math.ceil(pagination.total / pagination.limit)"
+            :max="7"
+            v-model="pagination.cpage" @change="changePage()"/>
         </div>
         <!---->
         <!---->
@@ -65,56 +58,66 @@
 
   export default {
     components: {},
-    
-
     data() {
       return {
-        note: this.$store.state.AppActiveUser.note,
-        birthday: this.$store.state.AppActiveUser.birthday,
-        address: this.$store.state.AppActiveUser.address,
-        gender: this.$store.state.AppActiveUser.gender,
-        alert: {
-          status: '',
-          show: false,
-          message: ''
-        }
+        sessions:[],
+        pagination: {
+          url: "/api/rooms/list",
+          id: "",
+          style: "line",
+          class: "",
+          spage: 1,
+          ppage: 1,
+          npage: 0,
+          lpage: 1,
+          cpage: 1,
+          total: 0,
+          limit: 10,
+          pages: [],
+          init: 0
+        },
       }
     },
-    computed: {
-      activeUserInfo() {
-        return this.$store.state.AppActiveUser
-      }
+    created() {
+      this.getData();
     },
     methods: {
-      updateUser() {
+      getData() {
         this.$vs.loading()
-        axios.p('/api/user/update-info', {
-            data: {
-              'note': this.note,
-              'birthday': this.birthday,
-              'address': this.address,
-              'gender': this.gender
-            }
+        axios.p(`/api/rooms/sessions/${this.$route.params.id}`, {
+            pagination: this.pagination
           })
           .then((response) => {
-            this.$store.dispatch('updateUserInfo', response.data.userData)
             this.$vs.loading.close()
-            this.alert.show = true
-            this.alert.status = response.data.status
-            this.alert.message = response.data.message
-            this.alert.color = response.data.status ? 'success' : 'danger'
+            if (response.data.status) {
+              this.sessions = response.data.data.list
+              this.pagination = response.data.data.paging;
+              this.pagination.init = 1;
+            } else {
+              this.$vs.notify({
+                title: 'Lỗi',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'danger'
+              })
+            }
           })
           .catch((error) => {
             console.log(error);
             this.$vs.loading.close();
           })
       },
-      reset() {
-        this.note = this.$store.state.AppActiveUser.note
-        this.birthday = this.$store.state.AppActiveUser.birthday
-        this.address = this.$store.state.AppActiveUser.address
-        this.gender = this.$store.state.AppActiveUser.gender
-      }
+      changePage() {
+        if (this.pagination.init) {
+          this.getData();
+        }
+      },
+      changePageLimit(limit) {
+        this.pagination.cpage = 1
+        this.pagination.limit = limit
+        this.getData();
+      },
     }
   }
 </script>

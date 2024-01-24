@@ -14,10 +14,10 @@
         </div>
       </vs-col>
       <vs-col class="mb-3 action-room-detail" vs-type="flex" vs-justify="right" vs-align="center" vs-lg="8" vs-sm="12" vs-xs="12">
-        <vs-button type="border">
+        <vs-button type="border"  @click="copyTextJoinLink(room.join_link, 'Link tham gia cuộc họp')">
           <feather-icon icon="CopyIcon" svgClasses="h-5 w-5"></feather-icon> Sao chép liên kết
         </vs-button>
-        <vs-button class="ml-3">
+        <vs-button class="ml-3" @click="join">
           <feather-icon icon="PlayCircleIcon" svgClasses="h-5 w-5"></feather-icon> Bắt đầu cuộc họp
         </vs-button>
       </vs-col>
@@ -96,6 +96,54 @@
             console.log(error);
             this.$vs.loading.close();
           })
+      },
+      copyTextJoinLink(textCopy, message) {
+          const thisIns = this;
+          this.$copyText(textCopy).then(function() {
+              thisIns.$vs.notify({
+                  title: 'Copy',
+                  text: message,
+                  color: 'success',
+                  iconPack: 'feather',
+                  icon: 'icon-check-circle'
+              })
+          }, function() {
+              thisIns.$vs.notify({
+                  title: 'Failed',
+                  text: 'Error in copying text',
+                  color: 'danger',
+                  iconPack: 'feather',
+                  icon: 'icon-alert-circle'
+              })
+          })
+      },
+      join(){
+        this.$vs.loading()
+        axios.p(`/api/room/join`,{
+          code: this.room.code,
+          name: this.$store.state.AppActiveUser.name,
+          pass: this.room.password_moderator,
+          init: 1,
+        })
+        .then((response) => {
+          if (response.data.status) {
+            window.location.href = response.data.redirect_url;
+            this.$vs.loading.close()
+          } else {
+            this.$vs.loading.close()
+            this.$vs.notify({
+              title: 'Lỗi',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'danger'
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
       }
     },
   }

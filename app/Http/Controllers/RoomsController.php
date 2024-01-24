@@ -45,8 +45,9 @@ class RoomsController extends Controller
     public function info(Request $request)
     {
         $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
-        $room_info->last_session_time = $room_info->last_session_time ? date('d/m/Y H:i:s', strtotime($room_info->last_session_time)):'';
         if($room_info){
+            $room_info->last_session_time = $room_info->last_session_time ? date('d/m/Y H:i:s', strtotime($room_info->last_session_time)):'';
+            $room_info->join_link = config('app.url').'/rooms/'.$room_info->code;
             $result = [
                 'status' => 1,
                 'message' => 'success full',
@@ -266,8 +267,9 @@ class RoomsController extends Controller
 
     public function joinRoom(Request $request){
         $room_info = u::first("SELECT * FROM rooms WHERE `status`=1 AND code = '".$request->code."'");
+        $init = $request->init && data_get(Auth::user(), 'id') == $room_info->creator_id ? 1 : 0; 
         if($room_info){
-            if($room_info->password_attendee && ($room_info->password_attendee != $request->pass && $room_info->password_moderator != $request->pass)){
+            if($room_info->password_attendee && ($init !=1 && $room_info->password_attendee != $request->pass && $room_info->password_moderator != $request->pass)){
                 return [
                     'status' => 0,
                     'message' => 'Mã truy cập không hợp lệ.',
@@ -276,7 +278,7 @@ class RoomsController extends Controller
             $presentation = u::query("SELECT file_url FROM upload_files WHERE status=1 AND type=1 AND data_id=$room_info->id");
             $session_info = u::first("SELECT * FROM room_sessions WHERE room_id= $room_info->id AND `status`=1");
             if($session_info){
-                $pass_join = $request->pass == $room_info->password_moderator || $room_info->cf_moderator ? data_get($session_info, 'password_moderator') : data_get($session_info, 'password_attendee');
+                $pass_join = $init==1 || $request->pass == $room_info->password_moderator || $room_info->cf_moderator || $request->init==1 ? data_get($session_info, 'password_moderator') : data_get($session_info, 'password_attendee');
                 $url_join = bbb::joinRoom(data_get($session_info, 'code'), $request->name, $pass_join);
                 $result = [
                     'status' => 1,
@@ -307,7 +309,7 @@ class RoomsController extends Controller
                             'password_moderator' => data_get($bbb_info, 'password_moderator')
                         ), 'room_sessions');
 
-                        $pass_join = $request->pass == $room_info->password_moderator || $room_info->cf_moderator ? data_get($bbb_info, 'password_moderator') : data_get($bbb_info, 'password_attendee');
+                        $pass_join = $init==1 || $request->pass == $room_info->password_moderator || $room_info->cf_moderator ? data_get($bbb_info, 'password_moderator') : data_get($bbb_info, 'password_attendee');
                         $url_join = bbb::joinRoom(data_get($bbb_info, 'meetingID'), $request->name, $pass_join);
                         
                         $result = [
@@ -332,6 +334,38 @@ class RoomsController extends Controller
             $result = [
                 'status' => 0,
                 'message' => 'Link tham gia không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function getSessions(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            $pagination = (object)$request->pagination;
+            $page = isset($pagination->cpage) ? (int) $pagination->cpage : 1;
+            $limit = isset($pagination->limit) ? (int) $pagination->limit : 20;
+            $offset = $page == 1 ? 0 : $limit * ($page - 1);
+            $limitation =  $limit > 0 ? " LIMIT $offset, $limit" : "";
+            $cond = " r.room_id = ".$room_info->id;
+            $total = u::first("SELECT count(r.id) AS total FROM room_sessions AS r WHERE $cond ");
+            $list = u::query("SELECT r.*
+                FROM room_sessions AS r 
+                WHERE $cond ORDER BY r.id DESC $limitation");
+            foreach($list AS $k=>$row){
+                $list[$k]->start_time = $row->start_time ? date('d/m/Y H:i:s', strtotime($row->start_time)):'';
+                $list[$k]->end_time = $row->end_time ? date('d/m/Y H:i:s', strtotime($row->end_time)):'';
+            }
+            $data = u::makingPagination($list, $total->total, $page, $limit);
+            $result = [
+                'status' => 1,
+                'message' => 'success full',
+                'data' => $data
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
             ];
         }
         return response()->json($result);

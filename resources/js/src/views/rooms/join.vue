@@ -103,10 +103,11 @@ export default {
           pass: this.input.pass
         })
         .then((response) => {
-          this.$vs.loading.close()
           if (response.data.status) {
             window.location.href = response.data.redirect_url;
+            this.$vs.loading.close()
           } else {
+            this.$vs.loading.close()
             this.$vs.notify({
               title: 'Lỗi',
               text: response.data.message,

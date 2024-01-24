@@ -58,6 +58,7 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('remove-pass', 'RoomsController@removePass');
             Route::post('gen-pass', 'RoomsController@genPass');
             Route::get('room-delete/{id}', 'RoomsController@deleteRoom');
+            Route::post('sessions/{id}', 'RoomsController@getSessions');
         });
     });
 });
