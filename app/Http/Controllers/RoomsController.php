@@ -136,4 +136,87 @@ class RoomsController extends Controller
         ), array('id'=>$request->id), 'upload_files');
         return response()->json("ok");
     }
+
+    public function update(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            $params = $request->input();
+            $data_update = array(
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'updator_id'=>Auth::user()->id
+            );
+            foreach($params AS $k=> $row){
+                if($k != 'id'){
+                    $data_update[$k] = $row;
+                }
+            }
+            u::updateSimpleRow($data_update, array('id'=>$request->id), 'rooms');
+            $result = [
+                'status' => 1,
+                'message' => 'Cập nhật thông tin phòn họp thành công',
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function removePass(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            $data_update = array(
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'updator_id'=>Auth::user()->id
+            );
+            if($request->type ==2){
+                $data_update['password_moderator'] = null;
+            }else{
+                $data_update['password_attendee'] = null;
+            }
+            u::updateSimpleRow($data_update, array('id'=>$request->id), 'rooms');
+            $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id ");
+            $result = [
+                'status' => 1,
+                'message' => $request->type ==2 ? 'Xóa mã truy cập cho người kiểm duyệt thành công': 'Xóa mã truy cập cho người xem thành công',
+                'data' => $room_info
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function genPass(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            $data_update = array(
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'updator_id'=>Auth::user()->id
+            );
+            if($request->type ==2){
+                $data_update['password_moderator'] = 'm'.uniqid();
+            }else{
+                $data_update['password_attendee'] = 'a'.uniqid();
+            }
+            u::updateSimpleRow($data_update, array('id'=>$request->id), 'rooms');
+            $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id ");
+            $result = [
+                'status' => 1,
+                'message' => $request->type ==2 ? 'Tạo mã truy cập cho người kiểm duyệt thành công': 'Tạo mã truy cập cho người xem thành công',
+                'data' => $room_info
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
 }

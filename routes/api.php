@@ -44,11 +44,14 @@ Route::group(['middleware' => 'api'], function ($router) {
         });
         Route::prefix('rooms')->group(function () {
             Route::post('create', 'RoomsController@create');
+            Route::post('update', 'RoomsController@update');
             Route::post('list', 'RoomsController@list');
             Route::get('info/{id}', 'RoomsController@info');
             Route::get('slides/{id}', 'RoomsController@getSlides');
             Route::get('slides-delete/{id}', 'RoomsController@deleteSlide');
             Route::post('upload-file', 'RoomsController@uploadFile');
+            Route::post('remove-pass', 'RoomsController@removePass');
+            Route::post('gen-pass', 'RoomsController@genPass');
         });
     });
 });

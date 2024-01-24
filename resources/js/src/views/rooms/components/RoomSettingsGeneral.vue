@@ -5,34 +5,38 @@
         <div class="mb-6">
           <label>Tên phòng họp</label>
           <div class=w-full>
-            <input type="text" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
-            <vs-button style="width:82px; float:left; padding:10px 5px; margin-left: 3px;">Cập nhật</vs-button>
+            <input type="text" v-model="room.title" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
+            <vs-button style="width:82px; float:left; padding:10px 5px; margin-left: 3px;" @click="updateTitleRoom()">Cập nhật</vs-button>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-6">
           <label>Tạo mã truy cập cho người xem</label>
-          <div class=w-full>
-            <input type="text" disabled="true" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
+          <div class=w-full v-if="room.password_attendee">
+            <input type="text" v-model="room.password_attendee" disabled="true" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
             <span style="width:82px; float:left; padding:10px 5px; margin-left: 3px;">
-              <feather-icon icon="CopyIcon" svgClasses="h-5 w-5"></feather-icon>
-              <feather-icon icon="RefreshCcwIcon" style="margin-left:3px" svgClasses="h-5 w-5"></feather-icon>
-              <feather-icon icon="Trash2Icon" style="margin-left:3px"  svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="CopyIcon" @click="copyText(room.password_attendee)" svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="RefreshCcwIcon" @click="genPass(1)" style="margin-left:3px" svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="Trash2Icon" @click="removePass(1)" style="margin-left:3px"  svgClasses="h-5 w-5"></feather-icon>
             </span>
-            <vs-button  type="border">Tạo mã truy cập</vs-button>
+          </div>
+          <div class=w-full v-else>
+            <vs-button class="mt-2" type="border" @click="genPass(1)">Tạo mã truy cập</vs-button>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-6">
           <label>Tạo mã truy cập cho người kiểm duyệt</label>
-          <div class=w-full>
-            <input type="text" disabled="true" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
+          <div class=w-full v-if="room.password_moderator">
+            <input type="text" v-model="room.password_moderator" disabled="true" class="vs-inputx vs-input--input normal" style="border: 1px solid rgba(0, 0, 0, 0.2); width: calc(100% - 85px); float:left">
             <span style="width:82px; float:left; padding:10px 5px; margin-left: 3px;">
-              <feather-icon icon="CopyIcon" svgClasses="h-5 w-5"></feather-icon>
-              <feather-icon icon="RefreshCcwIcon" style="margin-left:3px" svgClasses="h-5 w-5"></feather-icon>
-              <feather-icon icon="Trash2Icon" style="margin-left:3px"  svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="CopyIcon" @click="copyText(room.password_moderator)" svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="RefreshCcwIcon" @click="genPass(1)" style="margin-left:3px" svgClasses="h-5 w-5"></feather-icon>
+              <feather-icon icon="Trash2Icon" @click="removePass(2)" style="margin-left:3px"  svgClasses="h-5 w-5"></feather-icon>
             </span>
-            <vs-button  type="border">Tạo mã truy cập</vs-button>
+          </div>
+          <div class=w-full v-else>
+            <vs-button class="mt-2" type="border" @click="genPass(2)">Tạo mã truy cập</vs-button>
           </div>
           <div style="clear:both"></div>
         </div>
@@ -76,6 +80,12 @@
 <script>
   import axios from './../../../http/axios.js'
   export default {
+    props: {
+      room: {
+        type: Object,
+        default: () => {}
+      },
+    },
     data() {
       return {
         room: {},
@@ -91,6 +101,26 @@
       // this.getRoomInfo();
     },
     methods: {
+      copyText(textCopy) {
+          const thisIns = this;
+          this.$copyText(textCopy).then(function() {
+              thisIns.$vs.notify({
+                  title: 'Copy',
+                  text: textCopy,
+                  color: 'success',
+                  iconPack: 'feather',
+                  icon: 'icon-check-circle'
+              })
+          }, function() {
+              thisIns.$vs.notify({
+                  title: 'Failed',
+                  text: 'Error in copying text',
+                  color: 'danger',
+                  iconPack: 'feather',
+                  icon: 'icon-alert-circle'
+              })
+          })
+      },
       getRoomInfo() {
         this.$vs.loading()
         axios.g(`/api/rooms/info/${this.$route.params.id}`)
@@ -115,6 +145,111 @@
             console.log(error);
             this.$vs.loading.close();
           })
+      },
+      updateTitleRoom(){
+        if(this.room.title){
+          this.$vs.loading()
+          axios.p(`/api/rooms/update`,{
+            id: this.room.id,
+            title: this.room.title
+          })
+          .then((response) => {
+            this.$vs.loading.close()
+            if (response.data.status) {
+              this.$vs.notify({
+                title: 'Thành Công',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'success'
+              })
+            } else {
+              this.$vs.notify({
+                title: 'Lỗi',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'danger'
+              })
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$vs.loading.close();
+          })
+        }else{
+          this.$vs.notify({
+            title: 'Lỗi',
+            text: 'Tên phòng họp không được để trống',
+            iconPack: 'feather',
+            icon: 'icon-alert-circle',
+            color: 'danger'
+          })
+        }
+      },
+      removePass(type){
+        this.$vs.loading()
+        axios.p(`/api/rooms/remove-pass`,{
+          id: this.room.id,
+          type: type
+        })
+        .then((response) => {
+          this.$vs.loading.close()
+          if (response.data.status) {
+            this.room = response.data.data
+            this.$vs.notify({
+              title: 'Thành Công',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'success'
+            })
+          } else {
+            this.$vs.notify({
+              title: 'Lỗi',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'danger'
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
+      },
+      genPass(type){
+        this.$vs.loading()
+        axios.p(`/api/rooms/gen-pass`,{
+          id: this.room.id,
+          type: type
+        })
+        .then((response) => {
+          this.$vs.loading.close()
+          if (response.data.status) {
+            this.room = response.data.data
+            this.$vs.notify({
+              title: 'Thành Công',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'success'
+            })
+          } else {
+            this.$vs.notify({
+              title: 'Lỗi',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'danger'
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
       }
     },
   }
@@ -125,6 +260,9 @@
 }
 .tab-config-room .vx-col.mb-base.item-last{
   border-left: 1px solid #ccc
+}
+.feather-icon {
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   .tab-config-room .vx-col.mb-base.item-last, .tab-config-room .vx-col.mb-base.item-first{
