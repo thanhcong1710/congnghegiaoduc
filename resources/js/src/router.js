@@ -114,6 +114,14 @@ const router = new Router({
         // PAGES
         // =============================================================================
         {
+          path: '/rooms/:code',
+          name: 'room-join',
+          component: () => import('@/views/rooms/join.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
+        {
           path: '/pages/login',
           name: 'page-login',
           component: () => import('@/views/pages/login/Login.vue'),

@@ -82,6 +82,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapPageRoutes()
     {
+        Route::prefix('rooms')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page.php'));
         Route::prefix('pages')
             ->namespace($this->namespace)
             ->group(base_path('routes/page.php'));

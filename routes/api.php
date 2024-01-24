@@ -26,6 +26,11 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('viewMail', 'AuthController@viewMail');
     Route::get('account/activate/{key}', 'AuthController@activeAccount');
 
+    Route::prefix('room')->group(function () {
+        Route::get('info/{code}', 'RoomsController@infoByCode');
+        Route::post('join', 'RoomsController@joinRoom');
+    });
+
     Route::prefix('auth')->group(function () {
         Route::post('login', 'AuthController@login');
         Route::post('register', 'AuthController@register');

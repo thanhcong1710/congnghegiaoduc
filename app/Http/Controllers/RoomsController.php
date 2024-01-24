@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Providers\UtilityServiceProvider as u;
+use App\Providers\BigBluButtonServiceProvider as bbb;
 use Illuminate\Http\Request;
 use BigBlueButton\BigBlueButton;
 use BigBlueButton\Parameters\CreateMeetingParameters;
@@ -236,6 +237,101 @@ class RoomsController extends Controller
             $result = [
                 'status' => 0,
                 'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function infoByCode(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE `status`=1 AND code = '".$request->code."'");
+        if($room_info){
+            $result = [
+                'status' => 1,
+                'message' => 'Thành công',
+                'data' => [
+                    'id' => $room_info->id,
+                    'code' => $room_info->code,
+                    'title' => $room_info->title,
+                    'pass' => $room_info->password_moderator || $room_info->password_attendee ? 1 : 0
+                ]
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link tham gia không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function joinRoom(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE `status`=1 AND code = '".$request->code."'");
+        if($room_info){
+            if($room_info->password_attendee && ($room_info->password_attendee != $request->pass && $room_info->password_moderator != $request->pass)){
+                return [
+                    'status' => 0,
+                    'message' => 'Mã truy cập không hợp lệ.',
+                ];
+            }
+            $presentation = u::query("SELECT file_url FROM upload_files WHERE status=1 AND type=1 AND data_id=$room_info->id");
+            $session_info = u::first("SELECT * FROM room_sessions WHERE room_id= $room_info->id AND `status`=1");
+            if($session_info){
+                $pass_join = $request->pass == $room_info->password_moderator || $room_info->cf_moderator ? data_get($session_info, 'password_moderator') : data_get($session_info, 'password_attendee');
+                $url_join = bbb::joinRoom(data_get($session_info, 'code'), $request->name, $pass_join);
+                $result = [
+                    'status' => 1,
+                    'message' => 'Ok',
+                    'redirect_url' => $url_join
+                ];
+            }else{
+                if($request->pass == $room_info->password_moderator || $room_info->cf_user_start){
+                    $urlLogout = config('app.url');
+                    $urlJoin = config('app.url')."/rooms/".$room_info->code; 
+                    if($room_info->password_attendee){
+                        $welcomeMessage = "Để mời ai đó tham gia cuộc họp, hãy gửi cho họ liên kết này: $urlJoin (Mã truy cập: ".$room_info->password_attendee. " )";
+                    }else{
+                        $welcomeMessage = "Để mời ai đó tham gia cuộc họp, hãy gửi cho họ liên kết này: $urlJoin";
+                    }
+                    $isRecordingTrue = $room_info->cf_record ? true : false;
+                    $bbb_info = bbb::createRoom($room_info->id, $room_info->title, $presentation, 0, $urlLogout, $welcomeMessage, $isRecordingTrue);
+                    if(data_get($bbb_info, 'status')){
+                        $bbb_info =  data_get($bbb_info, 'data');
+                        u::insertSimpleRow(array(
+                            'code' => data_get($bbb_info, 'meetingID'),
+                            'room_id' => $room_info->id,
+                            'status' => 1,
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'creator_id' => data_get(Auth::user(), 'id'),
+                            'start_time' => date('Y-m-d H:i:s'),
+                            'password_attendee' => data_get($bbb_info, 'password_attendee'),
+                            'password_moderator' => data_get($bbb_info, 'password_moderator')
+                        ), 'room_sessions');
+
+                        $pass_join = $request->pass == $room_info->password_moderator || $room_info->cf_moderator ? data_get($bbb_info, 'password_moderator') : data_get($bbb_info, 'password_attendee');
+                        $url_join = bbb::joinRoom(data_get($bbb_info, 'meetingID'), $request->name, $pass_join);
+                        
+                        $result = [
+                            'status' => 1,
+                            'message' => 'Ok',
+                            'redirect_url' => $url_join
+                        ];
+                    }else{
+                        $result = [
+                            'status' => 0,
+                            'message' => data_get($bbb_info, 'message'),
+                        ];
+                    }
+                }else{
+                    $result = [
+                        'status' => 0,
+                        'message' => 'Cuộc họp chưa được bắt đầu.',
+                    ];
+                }
+            }
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link tham gia không hợp lệ',
             ];
         }
         return response()->json($result);
