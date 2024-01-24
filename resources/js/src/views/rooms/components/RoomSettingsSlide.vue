@@ -136,8 +136,7 @@
         axios.g(`/api/rooms/slides-delete/${this.delete_id}`)
           .then((response) => {
             this.$vs.loading.close()
-              this.$vs.loading.close();
-              this.getListFileByRoom();
+            this.getListFileByRoom();
           })
           .catch((error) => {
             console.log(error);

@@ -45,30 +45,30 @@
         <h5 class="mb-6">Thiết lập người dùng</h5>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Cho phép ghi hình lại phòng họp</label> <vs-switch v-model="switch1" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Cho phép ghi hình lại phòng họp</label> <vs-switch v-model="room.cf_record" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Cho phép bất kỳ người dùng nào bắt đầu cuộc họp này</label> <vs-switch v-model="switch1" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Cho phép bất kỳ người dùng nào bắt đầu cuộc họp này</label> <vs-switch v-model="room.cf_user_start" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Tất cả người dùng tham gia với tư cách là người kiểm duyệt</label> <vs-switch v-model="switch1" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Tất cả người dùng tham gia với tư cách là người kiểm duyệt</label> <vs-switch v-model="room.cf_moderator" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Tắt tiếng người dùng khi họ tham gia</label> <vs-switch v-model="switch1" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Tắt tiếng người dùng khi họ tham gia</label> <vs-switch v-model="room.cf_join_voice" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
-          <vs-button style="float:right" type="border" color="danger">Xóa phòng họp</vs-button>
+          <vs-button style="float:right" type="border" color="danger" @click="openConfirmDeleteRoom(room.id, room.title)">Xóa phòng họp</vs-button>
           <div style="clear:both"></div>
         </div>
       </div>
@@ -88,7 +88,7 @@
     },
     data() {
       return {
-        room: {},
+        delete_room_id:'',
         alert: {
           status: '',
           show: false,
@@ -98,7 +98,7 @@
       }
     },
     created() {
-      // this.getRoomInfo();
+      
     },
     methods: {
       copyText(textCopy) {
@@ -119,31 +119,6 @@
                   iconPack: 'feather',
                   icon: 'icon-alert-circle'
               })
-          })
-      },
-      getRoomInfo() {
-        this.$vs.loading()
-        axios.g(`/api/rooms/info/${this.$route.params.id}`)
-          .then((response) => {
-            this.$vs.loading.close()
-            if (response.data.status) {
-              this.room = response.data.data
-            } else {
-              this.$router.push({
-                name: 'rooms'
-              }).catch(() => {})
-              this.$vs.notify({
-                title: 'Lỗi',
-                text: response.data.message,
-                iconPack: 'feather',
-                icon: 'icon-alert-circle',
-                color: 'danger'
-              })
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            this.$vs.loading.close();
           })
       },
       updateTitleRoom(){
@@ -250,7 +225,82 @@
           console.log(error);
           this.$vs.loading.close();
         })
-      }
+      },
+      openConfirmDeleteRoom(id,room_name) {
+        this.delete_room_id = id
+        this.$vs.dialog({
+          type: 'confirm',
+          color: 'danger',
+          title: `Thông báo`,
+          text: 'Bạn muốn xóa phòng họp '+room_name,
+          accept: this.acceptDeleteRoom,
+          acceptText: 'Xóa',
+          cancelText:'Hủy'
+        })
+      },
+      acceptDeleteRoom() {
+        this.$vs.loading()
+        axios.g(`/api/rooms/room-delete/${this.delete_room_id}`)
+          .then((response) => {
+            this.$vs.loading.close()
+            if (response.data.status) {
+              this.$router.push({name: 'rooms'}).catch(() => {})
+              this.$vs.notify({
+                title: 'Thành Công',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'success'
+              })
+            } else {
+              this.$vs.notify({
+                title: 'Lỗi',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'danger'
+              })
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$vs.loading.close();
+          })
+      },
+      updateConfigRoom(){
+        this.$vs.loading()
+        axios.p(`/api/rooms/update`,{
+          id: this.room.id,
+          cf_record: this.room.cf_record,
+          cf_user_start: this.room.cf_user_start,
+          cf_moderator: this.room.cf_moderator,
+          cf_join_voice: this.room.cf_join_voice,
+        })
+        .then((response) => {
+          this.$vs.loading.close()
+          if (response.data.status) {
+            this.$vs.notify({
+              title: 'Thành Công',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'success'
+            })
+          } else {
+            this.$vs.notify({
+              title: 'Lỗi',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'danger'
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
+      },
     },
   }
 </script>

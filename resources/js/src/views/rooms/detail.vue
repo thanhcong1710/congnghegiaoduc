@@ -37,7 +37,7 @@
           <room-settings-slide :room="room"/>
         </div>
       </vs-tab>
-      <vs-tab icon-pack="feather" icon="icon-save" :label="!isSmallerScreen ? 'Bản ghi hình' : ''">
+      <vs-tab icon-pack="feather" icon="icon-list" :label="!isSmallerScreen ? 'Phiên họp' : ''">
         <div class="tab-info md:ml-4 md:mt-0 mt-4 ml-0">
           <room-settings-record :room="room"/>
         </div>

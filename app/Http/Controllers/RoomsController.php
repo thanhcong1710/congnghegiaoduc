@@ -219,4 +219,25 @@ class RoomsController extends Controller
         }
         return response()->json($result);
     }
+
+    public function deleteRoom(Request $request){
+        $room_info = u::first("SELECT * FROM rooms WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            u::updateSimpleRow(array(
+                'status'=>0,
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'updator_id'=>Auth::user()->id
+            ), array('id'=>$request->id), 'rooms');
+            $result = [
+                'status' => 1,
+                'message' => 'Xóa phòng họp thành công',
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
 }
