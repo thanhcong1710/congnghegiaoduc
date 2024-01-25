@@ -13,14 +13,16 @@ use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class BigBluButtonController extends Controller
 {
     public function createRoom(Request $request)
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo9';
-        $meetingName = 'DEMO 7';
+        $meetingID = 'demo11';
+        $meetingName = 'DEMO 10';
         $attendee_password = '123456';
         $moderator_password = 'acbd1234';
         $duration = 300;
@@ -45,7 +47,7 @@ class BigBluButtonController extends Controller
         if ($response->getReturnCode() == 'FAILED') {
             return 'Can\'t create room! please contact our administrator.';
         } else {
-            var_dump($response);
+            var_dump($this->xml2array($response->getRawXml()->internalMeetingID)[0]);die();
             die();
         }
         return response()->json($response);
@@ -146,5 +148,26 @@ class BigBluButtonController extends Controller
             $out[$index] = ( is_object ( $node ) ) ? $this->xml2array ( $node ) : $node;
     
         return $out;
+    }
+
+    public function webHook(Request $request){
+        $params = $request->input();
+        $event = data_get($params, 'event');
+        if($event){
+            $event = json_decode($event,true);
+            if(isset($event[0])){
+                $data = data_get($event[0], 'data');
+                if(data_get($data, 'id')== 'meeting-ended'){
+                    $attributes = data_get($data, 'attributes');
+                    $meeting = data_get($attributes, 'meeting');
+                    $internal_meeting_id = data_get($meeting, 'internal-meeting-id');
+                    if($internal_meeting_id){
+                        $timestamp = ceil($data['event']['ts']/1000);
+                        u::updateSimpleRow(array('status'=>2, 'end_time'=> date('Y-m-d H:i:s', $timestamp)), array('bbb_internal_meeting_id'=>$internal_meeting_id),'room_sessions');
+                    }
+                }
+            }
+        }
+        return response()->json("ok");
     }
 }

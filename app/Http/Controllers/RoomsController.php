@@ -301,6 +301,7 @@ class RoomsController extends Controller
                         u::insertSimpleRow(array(
                             'code' => data_get($bbb_info, 'meetingID'),
                             'room_id' => $room_info->id,
+                            'bbb_internal_meeting_id' =>data_get($bbb_info, 'internalMeetingID'),
                             'status' => 1,
                             'created_at' => date('Y-m-d H:i:s'),
                             'creator_id' => data_get(Auth::user(), 'id'),

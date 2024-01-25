@@ -24,7 +24,9 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('bbb/record/delete', 'BigBluButtonController@deleteRecord');
     Route::get('testMail', 'AuthController@testMail');
     Route::get('viewMail', 'AuthController@viewMail');
+
     Route::get('account/activate/{key}', 'AuthController@activeAccount');
+    Route::post('bbb/web-hook', 'BigBluButtonController@webHook');
 
     Route::prefix('room')->group(function () {
         Route::get('info/{code}', 'RoomsController@infoByCode');

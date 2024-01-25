@@ -12,6 +12,7 @@ use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
+use App\Providers\UtilityServiceProvider as u;
 
 class BigBluButtonServiceProvider extends ServiceProvider
 {
@@ -46,11 +47,13 @@ class BigBluButtonServiceProvider extends ServiceProvider
 				'message' => 'Không tạo được phòng họp. Vui lòng liên hệ với quản trị viên để được hỗ trợ.'
 			];
         } else {
+            $internalMeetingID = u::xml2array($response->getRawXml()->internalMeetingID)[0];
             return [
 				'status' => 1,
 				'message' => 'Ok',
 				'data' => [
 					'meetingID' => $meetingID,
+                    'internalMeetingID' => $internalMeetingID,
 					'password_attendee' => $password_attendee,
 					'password_moderator' => $password_moderator,
 				]

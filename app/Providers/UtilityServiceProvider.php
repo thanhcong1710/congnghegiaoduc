@@ -196,4 +196,12 @@ class UtilityServiceProvider extends ServiceProvider
 		$str = preg_replace('/([\s]+)/', '_', $str);
 		return $str;
     }
+
+	public static function xml2array ( $xmlObject, $out = array () )
+    {
+        foreach ( (array) $xmlObject as $index => $node )
+            $out[$index] = ( is_object ( $node ) ) ? self::xml2array ( $node ) : $node;
+    
+        return $out;
+    }
 }
