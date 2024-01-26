@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        '\App\Console\Commands\JobsProcessRecord',
         //
     ];
 
@@ -23,7 +24,8 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
+    { 
+        $schedule->command('jobsProcessRecord:command')->cron('*/10 * * * *');
         // $schedule->command('inspire')->hourly();
     }
 

@@ -47,7 +47,7 @@ class BigBluButtonController extends Controller
         if ($response->getReturnCode() == 'FAILED') {
             return 'Can\'t create room! please contact our administrator.';
         } else {
-            var_dump($this->xml2array($response->getRawXml()->internalMeetingID)[0]);die();
+            var_dump($this->xml2array($response->getRawXml()));die();
             die();
         }
         return response()->json($response);
@@ -83,8 +83,8 @@ class BigBluButtonController extends Controller
     public function getRoomInfo()
     {
         $bbb = new BigBlueButton();
-        $meetingID = 'demo7';
-        $moderator_password = 'acbd1234';
+        $meetingID = '6_session_65b22815038a2';
+        $moderator_password = '6_moderator_65b22815038a5';
 
         $getMeetingInfoParams = new GetMeetingInfoParameters($meetingID, $moderator_password);
         $response = $bbb->getMeetingInfo($getMeetingInfoParams);
@@ -115,14 +115,14 @@ class BigBluButtonController extends Controller
     public function getRecords()
     {
         $recordingParams = new GetRecordingsParameters();
+        $recordingParams->setMeetingId('6_session_65b232a95d835') ;
         $bbb = new BigBlueButton();
         $response = $bbb->getRecordings($recordingParams);
-
         if ($response->getReturnCode() == 'SUCCESS') {
             foreach ($response->getRawXml()->recordings->recording as $recording) {
                 $recording = (object)$this->xml2array($recording);
+                var_dump($recording->playback);die();
                 // process all recording
-                var_dump($recording->meetingID);die();
             }
         }
         return response()->json("ok");
@@ -150,6 +150,7 @@ class BigBluButtonController extends Controller
         return $out;
     }
 
+
     public function webHook(Request $request){
         $params = $request->input();
         $event = data_get($params, 'event');
@@ -169,5 +170,34 @@ class BigBluButtonController extends Controller
             }
         }
         return response()->json("ok");
+    }
+
+    public function getRecordByRoom($room_session_info){
+        $recordingParams = new GetRecordingsParameters();
+        $recordingParams->setMeetingId($room_session_info->code) ;
+        $bbb = new BigBlueButton();
+        $response = $bbb->getRecordings($recordingParams);
+        if ($response->getReturnCode() == 'SUCCESS') {
+            foreach ($response->getRawXml()->recordings->recording as $recording) {
+                $recording = (object)$this->xml2array($recording);
+                if(data_get($recording, 'recordID')){
+                    $playback = data_get($recording, 'playback');
+                    $format = data_get($playback, 'format');
+                    $link = data_get($format, 'url');
+                    if($link){
+                        u::insertSimpleRow(array(
+                            'room_session_id' => data_get($room_session_info, 'room_session_id'),
+                            'bbb_record_id' => data_get($recording, 'recordID'),
+                            'bbb_record_link' => $link,
+                            'status' => 1,
+                            'created_at' => date('Y-m-d H:i:s'),
+                        ), 'room_session_records');
+                        u::updateSimpleRow(array('bbb_record_status'=>1), array('id'=>data_get($room_session_info, 'room_session_id')), 'room_sessions');
+                    }
+                }
+            }
+        }
+        u::updateSimpleRow(array('bbb_record_get_num'=>(int)data_get($room_session_info, 'bbb_record_get_num') +1), array('id'=>data_get($room_session_info, 'room_session_id')), 'room_sessions');
+        return true;
     }
 }
