@@ -40,7 +40,7 @@ class JobsProcessRecord extends Command
      */
     public function handle(Request $request)
     {
-        $list_room_sessions = u::query("SELECT id AS room_session_id, code, bbb_record_get_num FROM room_sessions WHERE bbb_record_get_num <3 AND bbb_record_status!=1 AND status=2");
+        $list_room_sessions = u::query("SELECT id AS room_session_id, room_id, code, bbb_record_get_num FROM room_sessions WHERE bbb_record_get_num <3 AND bbb_record_status!=1 AND status=2");
         foreach($list_room_sessions AS $row){
             $bbb = new BigBluButtonController();
             $bbb->getRecordByRoom($row);

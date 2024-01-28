@@ -62,5 +62,9 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::get('room-delete/{id}', 'RoomsController@deleteRoom');
             Route::post('sessions/{id}', 'RoomsController@getSessions');
         });
+        Route::prefix('records')->group(function () {
+            Route::post('list', 'RecordsController@list');
+            Route::get('delete/{id}', 'RecordsController@delete');
+        });
     });
 });

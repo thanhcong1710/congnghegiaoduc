@@ -186,6 +186,7 @@ class BigBluButtonController extends Controller
                     $link = data_get($format, 'url');
                     if($link){
                         u::insertSimpleRow(array(
+                            'room_id' =>  data_get($room_session_info, 'room_id'),
                             'room_session_id' => data_get($room_session_info, 'room_session_id'),
                             'bbb_record_id' => data_get($recording, 'recordID'),
                             'bbb_record_link' => $link,

@@ -96,6 +96,20 @@ const router = new Router({
             authRequired: true
           }
         },
+        {
+          path: '/admin/records',
+          name: 'records',
+          component: () => import('@/views/records/list.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Lưu trữ', active: true }
+            ],
+            pageTitle: 'Lưu trữ',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

@@ -40,7 +40,7 @@ export default [
         i18n: 'Phòng họp'
       },
       {
-        url: '/apps/chat',
+        url: '/admin/records',
         name: 'Lưu trữ',
         slug: 'records',
         icon: 'ArchiveIcon',
