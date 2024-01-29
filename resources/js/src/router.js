@@ -110,6 +110,34 @@ const router = new Router({
             authRequired: true
           }
         },
+        {
+          path: '/admin/upgrade',
+          name: 'upgrade',
+          component: () => import('@/views/users/upgrade.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Nâng cấp dịch vụ', active: true }
+            ],
+            pageTitle: 'Nâng cấp dịch vụ',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+        {
+          path: '/admin/user/payments',
+          name: 'payments',
+          component: () => import('@/views/users/payments.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Nâng cấp dịch vụ', active: true }
+            ],
+            pageTitle: 'Nâng cấp dịch vụ',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

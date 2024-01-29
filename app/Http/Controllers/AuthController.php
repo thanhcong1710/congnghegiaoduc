@@ -113,6 +113,7 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token, $email)
     {
+        $num_vip = auth()->user()->end_vip ? ceil((strtotime(auth()->user()->end_vip) -time()) / (24*3600)) : 0;
         return response()->json([
             'status' => 1,
             'accessToken' => $token,
@@ -129,6 +130,9 @@ class AuthController extends Controller
                 'note' => auth()->user()->note,
                 'gender' => auth()->user()->gender,
                 'menuroles' => auth()->user()->menuroles,
+                'is_vip' => auth()->user()->is_vip,
+                'end_vip' => auth()->user()->end_vip ? date('d/m/Y', strtotime(auth()->user()->end_vip )) : null,
+                'num_vip' => $num_vip >0 ? $num_vip : 0,
             ]
         ]);
     }

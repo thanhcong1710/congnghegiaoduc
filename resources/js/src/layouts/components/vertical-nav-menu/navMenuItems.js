@@ -61,20 +61,20 @@ export default [
         i18n: 'Cài đặt tài khoản'
       },
       {
-        url: '/apps/chat',
+        url: '/admin/upgrade',
         name: 'Gói dịch vụ',
         slug: 'records',
         icon: 'StarIcon',
         i18n: 'Gói dịch vụ',
         submenu: [
           {
-            url: '/apps/user/user-list',
+            url: '/admin/upgrade',
             name: 'Nâng cấp',
             slug: 'app-user-list',
             i18n: 'Nâng cấp dịch vụ'
           },
           {
-            url: '/apps/user/user-view/268',
+            url: '/admin/user/payment',
             name: 'Lịch sử thanh toán',
             slug: 'app-user-view',
             i18n: 'Lịch sử thanh toán'

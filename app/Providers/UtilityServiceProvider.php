@@ -204,4 +204,15 @@ class UtilityServiceProvider extends ServiceProvider
     
         return $out;
     }
+
+	public static function genMaSo($text,$number){
+		if(strlen($text)< $number){
+			$tmp=$text;
+			for($i=strlen($text);$i<$number;$i++){
+				$tmp= '0'.$tmp;
+			}
+			$text=$tmp;
+		}
+		return $text;
+    }
 }

@@ -23,6 +23,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('bbb/record', 'BigBluButtonController@getRecords');
     Route::get('bbb/record/delete', 'BigBluButtonController@deleteRecord');
     Route::get('testMail', 'AuthController@testMail');
+    Route::get('active/payment/{code}', 'UserController@activePayment');
     Route::get('viewMail', 'AuthController@viewMail');
 
     Route::get('account/activate/{key}', 'AuthController@activeAccount');
@@ -48,6 +49,10 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::prefix('user')->group(function () {
             Route::post('update-info', 'UserController@updateInfo');
             Route::post('change-password', 'UserController@changePassword');
+            Route::post('contact', 'UserController@addContact');
+            Route::post('payment-add', 'UserController@addPayment');
+            Route::post('payment-transfer', 'UserController@transferPayment');
+            Route::post('payments', 'UserController@listPayment');
         });
         Route::prefix('rooms')->group(function () {
             Route::post('create', 'RoomsController@create');
