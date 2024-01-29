@@ -51,17 +51,18 @@
               <!---->
               <td class="td vs-table--td">{{ index + 1 + (pagination.cpage - 1) * pagination.limit }}</td>
               <td class="td vs-table--td">{{item.code}}</td>
-              <td class="td vs-table--td">{{item.amount}}</td>
-              <td class="td vs-table--td">{{item.end_time}}</td>
+              <td class="td vs-table--td">{{item.amount | formatCurrency}}</td>
+              <td class="td vs-table--td">{{item.start_date}}</td>
+               <td class="td vs-table--td">{{item.end_date}}</td>
               <td class="td vs-table--td">
-                <span v-if="item.status==1" :class="item.record_date < 3 ? 'text-warning' : '' ">{{item.record_date}}</span>
-                <span v-else  class="text-danger">Đã bị xóa</span>
+                <span v-if="item.status==0">Chờ chuyển tiền</span>
+                <span v-if="item.status==1" class="text-warning">Chờ xác nhận</span>
+                <span v-if="item.status==2"  class="text-success">Hoàn thành</span>
               </td>
               <td class="td vs-table--td">
-                  <a target="blank" :href="item.record_link" v-if="item.record_link">
-                    <feather-icon icon="EyeIcon" svgClasses="h-5 w-5"></feather-icon>
+                  <a target="blank" >
+                    <feather-icon icon="CreditCardIcon" svgClasses="h-5 w-5" style="cursor: pointer;"></feather-icon>
                   </a>
-                  <feather-icon icon="Trash2Icon" svgClasses="h-5 w-5" style="cursor: pointer;" @click="openConfirmDelete(item.record_id, item.title)"></feather-icon>
               </td>
             </tr>
           </table>

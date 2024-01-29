@@ -102,7 +102,7 @@ class UserController extends Controller
     }
 
     public function activePayment(Request $request){
-        $payment_info = u::getObject(array(strtoupper($request->code)),'payments');
+        $payment_info = u::getObject(array('code'=>strtoupper($request->code)),'payments');
         if($payment_info){
             $start_date = $request->start_date ? $request->start_date : date('Y-m-d');
             $end_date =  date('Y-m-d',strtotime ( '+1 month' , strtotime ( $start_date ) )) ;
@@ -114,7 +114,7 @@ class UserController extends Controller
             u::updateSimpleRow(array(
                 'is_vip' => 1,
                 'end_vip' => $end_date
-            ),  array('user_id'=>$payment_info->user_id),'users');
+            ),  array('id'=>$payment_info->user_id),'users');
         }
         return response()->json([
             'status' => 1,
@@ -137,7 +137,7 @@ class UserController extends Controller
             WHERE $cond ORDER BY p.id DESC $limitation");
         foreach($list AS $k=>$row){
             $list[$k]->start_date = $row->start_date ? date('d/m/Y', strtotime($row->start_date)):'';
-            $list[$k]->end_date = $row->end_time ? date('d/m/Y', strtotime($row->end_date)):'';
+            $list[$k]->end_date = $row->end_date ? date('d/m/Y', strtotime($row->end_date)):'';
         }
         $data = u::makingPagination($list, $total->total, $page, $limit);
         return response()->json($data);

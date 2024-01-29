@@ -42,7 +42,7 @@ const router = new Router({
         // =============================================================================
         {
           path: '/',
-          redirect: '/admin/dashboard'
+          redirect: '/admin/rooms'
         },
         {
           path: '/admin/dashboard',
@@ -131,9 +131,9 @@ const router = new Router({
           meta: {
             breadcrumb: [
               { title: 'Home', url: '/' },
-              { title: 'Nâng cấp dịch vụ', active: true }
+              { title: 'Lịch sử thanh toán', active: true }
             ],
-            pageTitle: 'Nâng cấp dịch vụ',
+            pageTitle: 'Lịch sử thanh toán',
             rule: 'editor',
             authRequired: true
           }

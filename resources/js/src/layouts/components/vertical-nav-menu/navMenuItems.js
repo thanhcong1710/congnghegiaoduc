@@ -74,7 +74,7 @@ export default [
             i18n: 'Nâng cấp dịch vụ'
           },
           {
-            url: '/admin/user/payment',
+            url: '/admin/user/payments',
             name: 'Lịch sử thanh toán',
             slug: 'app-user-view',
             i18n: 'Lịch sử thanh toán'

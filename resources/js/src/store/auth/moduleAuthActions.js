@@ -49,7 +49,7 @@ export default {
           if (response.data && response.data.status && response.data.userData) {
 
             // Navigate User to homepage
-            router.push(payload.redirect_url || '/admin/dashboard')
+            router.push(payload.redirect_url || '/')
 
             // Set accessToken
             localStorage.setItem('accessToken', response.data.accessToken)

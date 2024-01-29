@@ -89,7 +89,7 @@ export default {
           email: this.email,
           password: this.password
         },
-        redirect_url :  '/admin/dashboard'
+        redirect_url :  '/admin/rooms'
       }
 
       this.$store.dispatch('auth/loginJWT', payload)
