@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Công nghệ giáo dục</title>
+  <meta content="Công nghệ giáo dục cung cấp các nền tảng dịch vụ hỗ trợ quản lý giảng dạy online trên nền tảng BigBlueButton. Lớp học ảo, cuộc họp video ..." name="description">
+  <meta content="BigBlueButton, Elearning, Lớp học ảo, Cuộc họp video, Meeting room" name="keywords">
 
   <!-- Favicons -->
   <link href="../static/flexstart/img/favicon.png" rel="icon">
@@ -49,57 +49,11 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown megamenu"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li>
-                <a href="#">Column 1 link 1</a>
-                <a href="#">Column 1 link 2</a>
-                <a href="#">Column 1 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 2 link 1</a>
-                <a href="#">Column 2 link 2</a>
-                <a href="#">Column 3 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 3 link 1</a>
-                <a href="#">Column 3 link 2</a>
-                <a href="#">Column 3 link 3</a>
-              </li>
-              <li>
-                <a href="#">Column 4 link 1</a>
-                <a href="#">Column 4 link 2</a>
-                <a href="#">Column 4 link 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Trang chủ</a></li>
+          <li><a class="nav-link scrollto" href="#about">Giải pháp</a></li>
+          <li><a class="nav-link scrollto" href="#services">Gói dịch vụ và mức giá</a></li>
+          <li><a class="getstarted scrollto" href="#about">Dùng thử miễn phí</a></li>
+          <li><a class="getstarted scrollto" href="/pages/login" style="background-color: #198754;">Đăng nhập</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -113,19 +67,20 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+          <h1 data-aos="fade-up">Phần mềm họp trực tuyến miễn phí</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400"  style="text-align: justify;">Kết nối, cộng tác và cùng nhau hoàn thành nhiều việc hơn với giải pháp cuộc họp video BigBlueButton hoàn toàn miễn phí không giới hạn.</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Get Started</span>
+                <span>Dùng thử miễn phí ngay</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
           </div>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="../static/flexstart/img/hero-img.png" class="img-fluid" alt="">
+          <!-- <img src="../static/flexstart/img/hero-img.png" class="img-fluid" alt=""> -->
+          <img src="../static/flexstart/images/BigBlueButton_banner.jpeg" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -141,14 +96,16 @@
 
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <div class="content">
-              <h3>Who We Are</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <h2>BigBlueButton khác với các hệ thống hội nghị ảo khác như thế nào?</h2>
               <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                - Tích hợp công cụ đánh giá trực quan<br>
+                - Các slide thông minh được hỗ trợ bởi AI<br>
+                - Phân tích trực tiếp để chủ động đánh giá mức độ tham gia<br>
+                - Bảng trắng đa người dùng dễ sử dụng<br>
               </p>
               <div class="text-center text-lg-start">
                 <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                  <span>Read More</span>
+                  <span>Dùng thử miễn phí ngay</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
               </div>
@@ -170,8 +127,7 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>Our Values</h2>
-          <p>Odit est perspiciatis laborum et dicta</p>
+          <p>GIÁ TRỊ CỦA CHÚNG TÔI</p>
         </header>
 
         <div class="row">
@@ -179,24 +135,24 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="box">
               <img src="../static/flexstart/img/values-1.png" class="img-fluid" alt="">
-              <h3>Ad cupiditate sed est odio</h3>
-              <p>Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
+              <h3>Dành cho gia sư, giáo viên, giảng viên</h3>
+              <p style="text-align: justify;">Sử dụng giải pháp lớp học ảo của chúng tôi, bạn có thể dạy kèm, giảng dạy hoặc đào tạo trực tuyến cho sinh viên của mình. Bạn nhận được video, bảng trắng, bản trình bày, cũng như trò chuyện.</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
             <div class="box">
               <img src="../static/flexstart/img/values-2.png" class="img-fluid" alt="">
-              <h3>Voluptatem voluptatum alias</h3>
-              <p>Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
+              <h3>Đối với các trường đại học và tổ chức giáo dục.</h3>
+              <p style="text-align: justify;">Mỗi giáo sư, khoa, giảng viên hoặc sinh viên có thể có thể sử dụng BigBlueButton để tổ chức giờ hành chính, phòng thí nghiệm hoặc hướng dẫn trực tuyến.</p>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
             <div class="box">
               <img src="../static/flexstart/img/values-3.png" class="img-fluid" alt="">
-              <h3>Fugit cupiditate alias nobis.</h3>
-              <p>Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
+              <h3>Đối với các công ty và tổ chức.</h3>
+              <p  style="text-align: justify;">Cung cấp hội nghị truyền hình, thuyết trình trực tuyến, hội thảo trên web và đào tạo từ xa, các cuộc họp trực tuyến cho mọi người trong tổ chức của bạn. Ghi lại các cuộc họp của bạn cho những người không thể tham dự.</p>
             </div>
           </div>
 
@@ -207,198 +163,15 @@
     </section><!-- End Values Section -->
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-emoji-smile"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Clients</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-headset" style="color: #15be56;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hours Of Support</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="bi bi-people" style="color: #bb0852;"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hard Workers</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
+    
 
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">
 
       <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Features</h2>
-          <p>Laboriosam et omnis fuga quis dolor direda fara</p>
-        </header>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <img src="../static/flexstart/img/features.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
-            <div class="row align-self-center gy-4">
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Eos aspernatur rem</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Facilis neque ipsa</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Volup amet voluptas</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Rerum omnis sint</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Alias possimus</h3>
-                </div>
-              </div>
-
-              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
-                <div class="feature-box d-flex align-items-center">
-                  <i class="bi bi-check"></i>
-                  <h3>Repellendus mollitia</h3>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div> <!-- / row -->
-
-        <!-- Feature Tabs -->
-        <div class="row feture-tabs" data-aos="fade-up">
-          <div class="col-lg-6">
-            <h3>Neque officiis dolore maiores et exercitationem quae est seda lidera pat claero</h3>
-
-            <!-- Tabs -->
-            <ul class="nav nav-pills mb-3">
-              <li>
-                <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Saepe fuga</a>
-              </li>
-              <li>
-                <a class="nav-link" data-bs-toggle="pill" href="#tab2">Voluptates</a>
-              </li>
-              <li>
-                <a class="nav-link" data-bs-toggle="pill" href="#tab3">Corrupti</a>
-              </li>
-            </ul><!-- End Tabs -->
-
-            <!-- Tab Content -->
-            <div class="tab-content">
-
-              <div class="tab-pane fade show active" id="tab1">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 1 Content -->
-
-              <div class="tab-pane fade show" id="tab2">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 2 Content -->
-
-              <div class="tab-pane fade show" id="tab3">
-                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                </div>
-                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check2"></i>
-                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                </div>
-                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 3 Content -->
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-6">
-            <img src="../static/flexstart/img/features-2.png" class="img-fluid" alt="">
-          </div>
-
-        </div><!-- End Feature Tabs -->
-
         <!-- Feature Icons -->
-        <div class="row feature-icons" data-aos="fade-up">
-          <h3>Ratione mollitia eos ab laudantium rerum beatae quo</h3>
+        <div class="row feature-icons" data-aos="fade-up" style="margin-top: 0px;">
+          <h3>Có gì mới với BigBlueButton</h3>
 
           <div class="row">
 
@@ -410,50 +183,66 @@
               <div class="row align-self-center gy-4">
 
                 <div class="col-md-6 icon-box" data-aos="fade-up">
-                  <i class="ri-line-chart-line"></i>
+                  <i class="ri-video-chat-line"></i>
                   <div>
-                    <h4>Corporis voluptates sit</h4>
-                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                    <h4>Ghi và phát lại</h4>
+                    <p style="text-align: justify;">BigBlueButton có thể ghi lại các phiên của bạn để phát lại sau này.</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                  <i class="ri-stack-line"></i>
+                  <i class="ri-artboard-line"></i>
                   <div>
-                    <h4>Ullamco laboris nisi</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                    <h4>Bảng trắng</h4>
+                    <p style="text-align: justify;">Các điều khiển bảng trắng cho phép bạn chú thích các phần chính của bản trình bày của bạn.</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-                  <i class="ri-brush-4-line"></i>
+                  <i class="ri-html5-line"></i>
                   <div>
-                    <h4>Labore consequatur</h4>
-                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                    <h4>HTML5 WebRTC</h4>
+                    <p style="text-align: justify;">Cho phép truy cập các tính năng trên cả máy tính để bàn và thiết bị di động với video và âm thanh chất lượng cao.</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                  <i class="ri-magic-line"></i>
+                  <i class="ri-slideshow-2-line"></i>
                   <div>
-                    <h4>Beatae veritatis</h4>
-                    <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                    <h4>Trình bày</h4>
+                    <p style="text-align: justify;">Bạn có thể tải lên bất kỳ bản trình bày PDF hoặc tài liệu văn bản DOC. Đồng bộ slide, phóng to, pan, chú thích và con trỏ chuột hiện tại của bạn.</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-                  <i class="ri-command-line"></i>
+                  <i class="ri-webcam-line"></i>
                   <div>
-                    <h4>Molestiae dolor</h4>
-                    <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
+                    <h4>Webcam</h4>
+                    <p style="text-align: justify;">Nhiều người dùng có thể chia sẻ webcam của họ cùng một lúc. Không có giới hạn tích hợp về số lượng webcam hoạt động đồng thời.</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
-                  <i class="ri-radar-line"></i>
+                  <i class="ri-hotel-bed-line"></i>
                   <div>
-                    <h4>Explicabo consectetur</h4>
-                    <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
+                    <h4>Phòng nghỉ</h4>
+                    <p>Bạn có thể chia thành các phòng riêng lẻ để tiến hành các phiên 1: 1 hoặc 1: nhiều cá nhân. Hữu ích cho các cuộc phỏng vấn và các hoạt động nhóm nhỏ hơn.</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                <i class="ri-message-3-line"></i>
+                  <div>
+                    <h4>Trò chuyện</h4>
+                    <p style="text-align: justify;">Bạn có thể trò chuyện với mọi người trong phòng họp hoặc trò chuyện riêng với ai đó.</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
+                  <i class="ri-feedback-line"></i>
+                  <div>
+                    <h4>Bình chọn</h4>
+                    <p>Tiến hành các cuộc thăm dò tương tác với những người tham gia của bạn.</p>
                   </div>
                 </div>
 

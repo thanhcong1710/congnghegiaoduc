@@ -49,8 +49,8 @@ Author URL: http://www.themeforest.net/user/pixinvent
       data-vv-validate-on="blur"
       data-vv-as="password"
       name="confirm_password"
-      label-placeholder="Mật khẩu"
-      placeholder="Mật khẩu"
+      label-placeholder="Nhắc lại mật khẩu"
+      placeholder="Nhắc lại mật khẩu"
       v-model="confirm_password"
       class="w-full mt-6" />
     <span class="text-danger text-sm">{{ errors.first('confirm_password') }}</span>

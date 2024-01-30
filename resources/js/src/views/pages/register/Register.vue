@@ -24,11 +24,11 @@
                                         <img src="/static/logo.png" style="height: 64px; margin: auto"/>
                                     </a>
                                 </div>
-                                <div class="vx-card__title mb-4">
+                                <div class="vx-card__title mb-6">
                                     <h4 class="mb-4">TẠO TÀI KHOẢN</h4>
-                                    <p>Điền vào mẫu dưới đây để tạo tài khoản mới.</p>
+                                    <p>Điền vào mẫu dưới đây để tạo tài khoản mới ngay và sử dụng <span class="text-danger">không giới hạn thời gian cuộc họp </span> </p>
+                                    <p style="font-size: 12px"><i>(Lưu ý: nhập chính xác email để nhận mã kích hoạt tài khoản)</i></p>
                                 </div>
-                                <br>
                                 <register-jwt></register-jwt>
                             </div>
                         </div>

@@ -27,11 +27,10 @@
                     <img src="/static/logo.png" style="height: 64px; margin: auto"/>
                   </a>
                 </div>
-                <div class="vx-card__title mb-4">
+                <div class="vx-card__title mb-6">
                   <h4 class="mb-4">ĐĂNG NHẬP</h4>
                   <p>Chào mừng trở lại, vui lòng đăng nhập vào tài khoản của bạn.</p>
                 </div>
-                <br>
                 <login-jwt></login-jwt>
               </div>
             </div>

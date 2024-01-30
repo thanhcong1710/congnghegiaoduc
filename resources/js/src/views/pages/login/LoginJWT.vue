@@ -70,7 +70,7 @@ export default {
         //   icon: 'icon-alert-circle',
         //   color: 'warning'
         // })
-        this.$router.push('/admin/dashboard')
+        this.$router.push('/admin/rooms')
 
         return false
       }
@@ -89,7 +89,7 @@ export default {
           email: this.email,
           password: this.password
         },
-        redirect_url :  '/admin/rooms'
+        //redirect_url :  '/admin/rooms'
       }
 
       this.$store.dispatch('auth/loginJWT', payload)

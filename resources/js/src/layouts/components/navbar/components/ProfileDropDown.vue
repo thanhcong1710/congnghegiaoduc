@@ -3,8 +3,8 @@
 
     <div class="text-right leading-tight hidden sm:block">
       <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
-      <b-badge pill variant="danger">VIP</b-badge>
-      <b-badge pill variant="info">Miễn phí</b-badge>
+      <small class="text-danger" v-if="activeUserInfo.is_vip">VIP</small>
+      <small class="text-primary" v-else>Miễn phí</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
