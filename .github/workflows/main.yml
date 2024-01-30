@@ -1,0 +1,19 @@
+name: congnghegiaoduc
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  congnghegiaoduc_production:
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - name: Pull
+      run: sudo git pull origin master
+      working-directory: /var/www/html/congnghegiaoduc
+    - name: Complete
+      run: sudo npm run production
+      working-directory: /var/www/html/congnghegiaoduc
