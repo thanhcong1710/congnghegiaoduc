@@ -12,9 +12,9 @@
     </div>
 
     <!-- Info -->
-    <vs-input class="w-full mb-base" label-placeholder="Số điện thoại" v-model="phone" disabled="true"></vs-input>
+    <vs-input class="w-full mb-base" label-placeholder="Email" v-model="email" disabled="true"></vs-input>
     <vs-input class="w-full mb-base" label-placeholder="Họ tên" v-model="name"></vs-input>
-    <vs-input class="w-full" label-placeholder="Email" v-model="email"></vs-input>
+    <vs-input class="w-full mb-base" label-placeholder="Số điện thoại" v-model="phone" ></vs-input>
     <vs-alert :active.sync="alert.show" :color="alert.color" class="mt-4 mb-4"  closable icon-pack="feather" close-icon="icon-x">
       {{alert.message}}
     </vs-alert>
@@ -53,7 +53,7 @@ export default {
       axios.p('/api/user/update-info', {
         data: { 
           'name' : this.name,
-          'email' : this.email
+          'phone' : this.phone
         }
       })
       .then((response) => {  

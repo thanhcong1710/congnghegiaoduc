@@ -7,12 +7,12 @@ Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
 Author URL: http://www.themeforest.net/user/pixinvent
 ========================================================================================== -->
 
-
 <template>
   <div class="clearfix">
     <vs-input
       v-validate="'required|min:3'"
       data-vv-validate-on="blur"
+      type="text"
       label-placeholder="Họ tên"
       name="displayName"
       placeholder="Họ tên"
@@ -20,15 +20,16 @@ Author URL: http://www.themeforest.net/user/pixinvent
       class="w-full" />
     <span class="text-danger text-sm">{{ errors.first('displayName') }}</span>
 
-    <vs-input
-      v-validate="{ required: true, regex: /([\+84|84|0]+(3|5|7|8|9))+([0-9]{8})\b/ }"
+   <vs-input
+      v-validate="'required|email'"
       data-vv-validate-on="blur"
-      name="phone"
-      label-placeholder="Số điện thoại"
-      placeholder="Số điện thoại"
-      v-model="phone"
+      name="email"
+      type="email"
+      label-placeholder="Email"
+      placeholder="Email"
+      v-model="email"
       class="w-full mt-6" />
-    <span class="text-danger text-sm">{{ errors.first('phone') }}</span>
+    <span class="text-danger text-sm">{{ errors.first('email') }}</span>
 
     <vs-input
       ref="password"
@@ -54,9 +55,9 @@ Author URL: http://www.themeforest.net/user/pixinvent
       class="w-full mt-6" />
     <span class="text-danger text-sm">{{ errors.first('confirm_password') }}</span>
 
-    <vs-checkbox v-model="isTermsConditionAccepted" class="mt-6">I accept the terms & conditions.</vs-checkbox>
-    <vs-button  type="border" to="/pages/login" class="mt-6">Login</vs-button>
-    <vs-button class="float-right mt-6" @click="registerUserJWt" :disabled="!validateForm">Register</vs-button>
+    <vs-checkbox v-model="isTermsConditionAccepted" class="mt-6">Tôi chấp nhận các điều kiện và điều khoản.</vs-checkbox>
+    <vs-button  type="border" to="/pages/login" class="mt-6">Đăng nhập</vs-button>
+    <vs-button class="float-right mt-6" @click="registerUserJWt" :disabled="!validateForm">Đăng ký</vs-button>
   </div>
 </template>
 
@@ -65,7 +66,7 @@ export default {
   data () {
     return {
       displayName: '',
-      phone: '',
+      email: '',
       password: '',
       confirm_password: '',
       isTermsConditionAccepted: true
@@ -73,7 +74,7 @@ export default {
   },
   computed: {
     validateForm () {
-      return !this.errors.any() && this.displayName !== '' && this.phone !== '' && this.password !== '' && this.confirm_password !== '' && this.isTermsConditionAccepted === true
+      return !this.errors.any() && this.displayName !== '' && this.email !== '' && this.password !== '' && this.confirm_password !== '' && this.isTermsConditionAccepted === true
     }
   },
   methods: {
@@ -103,14 +104,26 @@ export default {
       const payload = {
         userDetails: {
           displayName: this.displayName,
-          phone: this.phone,
+          email: this.email,
           password: this.password,
           confirmPassword: this.confirm_password
         },
         notify: this.$vs.notify,
-        redirect_url : this.$store.state.eCommerce.cartItems.length > 0  ? '/law/checkout':''
+        redirect_url : '/admin/dashboard'
       }
+      this.$vs.loading()
       this.$store.dispatch('auth/registerUserJWT', payload)
+        .then(() => { this.$vs.loading.close() })
+        .catch(error => {
+          this.$vs.loading.close()
+          this.$vs.notify({
+            title: 'Lỗi',
+            text: error.message,
+            iconPack: 'feather',
+            icon: 'icon-alert-circle',
+            color: 'danger'
+          })
+        })
     }
   }
 }

@@ -19,18 +19,13 @@
         <!-- SM - OPEN SIDEBAR BUTTON -->
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
 
-        <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" />
+        <!-- <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" /> -->
 
-        <router-link tag="div" to="/" class="vx-logo cursor-pointer mx-auto flex items-center">
-          <logo class="w-10 mr-4 fill-current text-primary" />
-          <span class="vx-logo-text text-primary">Vuexy</span>
-        </router-link>
+        <vs-spacer />
 
         <!-- <i18n /> -->
 
-        <search-bar />
-
-        <cart-drop-down />
+        <!-- <search-bar /> -->
 
         <!-- <notification-drop-down /> -->
 
@@ -46,7 +41,6 @@
 import Bookmarks            from './components/Bookmarks.vue'
 import I18n                 from './components/I18n.vue'
 import SearchBar            from './components/SearchBar.vue'
-import CartDropDown         from './components/CartDropDown.vue'
 import NotificationDropDown from './components/NotificationDropDown.vue'
 import ProfileDropDown      from './components/ProfileDropDown.vue'
 
@@ -62,7 +56,6 @@ export default {
     Bookmarks,
     I18n,
     SearchBar,
-    CartDropDown,
     NotificationDropDown,
     ProfileDropDown
   },

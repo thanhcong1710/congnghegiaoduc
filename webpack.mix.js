@@ -13,6 +13,13 @@ require('dotenv').config();
  | file for the application as well as bundling up all the JS files.
  |
  */
+ mix.webpackConfig({
+    resolve: {
+       alias: {
+          'static': path.resolve(__dirname, 'resources/static/'),
+       }
+    }
+ });
 
 mix.js('resources/js/app.js', 'public/js')
     .webpackConfig({

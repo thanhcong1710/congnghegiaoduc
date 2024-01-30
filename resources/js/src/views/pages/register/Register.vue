@@ -18,26 +18,18 @@
                             <img src="@assets/images/pages/register.jpg" alt="register" class="mx-auto">
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center  d-theme-dark-bg">
-                            <div class="px-8 pt-8 register-tabs-container">
+                            <div class="px-8 pt-8 pb-8 register-tabs-container">
+                                <div class="text-center mb-8">
+                                    <a href="/" >
+                                        <img src="/static/logo.png" style="height: 64px; margin: auto"/>
+                                    </a>
+                                </div>
                                 <div class="vx-card__title mb-4">
-                                    <h4 class="mb-4">Create Account</h4>
-                                    <p>Fill the below form to create a new account.</p>
+                                    <h4 class="mb-4">TẠO TÀI KHOẢN</h4>
+                                    <p>Điền vào mẫu dưới đây để tạo tài khoản mới.</p>
                                 </div>
                                 <br>
                                 <register-jwt></register-jwt>
-                                <!-- <vs-tabs>
-                                  <vs-tab label="JWT">
-                                    <register-jwt></register-jwt>
-                                  </vs-tab>
-
-                                  <vs-tab label="Firebase">
-                                    <register-firebase></register-firebase>
-                                  </vs-tab>
-
-                                  <vs-tab label="Auth0">
-                                    <register-auth0></register-auth0>
-                                  </vs-tab>
-                                </vs-tabs> -->
                             </div>
                         </div>
                     </div>
@@ -49,14 +41,10 @@
 
 <script>
 import RegisterJwt from './RegisterJWT.vue'
-import RegisterFirebase from './RegisterFirebase.vue'
-import RegisterAuth0 from './RegisterAuth0.vue'
 
 export default {
   components: {
-    RegisterJwt,
-    RegisterFirebase,
-    RegisterAuth0
+    RegisterJwt
   }
 }
 </script>

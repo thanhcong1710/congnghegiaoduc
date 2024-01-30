@@ -20,49 +20,68 @@
 
 
 export default [
+  // {
+  //   url: '/',
+  //   name: 'Dashboard',
+  //   tagColor: 'warning',
+  //   icon: 'HomeIcon',
+  //   i18n: 'Dashboard'
+  // },
   {
-    url: '/law/list',
-    name: 'Tìm luật sư',
-    tag: '3',
-    tagColor: 'warning',
-    icon: 'SearchIcon',
-    submenu: [
+    header: 'Ứng dụng',
+    icon: 'PackageIcon',
+    i18n: 'Ứng dụng',
+    items: [
       {
-        url: '/#',
-        name: 'Bảo hiểm',
-        slug: 'dashboard-analytics',
+        url: '/admin/rooms',
+        name: 'Phòng họp',
+        slug: 'rooms',
+        icon: 'VideoIcon',
+        i18n: 'Phòng họp'
       },
       {
-        url: '/#',
-        name: 'Dân sự',
-        slug: 'dashboard-ecommerce',
+        url: '/admin/records',
+        name: 'Lưu trữ',
+        slug: 'records',
+        icon: 'ArchiveIcon',
+        i18n: 'Lưu trữ'
       },
-      {
-        url: '/#',
-        name: 'Đất đai',
-        slug: 'dashboard-ecommerce',
-      }
     ]
   },
   {
-    url: '/#',
-    name: 'Bảng phí',
-    icon: 'DollarSignIcon',
-  },
-  {
-    url: '/#',
-    name: 'Dịch vụ pháp lý',
-    icon: 'KeyIcon',
-  },
-  {
-    url: '/#',
-    name: 'Chính sách bảo mật',
-    icon: 'BookOpenIcon',
-  },
-  {
-    url: '/#',
-    name: 'Liên hệ',
-    icon: 'InfoIcon',
+    header: 'Tài khoản',
+    icon: 'PackageIcon',
+    i18n: 'Tài khoản',
+    items: [
+      {
+        url: '/admin/user/profile',
+        name: 'Cài đặt tài khoản',
+        slug: 'user',
+        icon: 'SettingsIcon',
+        i18n: 'Cài đặt tài khoản'
+      },
+      {
+        url: '/admin/upgrade',
+        name: 'Gói dịch vụ',
+        slug: 'records',
+        icon: 'StarIcon',
+        i18n: 'Gói dịch vụ',
+        submenu: [
+          {
+            url: '/admin/upgrade',
+            name: 'Nâng cấp',
+            slug: 'app-user-list',
+            i18n: 'Nâng cấp dịch vụ'
+          },
+          {
+            url: '/admin/user/payments',
+            name: 'Lịch sử thanh toán',
+            slug: 'app-user-view',
+            i18n: 'Lịch sử thanh toán'
+          }
+        ]
+      },
+    ]
   }
 ]
 

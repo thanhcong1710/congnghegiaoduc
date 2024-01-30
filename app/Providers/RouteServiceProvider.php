@@ -44,6 +44,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapPageRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -76,5 +78,18 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapPageRoutes()
+    {
+        Route::prefix('rooms')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page.php'));
+        Route::prefix('pages')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page.php'));
+        Route::prefix('admin')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/page.php'));
     }
 }
