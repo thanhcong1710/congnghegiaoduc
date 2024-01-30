@@ -22,7 +22,11 @@
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
               <div class="px-8 pt-8 login-tabs-container">
-
+                <div class="text-center mb-8">
+                  <a href="/" >
+                    <img src="/static/logo.png" style="height: 64px; margin: auto"/>
+                  </a>
+                </div>
                 <div class="vx-card__title mb-4">
                   <h4 class="mb-4">ĐĂNG NHẬP</h4>
                   <p>Chào mừng trở lại, vui lòng đăng nhập vào tài khoản của bạn.</p>

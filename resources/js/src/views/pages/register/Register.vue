@@ -18,7 +18,12 @@
                             <img src="@assets/images/pages/register.jpg" alt="register" class="mx-auto">
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center  d-theme-dark-bg">
-                            <div class="px-8 pt-8 register-tabs-container">
+                            <div class="px-8 pt-8 pb-8 register-tabs-container">
+                                <div class="text-center mb-8">
+                                    <a href="/" >
+                                        <img src="/static/logo.png" style="height: 64px; margin: auto"/>
+                                    </a>
+                                </div>
                                 <div class="vx-card__title mb-4">
                                     <h4 class="mb-4">TẠO TÀI KHOẢN</h4>
                                     <p>Điền vào mẫu dưới đây để tạo tài khoản mới.</p>

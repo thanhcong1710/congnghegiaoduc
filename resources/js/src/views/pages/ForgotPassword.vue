@@ -18,6 +18,11 @@
                             <img src="@assets/images/pages/forgot-password.png" alt="login" class="mx-auto">
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
+                            <div class="text-center mt-5">
+                                <a href="/" >
+                                    <img src="/static/logo.png" style="height: 64px; margin: auto"/>
+                                </a>
+                            </div>
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
                                     <h4 class="mb-4">Khôi phục mật khẩu</h4>

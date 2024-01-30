@@ -19,6 +19,11 @@
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center  d-theme-dark-bg">
                             <div class="p-8">
+                                <div class="text-center mb-8">
+                                    <a href="/" >
+                                        <img src="/static/logo.png" style="height: 64px; margin: auto"/>
+                                    </a>
+                                </div>
                                 <div class="vx-card__title mb-8">
                                     <h4 class="mb-4">Đặt Lại Mật Khẩu</h4>
                                     <p>Vui lòng nhập mật khẩu mới của bạn.</p>
