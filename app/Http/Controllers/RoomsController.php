@@ -7,13 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\UtilityServiceProvider as u;
 use App\Providers\BigBluButtonServiceProvider as bbb;
 use Illuminate\Http\Request;
-use BigBlueButton\BigBlueButton;
-use BigBlueButton\Parameters\CreateMeetingParameters;
-use BigBlueButton\Parameters\JoinMeetingParameters;
-use BigBlueButton\Parameters\GetMeetingInfoParameters;
-use BigBlueButton\Parameters\GetRecordingsParameters;
-use BigBlueButton\Parameters\DeleteRecordingsParameters;
-use BigBlueButton\Parameters\EndMeetingParameters;
 use Illuminate\Support\Facades\Auth;
 
 class RoomsController extends Controller
@@ -370,5 +363,10 @@ class RoomsController extends Controller
             ];
         }
         return response()->json($result);
+    }
+
+    public function trialRoom(Request $request){
+        $ip= $request->ip();
+        var_dump($ip);die();
     }
 }

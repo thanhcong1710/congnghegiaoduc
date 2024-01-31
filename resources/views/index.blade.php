@@ -277,7 +277,7 @@
               <ul style="text-align:left; padding-left: 20px">
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Cuộc họp video <span style="color:#d5072a; font-size:14px">không giới hạn thời gian họp</span></li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Người tham gia (100 người)</li>
-                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Ghi lại cuộc họp (3 ngày)</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Ghi lại cuộc họp (lưu trữ 3 ngày)</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Bảng trắng</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Chia sẻ màn hình</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Trình bày slide</li>
@@ -297,7 +297,7 @@
               <ul style="text-align:left; padding-left: 20px">
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Đầy đủ tính năng của gói miễn phí</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Người tham gia <span style="color:#d5072a; font-size:14px">không giới hạn</span></li>
-                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Ghi lại cuộc họp <span style="color:#d5072a; font-size:14px">không giới hạn</span></li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Ghi lại cuộc họp <span style="color:#d5072a; font-size:14px">lưu trữ không giới hạn</span></li>
               </ul>
               <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
@@ -449,7 +449,6 @@
               <li><i class="bi bi-chevron-right"></i> <a href="#about">Giải pháp</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="#pricing">Bảng giá</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="#documents">Hướng dẫn</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
             </ul>
           </div>
 

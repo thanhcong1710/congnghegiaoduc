@@ -32,6 +32,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::prefix('room')->group(function () {
         Route::get('info/{code}', 'RoomsController@infoByCode');
         Route::post('join', 'RoomsController@joinRoom');
+        Route::get('trial', 'RoomsController@trialRoom');
     });
 
     Route::prefix('auth')->group(function () {
