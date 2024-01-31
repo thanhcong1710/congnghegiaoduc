@@ -203,6 +203,14 @@ const router = new Router({
             rule: 'editor'
           }
         },
+        {
+          path: '/pages/notify-active/:email',
+          name: 'page-notify-active',
+          component: () => import('@/views/pages/NotifyActive.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
 
         {
           path: '/callback',

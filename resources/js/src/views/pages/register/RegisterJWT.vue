@@ -120,7 +120,7 @@ export default {
       this.$store.dispatch('auth/registerUserJWT', payload)
         .then(() => { 
           this.$vs.loading.close() 
-          this.$router.push('/pages/notify-active')
+          this.$router.push(`/pages/notify-active/${this.email}`)
         })
         .catch(error => {
           this.$vs.loading.close()

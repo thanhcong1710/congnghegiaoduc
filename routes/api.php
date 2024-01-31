@@ -42,6 +42,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('register', 'AuthController@register');
         Route::post('forgot-password', 'AuthController@forgotPassword');
         Route::post('reset-password', 'AuthController@resetPassword');
+        Route::post('resend-active', 'AuthController@resendActive');
     });
     Route::prefix('law')->group(function () {
         Route::post('list', 'LawController@list');

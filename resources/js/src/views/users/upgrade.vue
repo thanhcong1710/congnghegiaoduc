@@ -1,24 +1,18 @@
 <template>
   <section id="pricing-plan">
     <div class="text-center">
-      <h1 class="mt-5"> Pricing Plans </h1>
-      <p class="mb-2 mt-3 pb-75"> All plans include 40+ advanced tools and features to boost your product. Choose the best
-        plan to fit your needs. </p>
+      <h1 class="mt-5"> Chính sách giá </h1>
+      
     </div>
     <div class="vx-row pricing-card mt-10" style="justify-content: center; display: flex; width: 100%;">
       <div class="md:w-10/12 w-full">
         <div class="vx-row">
-          <div :class="!user.end_vip ? 'vx-col md:w-1/3 w-full mb-4 active' : 'vx-col md:w-1/3 w-full mb-4'">
+          <div :class="!user.is_vip ? 'vx-col md:w-1/3 w-full mb-4 active' : 'vx-col md:w-1/3 w-full mb-4'">
             <div class="vx-card text-center">
               <!---->
               <!---->
               <div class="card-body p-5">
-                <!---->
-                <!----><img
-                  src="https://demos.pixinvent.com/vuexy-vuejs-admin-template-vue2/demo-1/img/Pot1.f497783b.svg"
-                  alt="basic svg img" class="mb-2 mt-5">
-                <h3>Miễn Phí</h3>
-                <p class="card-text"> A simple start for everyone </p>
+                <h3 style="color: #07d5c0;" class="mt-5">Miễn Phí</h3>
                 <div class="annual-plan">
                   <div class="plan-price mt-4 mb-4">
                     <span class="pricing-basic-value font-weight-bolder text-primary">0</span>
@@ -29,54 +23,80 @@
                 <div class="vs-list">
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Cuộc họp video <span style="color:#d5072a; font-size:14px">không giới hạn thời gian họp</span></div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Người tham gia (100 người)</div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Ghi lại cuộc họp (lưu trữ 3 ngày)</div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Bảng trắng</div>
                     </div>
                   </div>
-                  
+                  <div class="vs-list--item">
+                    <div class="vs-list--icon">
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
+                    </div>
+                    <div class="list-titles">
+                      <div class="vs-list--subtitle">Chia sẻ màn hình</div>
+                    </div>
+                  </div>
+                  <div class="vs-list--item">
+                    <div class="vs-list--icon">
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
+                    </div>
+                    <div class="list-titles">
+                      <div class="vs-list--subtitle">Trình bày slide</div>
+                    </div>
+                  </div>
+                  <div class="vs-list--item">
+                    <div class="vs-list--icon">
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
+                    </div>
+                    <div class="list-titles">
+                      <div class="vs-list--subtitle">Trò chuyện nhóm</div>
+                    </div>
+                  </div>
+                   <div class="vs-list--item">
+                    <div class="vs-list--icon">
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
+                    </div>
+                    <div class="list-titles">
+                      <div class="vs-list--subtitle">Bảng tổng kết sau cuộc họp</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!---->
               <!---->
             </div>
           </div>
-          <div :class="user.end_vip ? 'vx-col md:w-1/3 w-full mb-4 active' : 'vx-col md:w-1/3 w-full mb-4'">
+          <div :class="user.is_vip ? 'vx-col md:w-1/3 w-full mb-4 active' : 'vx-col md:w-1/3 w-full mb-4'">
             <div class="vx-card text-center">
               <!---->
               <!---->
               <div class="card-body p-5">
-                <!---->
-                <!----><img
-                  src="https://demos.pixinvent.com/vuexy-vuejs-admin-template-vue2/demo-1/img/Pot1.f497783b.svg"
-                  alt="basic svg img" class="mb-2 mt-5">
-                <h3>VIP</h3>
-                <p class="card-text"> A simple start for everyone </p>
+                <h3 style="color: #65c600;" class="mt-5">VIP</h3>
                 <div class="annual-plan">
                   <div class="plan-price mt-4 mb-4">
                     <span class="pricing-basic-value font-weight-bolder text-primary">100.000</span>
@@ -87,34 +107,26 @@
                 <div class="vs-list">
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle"> Đầy đủ tính năng của gói miễn phí</div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Người tham gia <span style="color:#d5072a; font-size:14px">không giới hạn</span></div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
-                    </div>
-                  </div>
-                  <div class="vs-list--item">
-                    <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
-                    </div>
-                    <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Ghi lại cuộc họp <span style="color:#d5072a; font-size:14px">lưu trữ không giới hạn</span></div>
                     </div>
                   </div>
                 </div>
@@ -132,50 +144,32 @@
               <!---->
               <!---->
               <div class="card-body p-5">
-                <!---->
-                <!----><img
-                  src="https://demos.pixinvent.com/vuexy-vuejs-admin-template-vue2/demo-1/img/Pot1.f497783b.svg"
-                  alt="basic svg img" class="mb-2 mt-5">
-                <h3>Doanh Nghiệp</h3>
-                <p class="card-text"> A simple start for everyone </p>
-                <div class="annual-plan">
-                  <div class="plan-price mt-4 mb-4">
-                    <span class="pricing-basic-value font-weight-bolder text-primary">0</span>
-                    <sub class="font-medium-1 font-weight-bold text-primary">đ</sub>
-                    <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/tháng</sub>
-                  </div>
-                </div>
+                <h3 tyle="color: #ff901c;" class="mt-5">Doanh Nghiệp</h3>
+                <p class="card-text mt-3" style="text-align: justify;"> Liên hệ với chúng tôi để biết thêm thông tin về mức giá và hơn thế nữa </p>
+                
                 <div class="vs-list">
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Đầy đủ tính năng của gói VIP</div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">Máy chủ dùng riêng</div>
                     </div>
                   </div>
                   <div class="vs-list--item">
                     <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
+                      <i class="vs-icon notranslate icon-scale feather icon-check null" style="font-size: 20px !important; color: #0fc305;"></i>
                     </div>
                     <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
-                    </div>
-                  </div>
-                  <div class="vs-list--item">
-                    <div class="vs-list--icon">
-                      <i class="vs-icon notranslate icon-scale feather icon-check null"></i>
-                    </div>
-                    <div class="list-titles">
-                      <div class="vs-list--subtitle">An excellent companion</div>
+                      <div class="vs-list--subtitle">API kết nối</div>
                     </div>
                   </div>
                   
@@ -380,5 +374,11 @@
 }
 .vx-row.pricing-card {
   margin: 10px 0px;
+}
+.vs-list--item .list-titles{
+ text-align: left;
+}
+#pricing-plan .vx-col.active .vx-card{
+  border: 2px solid rgba(var(--vs-primary), 1) ;
 }
 </style>

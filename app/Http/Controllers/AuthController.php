@@ -36,7 +36,7 @@ class AuthController extends Controller
         }        
         $user = new User;
         $user->name = $request->name;
-        $user->email = u::convertPhoneNumber($request->email);
+        $user->email = $request->email;
         // $user->phone = u::convertPhoneNumber($request->phone);
         $user->password = bcrypt($request->password);
         $user->menuroles = 'user';
@@ -44,6 +44,7 @@ class AuthController extends Controller
         $user->client_ip = $request->ip();
         $user->email_verified_code = uniqid();
         $user->save(); 
+        $this->sendActiveAccount($user->email);
         
         return response()->json([
             'status' => 1,
@@ -239,5 +240,13 @@ class AuthController extends Controller
 
     public function checkIp(Request $request){
         dd($request->ip());
+    }
+
+    public function resendActive(Request $request){
+        $this->sendActiveAccount($request->email);
+        return response()->json([
+            'status' => 1,
+            'message' => "Đã gửi lại email kích hoạt tài khoản đến địa chỉ $request->email"
+        ], 200);
     }
 }
