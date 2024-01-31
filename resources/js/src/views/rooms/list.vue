@@ -44,8 +44,8 @@
                     <vs-divider />
                     <div class="p-6 pb-0 pt-0">
                        <div class="flex flex-wrap justify-between mb-3">
-                          <feather-icon icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
-                          <vs-button >Bắt đầu</vs-button>
+                          <feather-icon @click="copyTextJoinLink(room.join_link, 'Link tham gia cuộc họp')" icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
+                          <vs-button  @click="join">Bắt đầu</vs-button>
                         </div>
                     </div>
                 </div>
@@ -146,6 +146,54 @@
       },
       room_detail_view(id){
         this.$router.push({name: 'room-detail-view', params: {id:id }}).catch(() => {})
+      },
+      copyTextJoinLink(textCopy, message) {
+          const thisIns = this;
+          this.$copyText(textCopy).then(function() {
+              thisIns.$vs.notify({
+                  title: 'Copy',
+                  text: message,
+                  color: 'success',
+                  iconPack: 'feather',
+                  icon: 'icon-check-circle'
+              })
+          }, function() {
+              thisIns.$vs.notify({
+                  title: 'Failed',
+                  text: 'Error in copying text',
+                  color: 'danger',
+                  iconPack: 'feather',
+                  icon: 'icon-alert-circle'
+              })
+          })
+      },
+      join(){
+        this.$vs.loading()
+        axios.p(`/api/room/join`,{
+          code: this.room.code,
+          name: this.$store.state.AppActiveUser.name,
+          pass: this.room.password_moderator,
+          init: 1,
+        })
+        .then((response) => {
+          if (response.data.status) {
+            window.location.href = response.data.redirect_url;
+            this.$vs.loading.close()
+          } else {
+            this.$vs.loading.close()
+            this.$vs.notify({
+              title: 'Lỗi',
+              text: response.data.message,
+              iconPack: 'feather',
+              icon: 'icon-alert-circle',
+              color: 'danger'
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
       }
     },
     created() {
