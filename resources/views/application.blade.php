@@ -17,11 +17,11 @@
     <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
+    <link href="../static/flexstart/img/apple-touch-icon.png" rel="shortcut icon">
   </head>
   <body>
     <noscript>
-      <strong>Công Nghệ Giáo Dục  - Vuejs, HTML & Laravel Admin Dashboard Template doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>Công Nghệ Giáo Dục  - cung cấp các nền tảng dịch vụ hỗ trợ quản lý giảng dạy online trên nền tảng BigBlueButton. Lớp học ảo, cuộc họp video, thuyết trình trực tuyến, hội thảo trên web và đào tạo từ xa ...</strong>
     </noscript>
     <div id="app">
     </div>
