@@ -476,7 +476,14 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML87RVSPD0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-ML87RVSPD0');
+  </script>
   <!-- Vendor JS Files -->
   <script src="../static/flexstart/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../static/flexstart/vendor/aos/aos.js"></script>
