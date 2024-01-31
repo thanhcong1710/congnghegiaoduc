@@ -269,71 +269,53 @@
 
         <div class="row gy-4" data-aos="fade-left">
 
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
-              <h3 style="color: #07d5c0;">Free Plan</h3>
-              <div class="price"><sup>$</sup>0<span> / mo</span></div>
+              <h3 style="color: #07d5c0;">Miễn Phí</h3>
+              <div class="price"><sup>đ</sup>0<span> / tháng</span></div>
               <img src="../static/flexstart/img/pricing-free.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
+              <ul style="text-align:left; padding-left: 20px">
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Cuộc họp video <span style="color:#d5072a; font-size:14px">không giới hạn thời gian họp</span></li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Người tham gia (100 người)</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Ghi lại cuộc họp (3 ngày)</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Bảng trắng</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Chia sẻ màn hình</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Trình bày slide</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Trò chuyện nhóm</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Bảng tổng kết sau cuộc họp</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
               <span class="featured">Featured</span>
-              <h3 style="color: #65c600;">Starter Plan</h3>
-              <div class="price"><sup>$</sup>19<span> / mo</span></div>
+              <h3 style="color: #65c600;">VIP</h3>
+              <div class="price"><sup>đ</sup>100.000<span> / tháng</span></div>
               <img src="../static/flexstart/img/pricing-starter.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
+              <ul style="text-align:left; padding-left: 20px">
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Đầy đủ tính năng của gói miễn phí</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Người tham gia <span style="color:#d5072a; font-size:14px">không giới hạn</span></li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Ghi lại cuộc họp <span style="color:#d5072a; font-size:14px">không giới hạn</span></li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
-              <h3 style="color: #ff901c;">Business Plan</h3>
-              <div class="price"><sup>$</sup>29<span> / mo</span></div>
+              <h3 style="color: #ff901c;">Doanh nghiệp</h3>
+              <p style="margin-bottom: 0px;">Liên hệ với chúng tôi để biết thêm thông tin về mức giá và hơn thế nữa</p>
               <img src="../static/flexstart/img/pricing-business.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
+              <ul style="text-align:left; padding-left: 20px">
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Đầy đủ tính năng của gói VIP</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Máy chủ dùng riêng</li>
+                <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>API kết nối</li>
               </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
+              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="box">
-              <h3 style="color: #ff0071;">Ultimate Plan</h3>
-              <div class="price"><sup>$</sup>49<span> / mo</span></div>
-              <img src="../static/flexstart/img/pricing-ultimate.png" class="img-fluid" alt="">
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <a href="#" class="btn-buy">Buy Now</a>
-            </div>
-          </div>
-
         </div>
 
       </div>
