@@ -53,7 +53,7 @@
           <li><a class="nav-link scrollto" href="#about">Giải pháp</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Bảng giá</a></li>
           <li><a class="nav-link scrollto" href="#documents">Hướng dẫn</a></li>
-          <li><a class="getstarted scrollto" href="#about">Dùng thử miễn phí</a></li>
+          <li><a class="getstarted scrollto" target="_blank" href="/api/room/trial">Dùng thử miễn phí</a></li>
           <li><a class="getstarted scrollto" href="/pages/login" style="background-color: #198754;">Đăng nhập</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -72,7 +72,7 @@
           <h2 data-aos="fade-up" data-aos-delay="400"  style="text-align: justify;">Kết nối, cộng tác và cùng nhau hoàn thành nhiều việc hơn với giải pháp cuộc họp video BigBlueButton hoàn toàn miễn phí không giới hạn.</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a target="_blank" href="/api/room/trial" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Dùng thử miễn phí ngay</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -105,7 +105,7 @@
                 - Bảng trắng đa người dùng dễ sử dụng<br>
               </p>
               <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                <a target="_blank" href="/api/room/trial" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                   <span>Dùng thử miễn phí ngay</span>
                   <i class="bi bi-arrow-right"></i>
                 </a>
@@ -284,7 +284,7 @@
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Trò chuyện nhóm</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Bảng tổng kết sau cuộc họp</li>
               </ul>
-              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
+              <a target="_blank" href="/api/room/trial" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
 
@@ -299,7 +299,7 @@
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Người tham gia <span style="color:#d5072a; font-size:14px">không giới hạn</span></li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i> Ghi lại cuộc họp <span style="color:#d5072a; font-size:14px">lưu trữ không giới hạn</span></li>
               </ul>
-              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
+              <a target="_blank" href="/api/room/trial" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
 
@@ -313,7 +313,7 @@
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>Máy chủ dùng riêng</li>
                 <li><i class="ri-check-fill" style="font-size: 20px; color: #0fc305; margin-right: 5px;"></i>API kết nối</li>
               </ul>
-              <a href="#" class="btn-buy">Dùng thử miễn phí ngay</a>
+              <a target="_blank" href="/api/room/trial" class="btn-buy">Dùng thử miễn phí ngay</a>
             </div>
           </div>
         </div>
