@@ -63,6 +63,7 @@ class RoomsController extends Controller
             'status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'creator_id' => Auth::user()->id,
+            'client_ip' => $request->ip()
         ), 'rooms');
 
         $result = [
@@ -367,6 +368,48 @@ class RoomsController extends Controller
 
     public function trialRoom(Request $request){
         $ip= $request->ip();
-        var_dump($ip);die();
+        $time_check = date('Y-m-d H:i:s', time()-15*60);
+        $check_spam = u::first("SELECT count(id) AS total FROM rooms WHERE client_ip='$ip' AND `type`=0  AND created_at >='$time_check'");
+        if($check_spam->total > 10){
+            return 'Xin lỗi bạn đã gửi quá nhiều yêu cầu dùng thử, vui chờ sau 15 phút để tiếp tục sử dụng';
+        }else{
+            $room_title = 'Công nghệ giáo dục - phòng họp trực tuyến';
+            $room_code = "trial_".uniqid();
+            $room_trial_id = u::insertSimpleRow(array(
+                'title' => $room_title,
+                'code' => $room_code,
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'creator_id' => 0,
+                'client_ip' => $request->ip(),
+                'type' => 0
+            ), 'rooms');
+
+            $urlLogout = config('app.url');
+            $urlJoin = config('app.url')."/rooms/".$room_code; 
+            $welcomeMessage = "Để mời ai đó tham gia cuộc họp, hãy gửi cho họ liên kết này: $urlJoin";
+            $isRecordingTrue = true;
+
+            $bbb_info = bbb::createRoom($room_trial_id, $room_title, [], 10, $urlLogout, $welcomeMessage, $isRecordingTrue);
+            if(data_get($bbb_info, 'status')){
+                $bbb_info =  data_get($bbb_info, 'data');
+                u::insertSimpleRow(array(
+                    'code' => data_get($bbb_info, 'meetingID'),
+                    'room_id' => $room_trial_id,
+                    'bbb_internal_meeting_id' =>data_get($bbb_info, 'internalMeetingID'),
+                    'status' => 1,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'creator_id' => data_get(Auth::user(), 'id'),
+                    'start_time' => date('Y-m-d H:i:s'),
+                    'password_attendee' => data_get($bbb_info, 'password_attendee'),
+                    'password_moderator' => data_get($bbb_info, 'password_moderator')
+                ), 'room_sessions');
+
+                $url_join = bbb::joinRoom(data_get($bbb_info, 'meetingID'), 'Tài khoản dùng thử', data_get($bbb_info, 'password_moderator'));
+                return redirect($url_join);
+            }else{
+                return data_get($bbb_info, 'message');
+            }
+        }
     }
 }
