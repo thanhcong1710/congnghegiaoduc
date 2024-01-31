@@ -77,6 +77,11 @@ export default {
       return !this.errors.any() && this.displayName !== '' && this.email !== '' && this.password !== '' && this.confirm_password !== '' && this.isTermsConditionAccepted === true
     }
   },
+  created() {
+    if (this.$store.state.auth.isUserLoggedIn()) {
+      this.$router.push('/admin/rooms')
+    }
+  },
   methods: {
     checkLogin () {
       // If user is already logged in notify
@@ -109,11 +114,14 @@ export default {
           confirmPassword: this.confirm_password
         },
         notify: this.$vs.notify,
-        redirect_url : '/admin/dashboard'
+        // redirect_url : '/admin/dashboard'
       }
       this.$vs.loading()
       this.$store.dispatch('auth/registerUserJWT', payload)
-        .then(() => { this.$vs.loading.close() })
+        .then(() => { 
+          this.$vs.loading.close() 
+          this.$router.push('/pages/notify-active')
+        })
         .catch(error => {
           this.$vs.loading.close()
           this.$vs.notify({

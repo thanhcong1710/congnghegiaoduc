@@ -49,7 +49,7 @@ export default {
           if (response.data && response.data.status && response.data.userData) {
 
             // Navigate User to homepage
-            router.push(payload.redirect_url || '/')
+            // router.push('/admin/rooms')
 
             // Set accessToken
             localStorage.setItem('accessToken', response.data.accessToken)
@@ -83,7 +83,7 @@ export default {
         .then(response => {
           if (response.data && response.data.status) {
             // Redirect User
-            router.push('/pages/notify-active')
+            // router.push('/pages/notify-active')
 
             resolve(response)
           } else{

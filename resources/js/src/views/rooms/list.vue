@@ -44,8 +44,8 @@
                     <vs-divider />
                     <div class="p-6 pb-0 pt-0">
                        <div class="flex flex-wrap justify-between mb-3">
-                          <feather-icon @click="copyTextJoinLink(room.join_link, 'Link tham gia cuộc họp')" icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
-                          <vs-button  @click="join">Bắt đầu</vs-button>
+                          <feather-icon style="cursor: pointer" @click="copyTextJoinLink(item.join_link, 'Link tham gia cuộc họp')" icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
+                          <vs-button  @click="join(item)">Bắt đầu</vs-button>
                         </div>
                     </div>
                 </div>
@@ -167,12 +167,12 @@
               })
           })
       },
-      join(){
+      join(room_info){
         this.$vs.loading()
         axios.p(`/api/room/join`,{
-          code: this.room.code,
+          code: room_info.code,
           name: this.$store.state.AppActiveUser.name,
-          pass: this.room.password_moderator,
+          pass: room_info.password_moderator,
           init: 1,
         })
         .then((response) => {

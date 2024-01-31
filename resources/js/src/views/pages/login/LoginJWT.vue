@@ -55,6 +55,12 @@ export default {
       return !this.errors.any() && this.phone !== '' && this.password !== ''
     }
   },
+  created() {
+    if (this.$store.state.auth.isUserLoggedIn()) {
+      this.$router.push('/admin/rooms')
+    }
+    console.log(process.env.APP_URL)
+  },
   methods: {
     checkLogin () {
       // If user is already logged in notify
@@ -89,11 +95,14 @@ export default {
           email: this.email,
           password: this.password
         },
-        //redirect_url :  '/admin/rooms'
+        redirect_url :  '/admin/rooms'
       }
 
       this.$store.dispatch('auth/loginJWT', payload)
-        .then(() => { this.$vs.loading.close() })
+        .then(() => { 
+          this.$vs.loading.close() 
+          this.$router.push('/admin/rooms')  
+        })
         .catch(error => {
           if(error.type == 'inactive'){
             this.resendActive = true

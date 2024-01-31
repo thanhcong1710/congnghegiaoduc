@@ -30,6 +30,7 @@ class RoomsController extends Controller
             WHERE $cond ORDER BY r.id DESC $limitation");
         foreach($list AS $k=>$row){
             $list[$k]->last_session_time = $row->last_session_time ? date('d/m/Y H:i:s', strtotime($row->last_session_time)):'';
+            $list[$k]->join_link = config('app.url').'/rooms/'.$row->code;
         }
         $data = u::makingPagination($list, $total->total, $page, $limit);
         return response()->json($data);
