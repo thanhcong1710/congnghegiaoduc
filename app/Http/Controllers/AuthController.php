@@ -41,6 +41,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->menuroles = 'user';
         $user->status = '0';
+        $user->client_ip = $request->ip();
         $user->email_verified_code = uniqid();
         $user->save(); 
         
