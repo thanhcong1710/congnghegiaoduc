@@ -235,4 +235,8 @@ class AuthController extends Controller
             ], 200);
         }
     }
+
+    public function checkIp(Request $request){
+        dd($request->ip());
+    }
 }

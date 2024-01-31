@@ -23,6 +23,8 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('bbb/record', 'BigBluButtonController@getRecords');
     Route::get('bbb/record/delete', 'BigBluButtonController@deleteRecord');
     Route::get('testMail', 'AuthController@testMail');
+    Route::get('checkip', 'AuthController@checkIp');
+
     Route::get('active/payment/{code}', 'UserController@activePayment');
     Route::get('viewMail', 'AuthController@viewMail');
 
