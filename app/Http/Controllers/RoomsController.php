@@ -89,7 +89,6 @@ class RoomsController extends Controller
                 $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
                 $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
                 $upload_status = move_uploaded_file($tmpFilePath, $newFilePath);
-                var_dump($upload_status);die();
                 if($upload_status) {
                     u::insertSimpleRow(array(
                         'title' => $title,
