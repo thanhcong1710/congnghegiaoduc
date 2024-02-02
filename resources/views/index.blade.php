@@ -502,10 +502,12 @@
   <script>
   $( document ).ready(function() {
     const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const code = urlParams.get('code')
-    if(code){
-      localStorage.setItem("registerCode", code);
+    if(queryString){
+      const urlParams = new URLSearchParams(queryString);
+      const code = urlParams.get('code')
+      if(code){
+        localStorage.setItem("registerCode", code);
+      }
     }
   });
   </script>
