@@ -35,12 +35,13 @@
     </div>
 
     <div class="flex flex-wrap justify-between mt-10 text-center" v-if="resendActive">
-      Tài khoản chưa được kích hoạt, <router-link to="/pages/forgot-password">gửi lại mã kích hoạt</router-link>
+      Tài khoản chưa được kích hoạt, <a style="cursor: pointer;" @click="resendMailActive()">gửi lại mã kích hoạt</a>
     </div>
   </div>
 </template>
 
 <script>
+import axios from './../../../http/axios.js'
 export default {
   data () {
     return {
@@ -120,6 +121,24 @@ export default {
     registerUser () {
       if (!this.checkLogin()) return
       this.$router.push('/pages/register').catch(() => {})
+    },
+    resendMailActive () {
+        this.$vs.loading()
+        axios.p(`/api/auth/resend-active`, {email:this.email})
+        .then((response) => {
+            this.$vs.loading.close()
+            this.$vs.notify({
+                title: 'Thành công',
+                text: response.data.message,
+                iconPack: 'feather',
+                icon: 'icon-alert-circle',
+                color: 'success'
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+            this.$vs.loading.close();
+        })
     }
   }
 }
