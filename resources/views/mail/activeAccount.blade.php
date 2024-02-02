@@ -539,12 +539,11 @@
                                                                                  <tr>
                                                                                     <td align="center" valign="top"
                                                                                        class="r15-i nl2go-default-textstyle"
-                                                                                       style="color: #474747; font-family: Inter,Arial; font-size: 14px; word-break: break-word; padding-bottom: 10px; padding-top: 10px; text-align: center;">
+                                                                                       style="color: #474747; font-family: Inter,Arial; font-size: 14px; word-break: break-word; padding-bottom: 0px; padding-top: 0px; text-align: center;">
                                                                                        <div>
                                                                                           <p
                                                                                              style="margin: 0; font-family: Tomato Grotesk, arial; font-size: 22px; font-weight: bold; color: #0B996E;">
-                                                                                             <span><strong
-                                                                                                   style="margin-left: 30px;"><span
+                                                                                             <span><strong><span
                                                                                                       style="font-size: 22px; font-weight: bold; display: block;"><span
                                                                                                          style="color: #0B996E;">
                                                                                                 Hoàn tất việc tạo tài khoản của bạn.</span></span></strong></span>

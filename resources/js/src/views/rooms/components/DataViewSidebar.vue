@@ -22,12 +22,13 @@
         <vs-input label="Tên phòng họp" type="text" v-model="title" class="mt-2 w-full" name="title" v-validate="'required'" />
         <span class="text-danger text-sm" v-show="errors.has('title')">{{ errors.first('title') }}</span>
       </div>
+      <div class="flex flex-wrap items-center p-6 pt-4">
+        
+        <vs-button class="mr-6" @click="submitData" >Thêm mới</vs-button>
+        <vs-button type="border" color="danger" @click="isSidebarActiveLocal = false">Hủy</vs-button>
+      </div>
     </component>
 
-    <div class="flex flex-wrap items-center p-6" slot="footer">
-      <vs-button class="mr-6" @click="submitData" >Thêm mới</vs-button>
-      <vs-button type="border" color="danger" @click="isSidebarActiveLocal = false">Hủy</vs-button>
-    </div>
   </vs-sidebar>
 </template>
 
