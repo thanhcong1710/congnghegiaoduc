@@ -18,7 +18,7 @@ export const colors = {
 
 // CONFIGS
 const themeConfig = {
-  disableCustomizer : false,       // options[Boolean] : true, false(default)
+  disableCustomizer : true,       // options[Boolean] : true, false(default)
   disableThemeTour  : true,        // options[Boolean] : true, false(default)
   footerType        : 'static',    // options[String]  : static(default) / sticky / hidden
   hideScrollToTop   : false,       // options[Boolean] : true, false(default)
