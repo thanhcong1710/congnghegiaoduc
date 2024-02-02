@@ -54,7 +54,7 @@
           <li><a class="nav-link scrollto" href="#pricing">Bảng giá</a></li>
           <li><a class="nav-link scrollto" href="#documents">Hướng dẫn</a></li>
           <li><a class="getstarted scrollto" target="_blank" href="/api/room/trial">Dùng thử miễn phí</a></li>
-          <li><a class="getstarted scrollto" href="/pages/login" style="background-color: #198754;">Đăng nhập/Đăng ký</a></li>
+          <li><a class="getstarted scrollto" href="/pages/login" style="background-color: #198754;">Đăng nhập / đăng ký</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
