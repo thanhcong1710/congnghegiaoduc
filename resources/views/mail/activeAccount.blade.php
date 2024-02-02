@@ -605,7 +605,7 @@
                                                                                           <p
                                                                                              style="margin: 0; font-family: Inter, arial; font-size: 14px; color: #474747;">
                                                                                              <span><span><span
-                                                                                                      style="background-color: transparent; color: #474747;">Địa chỉ email của bạn đã được đăng ký với {{data_get($data, 'domain')}} Để xác thực tài khoản của bạn và kích hoạt khả năng gửi chiến dịch email, vui lòng hoàn tất hồ sơ của bạn bằng cách nhấp vào liên kết bên dưới:</span></span></span>
+                                                                                                      style="background-color: transparent; color: #474747;">Địa chỉ email của bạn đã được đăng ký với {{data_get($data, 'domain')}} Để xác thực tài khoản của bạn và kích hoạt tính năng tạo phòng họp, vui lòng hoàn tất hồ sơ của bạn bằng cách nhấp vào liên kết bên dưới:</span></span></span>
                                                                                           </p>
                                                                                        </div>
                                                                                     </td>

@@ -20,7 +20,9 @@ class BigBluButtonController extends Controller
 {
     public function createRoom(Request $request)
     {
-        $bbb = new BigBlueButton();
+        $secret="vWmKBZtDtq3pbKEDyxBJ7YcXKqPEjvqR2wm6qyvdU0_123";
+        $url="https://bbb.dapanh.com/bigbluebutton/";
+        $bbb = new BigBlueButton($url, $secret);
         $meetingID = 'demo11';
         $meetingName = 'DEMO 10';
         $attendee_password = '123456';
