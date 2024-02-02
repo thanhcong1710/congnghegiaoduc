@@ -7,6 +7,7 @@
         <h5 style="font-size: 24px; color: #fff;">THÔNG TIN CHUYỂN KHOẢN</h5>
         <h2 style="font-size: 48px; color: #fff;" class="mt-5 mb-8">{{payment.amount | formatCurrency}}</h2>
         <div style="padding: 20px;font-size: 16px; background: #fff; color:#110111; border-radius: 6px;">
+          <img width="100%" :src="'https://img.vietqr.io/image/VPB-64308987-compact.png?amount='+payment.amount+'&addInfo='+payment.code+'&accountName=LUONG THANH CONG'" />     
           <div class="flex justify-between flex-wrap mt-3">
             <span style="margin-top: 6px">Ngân hàng</span> 
             <span><img src="/static/img/logo_vpb.svg" height="25px"/></span>
