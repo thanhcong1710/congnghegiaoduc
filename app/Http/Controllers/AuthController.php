@@ -42,6 +42,7 @@ class AuthController extends Controller
         $user->menuroles = 'user';
         $user->status = '0';
         $user->client_ip = $request->ip();
+        $user->register_code = $request->register_code;
         $user->email_verified_code = uniqid();
         $user->save(); 
         $this->sendActiveAccount($user->email);

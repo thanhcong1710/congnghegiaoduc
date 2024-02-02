@@ -50,12 +50,13 @@ export default {
       password: pwd
     })
   },
-  registerUser (name, email, pwd, pwd_cf) {
+  registerUser (name, email, pwd, pwd_cf,register_code) {
     return axios.post('/api/auth/register', {
       name: name,
       email,
       password: pwd,
-      password_confirmation: pwd_cf
+      password_confirmation: pwd_cf,
+      register_code: register_code
     })
   },
   refreshToken () {

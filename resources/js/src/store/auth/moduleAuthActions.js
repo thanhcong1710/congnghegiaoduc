@@ -70,7 +70,7 @@ export default {
   },
   registerUserJWT ({ commit }, payload) {
 
-    const { displayName, email, password, confirmPassword } = payload.userDetails
+    const { displayName, email, password, confirmPassword, registerCode } = payload.userDetails
 
     return new Promise((resolve, reject) => {
 
@@ -79,7 +79,7 @@ export default {
         reject({message: 'Mật khẩu không khớp. Vui lòng thử lại.'})
       }
 
-      jwt.registerUser(displayName, email, password, confirmPassword)
+      jwt.registerUser(displayName, email, password, confirmPassword, registerCode)
         .then(response => {
           if (response.data && response.data.status) {
             // Redirect User

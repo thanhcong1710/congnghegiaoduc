@@ -495,6 +495,20 @@
 
   <!-- Template Main JS File -->
   <script src="../static/flexstart/js/main.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <script>
+  $( document ).ready(function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code')
+    if(code){
+      localStorage.setItem("registerCode", code);
+    }
+  });
+  </script>
 
 </body>
 

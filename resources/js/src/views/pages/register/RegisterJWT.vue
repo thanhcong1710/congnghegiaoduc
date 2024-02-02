@@ -111,7 +111,8 @@ export default {
           displayName: this.displayName,
           email: this.email,
           password: this.password,
-          confirmPassword: this.confirm_password
+          confirmPassword: this.confirm_password,
+          registerCode: localStorage.getItem("registerCode")
         },
         notify: this.$vs.notify,
         // redirect_url : '/admin/dashboard'
