@@ -91,8 +91,8 @@ class RoomsController extends Controller
                 $upload_status = move_uploaded_file($tmpFilePath, $newFilePath);
                 if($upload_status) {
                     u::insertSimpleRow(array(
-                        'title' => $title,
-                        'file_url' => $dir_file_insert,
+                        // 'title' => $title,
+                        // 'file_url' => $dir_file_insert,
                         'type' => 1,
                         'data_id' => $request->room_id,
                         'status' => 1,
