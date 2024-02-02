@@ -88,7 +88,6 @@ class RoomsController extends Controller
                 $newFilePath = u::update_file_name($newFilePath);
                 $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
                 $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
-                move_uploaded_file($tmpFilePath, $newFilePath);
                 u::insertSimpleRow(array(
                     'title' => $title,
                     'file_url' => $dir_file_insert,
@@ -98,6 +97,7 @@ class RoomsController extends Controller
                     'created_at' => date('Y-m-d H:i:s'),
                     'creator_id' => Auth::user()->id,
                 ), 'upload_files');
+                move_uploaded_file($tmpFilePath, $newFilePath);
             }
         }
         return response()->json("ok");
