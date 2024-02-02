@@ -282,7 +282,7 @@ class RoomsController extends Controller
                 ];
             }else{
                 if($request->pass == $room_info->password_moderator || $room_info->cf_user_start){
-                    $urlLogout = config('app.url');
+                    $urlLogout = config('app.url').'/pages/register';
                     $urlJoin = config('app.url')."/rooms/".$room_info->code; 
                     if($room_info->password_attendee){
                         $welcomeMessage = "Để mời ai đó tham gia cuộc họp, hãy gửi cho họ liên kết này: $urlJoin (Mã truy cập: ".$room_info->password_attendee. " )";
@@ -386,7 +386,7 @@ class RoomsController extends Controller
                 'type' => 0
             ), 'rooms');
 
-            $urlLogout = config('app.url');
+            $urlLogout = config('app.url').'/pages/register';
             $urlJoin = config('app.url')."/rooms/".$room_code; 
             $welcomeMessage = "Để mời ai đó tham gia cuộc họp, hãy gửi cho họ liên kết này: $urlJoin";
             $isRecordingTrue = true;
