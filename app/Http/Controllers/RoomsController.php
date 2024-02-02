@@ -106,15 +106,15 @@ class RoomsController extends Controller
                 $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
                 $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
                 if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-                    // u::insertSimpleRow(array(
-                    //     'title' => $title,
-                    //     'file_url' => $dir_file_insert,
-                    //     'type' => 1,
-                    //     'data_id' => $request->room_id,
-                    //     'status' => 1,
-                    //     'created_at' => date('Y-m-d H:i:s'),
-                    //     'creator_id' => Auth::user()->id,
-                    // ), 'upload_files');
+                    u::insertSimpleRow(array(
+                        'title' => $title,
+                        'file_url' => $dir_file_insert,
+                        'type' => 1,
+                        'data_id' => $request->room_id,
+                        'status' => 1,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'creator_id' => Auth::user()->id,
+                    ), 'upload_files');
                 }
             }
         }
