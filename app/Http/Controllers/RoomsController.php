@@ -76,31 +76,48 @@ class RoomsController extends Controller
 
     public function uploadFile(Request $request)
     {
+
         $total = count($_FILES['files']['name']);
+
         for( $i=0 ; $i < $total ; $i++ ) {
             $tmpFilePath = $_FILES['files']['tmp_name'][$i];
             if ($tmpFilePath != ""){
-                $dir = __DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/';
+                $dir = __DIR__.'/../../../public/static/';
                 if(!file_exists($dir)){
                     mkdir($dir);
                 }
                 $newFilePath = $dir . $_FILES['files']['name'][$i];
-                $newFilePath = u::update_file_name($newFilePath);
                 $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
-                $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
+                $title = str_replace(__DIR__.'/../../../public/static/','',$newFilePath);
                 if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-                    u::insertSimpleRow(array(
-                        'title' => $title,
-                        'file_url' => $dir_file_insert,
-                        'type' => 1,
-                        'data_id' => $request->room_id,
-                        'status' => 1,
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'creator_id' => Auth::user()->id,
-                    ), 'upload_files');
                 }
             }
         }
+        // $total = count($_FILES['files']['name']);
+        // for( $i=0 ; $i < $total ; $i++ ) {
+        //     $tmpFilePath = $_FILES['files']['tmp_name'][$i];
+        //     if ($tmpFilePath != ""){
+        //         $dir = __DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/';
+        //         if(!file_exists($dir)){
+        //             mkdir($dir);
+        //         }
+        //         $newFilePath = $dir . $_FILES['files']['name'][$i];
+        //         $newFilePath = u::update_file_name($newFilePath);
+        //         $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
+        //         $title = str_replace(__DIR__.'/../../../public/static/upload/slides/'. date('Y_m').'/','',$newFilePath);
+        //         if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+        //             u::insertSimpleRow(array(
+        //                 'title' => $title,
+        //                 'file_url' => $dir_file_insert,
+        //                 'type' => 1,
+        //                 'data_id' => $request->room_id,
+        //                 'status' => 1,
+        //                 'created_at' => date('Y-m-d H:i:s'),
+        //                 'creator_id' => Auth::user()->id,
+        //             ), 'upload_files');
+        //         }
+        //     }
+        // }
         return response()->json("ok");
     }
 
