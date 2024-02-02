@@ -89,12 +89,10 @@ class UserController extends Controller
 
     public function transferPayment(Request $request){
         u::updateSimpleRow(array(
-            'user_id' => Auth::user()->id,
-            'amount' => $request->amount,
             'status' => 1,
             'updated_at' => date('Y-m-d H:i:s'),
             'updator_id'=>Auth::user()->id
-        ),  array('code'=>$request->code),'payments');
+        ),  array('id'=>$request->id),'payments');
         return response()->json([
             'status' => 1,
             'message' => 'Xin vui lòng chờ để quản trị viên xác nhận và kích hoạt tài khoản VIP cho bạn'
@@ -142,4 +140,11 @@ class UserController extends Controller
         $data = u::makingPagination($list, $total->total, $page, $limit);
         return response()->json($data);
     }
+
+    public function getDetailPayment(Request $request)
+    {
+        $data = u::first("SELECT * FROM payments AS p WHERE id=$request->id ");
+        return response()->json($data);
+    }
+
 }

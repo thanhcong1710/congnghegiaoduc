@@ -138,6 +138,21 @@ const router = new Router({
             authRequired: true
           }
         },
+        {
+          path: '/admin/user/payment/:id',
+          name: 'payment-detail',
+          component: () => import('@/views/users/paymentDetail.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Lịch sử thanh toán', url:'/admin/user/payments' },
+              { title: 'Chi tiết thanh toán', active: true }
+            ],
+            pageTitle: 'Chi tiết thanh toán',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

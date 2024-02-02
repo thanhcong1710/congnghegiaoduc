@@ -55,14 +55,14 @@
               <td class="td vs-table--td">{{item.start_date}}</td>
                <td class="td vs-table--td">{{item.end_date}}</td>
               <td class="td vs-table--td">
-                <span v-if="item.status==0">Chờ chuyển tiền</span>
+                <span v-if="item.status==0">Chưa chuyển tiền</span>
                 <span v-if="item.status==1" class="text-warning">Chờ xác nhận</span>
                 <span v-if="item.status==2"  class="text-success">Hoàn thành</span>
               </td>
               <td class="td vs-table--td">
-                  <a target="blank" >
+                  <router-link :to="`/admin/user/payment/${item.id}`">
                     <feather-icon icon="CreditCardIcon" svgClasses="h-5 w-5" style="cursor: pointer;"></feather-icon>
-                  </a>
+                  </router-link>
               </td>
             </tr>
           </table>

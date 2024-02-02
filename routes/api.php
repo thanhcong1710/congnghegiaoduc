@@ -57,6 +57,7 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('payment-add', 'UserController@addPayment');
             Route::post('payment-transfer', 'UserController@transferPayment');
             Route::post('payments', 'UserController@listPayment');
+            Route::get('payments/{id}', 'UserController@getDetailPayment');
         });
         Route::prefix('rooms')->group(function () {
             Route::post('create', 'RoomsController@create');

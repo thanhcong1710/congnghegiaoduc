@@ -99,7 +99,7 @@
                 <h3 style="color: #65c600;" class="mt-5">VIP</h3>
                 <div class="annual-plan">
                   <div class="plan-price mt-4 mb-4">
-                    <span class="pricing-basic-value font-weight-bolder text-primary">100.000</span>
+                    <span class="pricing-basic-value font-weight-bolder text-primary">{{amount_vip | formatCurrency}}</span>
                     <sub class="font-medium-1 font-weight-bold text-primary">đ</sub>
                     <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/tháng</sub>
                   </div>
@@ -212,6 +212,7 @@
     components: {},
     data() {
       return {
+        amount_vip: 100000,
         user:{
           is_vip: this.$store.state.AppActiveUser.is_vip,
           end_vip: this.$store.state.AppActiveUser.is_vip,
@@ -341,7 +342,7 @@
       addPayment(){
         this.$vs.loading()
         axios.p(`/api/user/payment-add`,{
-          amount:100000
+          amount:this.amount_vip
         })
           .then((response) => {
             this.$vs.loading.close()
