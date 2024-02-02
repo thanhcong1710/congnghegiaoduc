@@ -87,8 +87,8 @@ class RoomsController extends Controller
                     mkdir($dir);
                 }
                 $newFilePath = $dir . $_FILES['files']['name'][$i];
-                // $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
-                // $title = str_replace(__DIR__.'/../../../public/static/','',$newFilePath);
+                $dir_file_insert = str_replace(__DIR__.'/../../../public/','',$newFilePath);
+                $title = str_replace(__DIR__.'/../../../public/static/','',$newFilePath);
                 if(move_uploaded_file($tmpFilePath, $newFilePath)) {
                 }
             }
