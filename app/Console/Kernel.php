@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\App\Console\Commands\JobsProcessRecord',
+        '\App\Console\Commands\JobsProcessCrawlVungOi',
         //
     ];
 
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     { 
         $schedule->command('jobsProcessRecord:command')->cron('*/10 * * * *');
+        $schedule->command('jobsProcessCrawlVungOi:command')->everyThreeMinutes();
         // $schedule->command('inspire')->hourly();
     }
 
