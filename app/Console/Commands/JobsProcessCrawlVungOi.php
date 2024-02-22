@@ -52,11 +52,11 @@ class JobsProcessCrawlVungOi extends Command
             $list_update.= $list_update ? ",".$chap->id : $chap->id;
         }
         u::query("UPDATE vung_oi_chapter SET is_crawl = 5 WHERE id IN($list_update)");
+        u::query("INSERT INTO log_jobs (`action`, created_at) VALUES ('jobsProcessCrawlVungOi','".date('Y-m-d H:i:s')."')");
         foreach($chapters AS $chap){
             $tmp->vungOiQuestion($chap->_id);
             echo $chap->id."/";
         }
-        u::query("INSERT INTO log_jobs (`action`, created_at) VALUES ('jobsProcessCrawlVungOi','".date('Y-m-d H:i:s')."')");
         return "ok";
     }
     
