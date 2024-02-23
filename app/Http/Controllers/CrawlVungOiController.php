@@ -102,114 +102,145 @@ class CrawlVungOiController extends Controller
                 'x-access-token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudjEyMyIsImlkIjoiNjVkNDc1MTYxZTczMzkyODJkYjdiMzgyIiwiaXNHdWVzdCI6ZmFsc2UsImlzX3Rlc3QiOmZhbHNlLCJpYXQiOjE3MDg0MjI0MzN9._PVyMqEVJyMZrx50xsNifoFv75ET40T6XNnYMwKnzZ4'
             ];
             $client = new Client();
-            $response = $client->request('GET',$url,[
-                'headers' => $headers,
-                'verify' => false,
-                'form_params' => $params,
-            ]);
-            $data = json_decode($response->getBody()->getContents(), true);
-
-            u::insertSimpleRow([
-                '_id'=>$data['quiz']['_id'],
-                'content'=>json_encode($data['quiz']),
-                'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
-                'question_type'=>$data['quiz']['question_type'],
-                'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
-                'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
-                'chapter_id'=>$chapter_id,
-                'question_id' => data_get($data['quiz']['question'],'_id'),
-                'question_content'=>json_encode($data['quiz']['question']),
-            ],'vung_oi_question');
-            $quiz_id = $data['quiz']['_id'];
-            $session = $data['session'];
-            $option = $data['quiz']['question'];
-            $grade = data_get($data, 'grade');
-            $subject = data_get($data, 'subject');
-            $chapter = data_get($data, 'chapter');
-            $run=1;
-            while($run == 1) {
-                $url = "https://api.vungoi.vn/admin/v1/quiz_session/$session/answer";
-                $choice = [];
-                if(isset($option['quiz']['option']['items'])){
-                    $check = 0;
-                    foreach($option['quiz']['option']['items'] AS $op){
-                        $choice[]=[
-                            'id'=>$op['id'],
-                            "answer"=> $check == 0 ? true :false
-                        ];
-                        $check = 1;
-                    }
-                }else if(isset($option['quiz']['mathquill_content']['items'])){
-                    foreach($option['quiz']['mathquill_content']['items'] AS $k=> $op){
-                        $choice[]=[
-                            'id'=>'mInputText_'.($k+1),
-                            "answer"=> ""
-                        ];
-                    }
-                }else if(isset($option['quiz']['paragraph']['items'])){
-                    foreach($option['quiz']['paragraph']['items'] AS $k=> $op){
-                        $choice[]=[
-                            'id'=>$op['id'],
-                            "answer"=> [
-                                "index"=>$k+1
-                            ]
-                        ];
-                    }
-                }else if(isset($option['answers'])){
-                    $i=rand(0,(count($option['answers'])-1));
-                    $choice =[
-                        'answer_key'=>$option['answers'][$i]['answer_key']
-                    ];
-                }else{
-                    $i=rand(0,(count($option['question']['answers'])-1));
-                    $choice =[
-                        'answer_key'=>$option['question']['answers'][$i]['answer_key']
-                    ];
-                }
-                $params = [
-                    "grade"=> $grade,
-                    "subject"=> $subject,
-                    "chapter"=> $chapter,
-                    "question_id"=> $quiz_id,
-                    "learning_time"=> 10,
-                    "choice"=> $choice
-                ];
-                $headers = [
-                    'accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                    'x-access-token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudjEyMyIsImlkIjoiNjVkNDc1MTYxZTczMzkyODJkYjdiMzgyIiwiaXNHdWVzdCI6ZmFsc2UsImlzX3Rlc3QiOmZhbHNlLCJpYXQiOjE3MDg0MjI0MzN9._PVyMqEVJyMZrx50xsNifoFv75ET40T6XNnYMwKnzZ4'
-                ];
-            
-                $client = new Client();
-                $response = $client->request('POST',$url,[
+            $check_chapter = 0;
+            try{
+                $response = $client->request('GET',$url,[
                     'headers' => $headers,
                     'verify' => false,
-                    'body' =>json_encode($params)
+                    'form_params' => $params,
                 ]);
-                
                 $data = json_decode($response->getBody()->getContents(), true);
-                u::updateSimpleRow(['answer'=>json_encode($data['answer'])],['_id'=>$quiz_id],'vung_oi_question');
-                
-                if(!empty($data['quiz'])){
-                    $quiz_id = $data['quiz']['_id'];
-                    $session = $data['session'];
-                    $option = $data['quiz']['question'];
-                    u::insertSimpleRow([
-                        '_id'=>$data['quiz']['_id'],
-                        'content'=>json_encode($data['quiz']),
-                        'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
-                        'question_type'=>$data['quiz']['question_type'],
-                        'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
-                        'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
-                        'chapter_id'=>$chapter_id,
-                        'question_id' => data_get($data['quiz']['question'],'_id'),
-                        'question_content'=>json_encode($data['quiz']['question']),
-                    ],'vung_oi_question');
-                }else{
-                    $run=0;
+                $check_chapter = 1;
+            }catch(Exception $e){
+                if($e->getCode()==500){
+                    u::updateSimpleRow(['is_crawl'=>-1],['_id'=>$chapter_id],'vung_oi_chapter');
                 }
             }
-            u::updateSimpleRow(['is_crawl'=>1],['_id'=>$chapter_id],'vung_oi_chapter');
+            
+            if($check_chapter){
+                u::insertSimpleRow([
+                    '_id'=>$data['quiz']['_id'],
+                    'content'=>json_encode($data['quiz']),
+                    'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
+                    'question_type'=>$data['quiz']['question_type'],
+                    'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
+                    'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
+                    'chapter_id'=>$chapter_id,
+                    'question_id' => data_get($data['quiz']['question'],'_id'),
+                    'question_content'=>json_encode($data['quiz']['question']),
+                ],'vung_oi_question');
+                $quiz_id = $data['quiz']['_id'];
+                $session = $data['session'];
+                $option = $data['quiz']['question'];
+                $grade = data_get($data, 'grade');
+                $subject = data_get($data, 'subject');
+                $chapter = data_get($data, 'chapter');
+                $run=1;
+                while($run == 1) {
+                    $url = "https://api.vungoi.vn/admin/v1/quiz_session/$session/answer";
+                    $choice = [];
+                    if(isset($option['quiz']['option']['items'])){
+                        $check = 0;
+                        foreach($option['quiz']['option']['items'] AS $op){
+                            $choice[]=[
+                                'id'=>$op['id'],
+                                "answer"=> $check == 0 ? true :false
+                            ];
+                            $check = 1;
+                        }
+                    }else if(isset($option['quiz']['mathquill_content']['items'])){
+                        foreach($option['quiz']['mathquill_content']['items'] AS $k=> $op){
+                            $choice[]=[
+                                'id'=>'mInputText_'.($k+1),
+                                "answer"=> ""
+                            ];
+                        }
+                    }else if(isset($option['quiz']['paragraph']['items'])){
+                        foreach($option['quiz']['paragraph']['items'] AS $k=> $op){
+                            $choice[]=[
+                                'id'=>$op['id'],
+                                "answer"=> [
+                                    "index"=>$k+1
+                                ]
+                            ];
+                        }
+                    }else if(isset($option['answers'])){
+                        $i=rand(0,(count($option['answers'])-1));
+                        $choice =[
+                            'answer_key'=>$option['answers'][$i]['answer_key']
+                        ];
+                    }else if(isset($option['quiz']['firstParagraph']['items'])){
+                        foreach($option['quiz']['firstParagraph']['items'] AS $k=> $op){
+                            $choice[]=[
+                                'id'=>$op['id'],
+                                "answer"=> [
+                                    "index"=>$k+1
+                                ]
+                            ];
+                        }
+                    }else if(isset($option['quiz']['targets']['items'])){
+                        foreach($option['quiz']['targets']['items'] AS $k=> $op){
+                            $choice[]=[
+                                'id'=>$op['id'],
+                                "answer"=> [
+                                    "index"=>$k+1
+                                ]
+                            ];
+                        }
+                    }else{
+                        $i=rand(0,(count($option['question']['answers'])-1));
+                        $choice =[
+                            'answer_key'=>$option['question']['answers'][$i]['answer_key']
+                        ];
+                    }
+
+                    
+                    $params = [
+                        "grade"=> $grade,
+                        "subject"=> $subject,
+                        "chapter"=> $chapter,
+                        "question_id"=> $quiz_id,
+                        "learning_time"=> 10,
+                        "choice"=> $choice
+                    ];
+                    $headers = [
+                        'accept' => 'application/json',
+                        'Content-Type' => 'application/json',
+                        'x-access-token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudjEyMyIsImlkIjoiNjVkNDc1MTYxZTczMzkyODJkYjdiMzgyIiwiaXNHdWVzdCI6ZmFsc2UsImlzX3Rlc3QiOmZhbHNlLCJpYXQiOjE3MDg0MjI0MzN9._PVyMqEVJyMZrx50xsNifoFv75ET40T6XNnYMwKnzZ4'
+                    ];
+                
+                    $client = new Client();
+                    $response = $client->request('POST',$url,[
+                        'headers' => $headers,
+                        'verify' => false,
+                        'body' =>json_encode($params)
+                    ]);
+                    
+                    $data = json_decode($response->getBody()->getContents(), true);
+                    u::updateSimpleRow(['answer'=>json_encode($data['answer'])],['_id'=>$quiz_id],'vung_oi_question');
+                    
+                    if(!empty($data['quiz'])){
+                        $quiz_id = $data['quiz']['_id'];
+                        $session = $data['session'];
+                        $option = $data['quiz']['question'];
+                        u::insertSimpleRow([
+                            '_id'=>$data['quiz']['_id'],
+                            'content'=>json_encode($data['quiz']),
+                            'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
+                            'question_type'=>$data['quiz']['question_type'],
+                            'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
+                            'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
+                            'chapter_id'=>$chapter_id,
+                            'question_id' => data_get($data['quiz']['question'],'_id'),
+                            'question_content'=>json_encode($data['quiz']['question']),
+                        ],'vung_oi_question');
+                    }else{
+                        $run=0;
+                    }
+                }
+                u::updateSimpleRow(['is_crawl'=>1],['_id'=>$chapter_id],'vung_oi_chapter');
+            }
+            
         }catch(Exception $e){
             u::updateSimpleRow(['is_crawl'=>2],['_id'=>$chapter_id],'vung_oi_chapter');
         }

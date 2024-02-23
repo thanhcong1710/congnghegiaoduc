@@ -46,7 +46,7 @@ class JobsProcessCrawlVungOi extends Command
 
         // $tmp->vungOiGetChapter();
 
-        $chapters = u::query("SELECT  * FROM vung_oi_chapter WHERE is_crawl=0 AND parent_id IS NOT NULL AND parent_id!='' LIMIT 20");
+        $chapters = u::query("SELECT  * FROM vung_oi_chapter WHERE is_crawl=0 AND parent_id IS NOT NULL AND parent_id!='' LIMIT 30");
         $list_update = '';
         foreach($chapters AS $chap){
             $list_update.= $list_update ? ",".$chap->id : $chap->id;
@@ -57,6 +57,12 @@ class JobsProcessCrawlVungOi extends Command
             $tmp->vungOiQuestion($chap->_id);
             echo $chap->id."/";
         }
+
+        // $chapter_error =  u::query("SELECT  * FROM vung_oi_chapter WHERE is_crawl=2 AND parent_id IS NOT NULL AND parent_id!='' ");
+        // foreach($chapter_error AS $chap){
+        //     $tmp->vungOiQuestion($chap->_id);
+        //     echo $chap->id."/";
+        // }
         return "ok";
     }
     
