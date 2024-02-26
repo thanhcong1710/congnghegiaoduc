@@ -153,6 +153,36 @@ const router = new Router({
             authRequired: true
           }
         },
+
+        {
+          path: '/admin/grade/:id',
+          name: 'grade',
+          component: () => import('@/views/quizs/grade.vue'),
+          meta: {
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+
+        {
+          path: '/admin/subject/:id',
+          name: 'subject',
+          component: () => import('@/views/quizs/subject.vue'),
+          meta: {
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+
+        {
+          path: '/admin/chapter/:id',
+          name: 'chapter',
+          component: () => import('@/views/quizs/chapter.vue'),
+          meta: {
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

@@ -76,5 +76,11 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('list', 'RecordsController@list');
             Route::get('delete/{id}', 'RecordsController@delete');
         });
+
+        Route::prefix('quizs')->group(function () {
+            Route::post('subjects', 'QuizsController@subjects');
+            Route::post('chapters', 'QuizsController@chapters');
+            Route::post('chapter-detail', 'QuizsController@chapterDetail');
+        });
     });
 });

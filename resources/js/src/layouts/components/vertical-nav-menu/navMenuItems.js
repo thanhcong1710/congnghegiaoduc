@@ -46,6 +46,86 @@ export default [
         icon: 'ArchiveIcon',
         i18n: 'Lưu trữ'
       },
+      {
+        url: '/admin/upgrade',
+        name: 'Kho bài tập',
+        slug: 'records',
+        icon: 'StarIcon',
+        i18n: 'Kho bài tập',
+        submenu: [
+          {
+            url: '/admin/grade/1',
+            name: 'Lớp 12',
+            slug: 'app-user-list',
+            i18n: 'Lớp 12'
+          },
+          {
+            url: '/admin/grade/2',
+            name: 'Lớp 11',
+            slug: 'app-user-list',
+            i18n: 'Lớp 11'
+          },
+          {
+            url: '/admin/grade/3',
+            name: 'Lớp 10',
+            slug: 'app-user-list',
+            i18n: 'Lớp 10'
+          },
+          {
+            url: '/admin/grade/4',
+            name: 'Lớp 9',
+            slug: 'app-user-list',
+            i18n: 'Lớp 9'
+          },
+          {
+            url: '/admin/grade/5',
+            name: 'Lớp 8',
+            slug: 'app-user-list',
+            i18n: 'Lớp 8'
+          },
+          {
+            url: '/admin/grade/6',
+            name: 'Lớp 7',
+            slug: 'app-user-list',
+            i18n: 'Lớp 7'
+          },
+          {
+            url: '/admin/grade/7',
+            name: 'Lớp 6',
+            slug: 'app-user-list',
+            i18n: 'Lớp 6'
+          },
+          {
+            url: '/admin/grade/8',
+            name: 'Lớp 5',
+            slug: 'app-user-list',
+            i18n: 'Lớp 5'
+          },{
+            url: '/admin/grade/9',
+            name: 'Lớp 4',
+            slug: 'app-user-list',
+            i18n: 'Lớp 4'
+          },
+          {
+            url: '/admin/grade/10',
+            name: 'Lớp 3',
+            slug: 'app-user-list',
+            i18n: 'Lớp 3'
+          },
+          {
+            url: '/admin/grade/11',
+            name: 'Lớp 2',
+            slug: 'app-user-list',
+            i18n: 'Lớp 2'
+          },
+          {
+            url: '/admin/grade/12',
+            name: 'Lớp 1',
+            slug: 'app-user-list',
+            i18n: 'Lớp 1'
+          },
+        ]
+      },
     ]
   },
   {
