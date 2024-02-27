@@ -24,9 +24,9 @@
     </noscript>
     <div id="app">
     </div>
-
     <!-- <script src="js/app.js"></script> -->
     <script src="{{ asset(mix('js/app.js')) }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML87RVSPD0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
