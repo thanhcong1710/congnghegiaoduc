@@ -59,6 +59,9 @@ class QuizsController extends Controller
         $list = u::query("SELECT q.*
             FROM vung_oi_question AS q 
             WHERE $cond ORDER BY q.difficult_degree ,q.id DESC $limitation");
+        foreach($list AS $k=>$ques){
+            $list[$k]= u::convertQuestionVungOi($ques);
+        }
         $data = u::makingPagination($list, $total->total, $page, $limit);
         $data->chapter_info = $chapter_info;
         return response()->json($data);

@@ -215,4 +215,21 @@ class UtilityServiceProvider extends ServiceProvider
 		}
 		return $text;
     }
+
+	public static function convertQuestionVungOi($quiz_info){
+		$quiz_content = json_decode($quiz_info->content);
+		$answer = json_decode($quiz_info->answer);
+		$data = [
+			'id'=>$quiz_info->id
+		];
+		if($quiz_info->question_type ==1){
+			$arr_content = data_get($quiz_content,'content');
+			$tmp = "";
+			foreach((array)$arr_content AS $row){
+				$tmp.=data_get($row, 'content');
+			}
+			$data['noi_dung'] = $tmp;
+		}
+		return $data;
+	}
 }
