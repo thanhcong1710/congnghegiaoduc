@@ -112,11 +112,10 @@ class CrawlVungOiController extends Controller
                 $data = json_decode($response->getBody()->getContents(), true);
                 $check_chapter = 1;
             }catch(Exception $e){
-                if($e->getCode()==500){
+                if($e->getCode()==500 || $e->getCode()== 404){
                     u::updateSimpleRow(['is_crawl'=>-1],['_id'=>$chapter_id],'vung_oi_chapter');
                 }
             }
-            
             if($check_chapter){
                 $vung_oi_question_id = u::insertSimpleRow([
                     '_id'=>$data['quiz']['_id'],
