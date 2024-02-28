@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Providers\UtilityServiceProvider as u;
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class CrawlVungOiController extends Controller
 {
@@ -118,7 +119,7 @@ class CrawlVungOiController extends Controller
             }
             
             if($check_chapter){
-                u::insertSimpleRow([
+                $vung_oi_question_id = u::insertSimpleRow([
                     '_id'=>$data['quiz']['_id'],
                     'content'=>json_encode($data['quiz']),
                     'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
@@ -215,9 +216,9 @@ class CrawlVungOiController extends Controller
                         'verify' => false,
                         'body' =>json_encode($params)
                     ]);
-                    
                     $data = json_decode($response->getBody()->getContents(), true);
-                    u::updateSimpleRow(['answer'=>json_encode($data['answer'])],['_id'=>$quiz_id],'vung_oi_question');
+
+                    u::updateSimpleRow(['answer'=>json_encode($data['answer'])],['id'=>$vung_oi_question_id],'vung_oi_question');
                     
                     if(!empty($data['quiz'])){
                         $quiz_id = $data['quiz']['_id'];

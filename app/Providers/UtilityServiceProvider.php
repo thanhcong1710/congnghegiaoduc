@@ -220,16 +220,64 @@ class UtilityServiceProvider extends ServiceProvider
 		$quiz_content = json_decode($quiz_info->content);
 		$answer = json_decode($quiz_info->answer);
 		$data = [
-			'id'=>$quiz_info->id
+			'id'=>$quiz_info->id,
+			'parent'=>[]
 		];
 		if($quiz_info->question_type ==1){
-			$arr_content = data_get($quiz_content,'content');
-			$tmp = "";
-			foreach((array)$arr_content AS $row){
-				$tmp.=data_get($row, 'content');
+			$arr_content = data_get(data_get($quiz_content,'question'),'content');
+			$data['noi_dung'] = self::genTextVungOi($arr_content);
+
+			$data['lua_chon']=[];
+			$arr_option = data_get(data_get($quiz_content,'question'),'answers');
+			foreach($arr_option AS $op){
+				$data['lua_chon'][] =[
+					'answer_key' => data_get($op, 'answer_key'),
+					'id' => data_get($op, 'id'),
+					'noi_dung' => self::genTextVungOi(data_get($op,'text'))
+				];
 			}
-			$data['noi_dung'] = $tmp;
+			$data['dap_an']=data_get($answer, 'solution_key');
+			$data['loi_giai']= self::genTextVungOi(data_get($answer,'solution_detail'));
+		} elseif($quiz_info->question_type ==2){
+			$question = data_get($quiz_content,'question');
+			$parent = data_get($question, 'parent');
+			$sub_question = data_get($question,'question');
+			if(!empty($parent)){
+				$data['parent'] =[
+					'id' => data_get($parent,'id'),
+					'noi_dung' => self::genTextVungOi(data_get($parent,'content'))
+				];
+				$data['noi_dung'] = self::genTextVungOi(data_get($sub_question, 'content'));
+				$data['lua_chon']=[];
+				$arr_option = data_get($sub_question,'answers');
+				foreach($arr_option AS $op){
+					$data['lua_chon'][] =[
+						'answer_key' => data_get($op, 'answer_key'),
+						'id' => data_get($op, 'id'),
+						'noi_dung' => self::genTextVungOi(data_get($op,'text'))
+					];
+				}
+				$data['dap_an']=data_get($answer, 'solution_key');
+				$data['loi_giai']= self::genTextVungOi(data_get($answer,'solution_detail'));
+			} else{
+				dd($data);
+			}
+			
 		}
 		return $data;
+	}
+	
+	public static function genTextVungOi($data){
+		$result = '';
+		foreach($data AS $row){
+			if(data_get($row, 'type') == 'html'){
+				$result.=data_get($row, 'content');
+			} elseif(data_get($row, 'type') == 'image'){
+				$result.='<div class="text-center"><img class="image-item" src="'.data_get($row, 'url').'" title="alt=" style="max-width: 100%; margin: auto;"></div>';
+			}else{
+				dd($data);
+			}
+		}
+		return $result;
 	}
 }

@@ -17,6 +17,15 @@
 
     <!-- Favicon -->
     <link href="../static/flexstart/img/apple-touch-icon.png" rel="shortcut icon">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
   <body>
     <noscript>
@@ -26,7 +35,7 @@
     </div>
     <!-- <script src="js/app.js"></script> -->
     <script src="{{ asset(mix('js/app.js')) }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML87RVSPD0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
