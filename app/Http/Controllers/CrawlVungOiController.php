@@ -113,11 +113,10 @@ class CrawlVungOiController extends Controller
                 $data = json_decode($response->getBody()->getContents(), true);
                 $check_chapter = 1;
             }catch(Exception $e){
-                if($e->getCode()==500){
+                if($e->getCode()==500 || $e->getCode()== 404){
                     u::updateSimpleRow(['is_crawl'=>-1],['_id'=>$chapter_id],'vung_oi_chapter');
                 }
             }
-            
             if($check_chapter){
                 $vung_oi_question_id = u::insertSimpleRow([
                     '_id'=>$data['quiz']['_id'],
@@ -127,8 +126,7 @@ class CrawlVungOiController extends Controller
                     'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
                     'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
                     'chapter_id'=>$chapter_id,
-                    'question_id' => data_get($data['quiz']['question'],'_id'),
-                    'question_content'=>json_encode($data['quiz']['question']),
+                    'question_id' => data_get($data['quiz']['question'],'_id')
                 ],'vung_oi_question');
                 $quiz_id = $data['quiz']['_id'];
                 $session = $data['session'];
@@ -217,14 +215,13 @@ class CrawlVungOiController extends Controller
                         'body' =>json_encode($params)
                     ]);
                     $data = json_decode($response->getBody()->getContents(), true);
-
                     u::updateSimpleRow(['answer'=>json_encode($data['answer'])],['id'=>$vung_oi_question_id],'vung_oi_question');
                     
                     if(!empty($data['quiz'])){
                         $quiz_id = $data['quiz']['_id'];
                         $session = $data['session'];
                         $option = $data['quiz']['question'];
-                        u::insertSimpleRow([
+                        $vung_oi_question_id = u::insertSimpleRow([
                             '_id'=>$data['quiz']['_id'],
                             'content'=>json_encode($data['quiz']),
                             'difficult_degree'=>isset($data['quiz']['difficult_degree']) ? $data['quiz']['difficult_degree'] : $data['quiz']['question']['difficult_degree'],
@@ -232,8 +229,7 @@ class CrawlVungOiController extends Controller
                             'solution_suggesstion'=>isset($data['quiz']['solution_suggesstion'])? json_encode($data['quiz']['solution_suggesstion']) : json_encode($data['quiz']['question']['solution_suggesstion']),
                             'parent_id'=>isset($data['quiz']['parent']['id']) ? $data['quiz']['parent']['id'] : $data['quiz']['question']['parent']['id'],
                             'chapter_id'=>$chapter_id,
-                            'question_id' => data_get($data['quiz']['question'],'_id'),
-                            'question_content'=>json_encode($data['quiz']['question']),
+                            'question_id' => data_get($data['quiz']['question'],'_id')
                         ],'vung_oi_question');
                     }else{
                         $run=0;
