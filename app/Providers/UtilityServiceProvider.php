@@ -220,8 +220,10 @@ class UtilityServiceProvider extends ServiceProvider
 		$quiz_content = json_decode($quiz_info->content);
 		$answer = json_decode($quiz_info->answer);
 		$data = [
+			'show_loi_giai'=> 0,
 			'id'=>$quiz_info->id,
-			'parent'=>[]
+			'parent'=>[],
+			'type_view'=>1
 		];
 		if($quiz_info->question_type ==1){
 			$arr_content = data_get(data_get($quiz_content,'question'),'content');
@@ -263,6 +265,39 @@ class UtilityServiceProvider extends ServiceProvider
 				dd($data);
 			}
 			
+		}elseif($quiz_info->question_type ==3){
+			$data['type_view'] = 2;
+			$quiz = data_get(data_get($quiz_content,'question'),'quiz');
+			$content_question = data_get($quiz,'content_question');
+			$content_question_items = data_get($content_question,'items');
+			$data['noi_dung']='';
+			foreach($content_question_items AS $item){
+				$data['noi_dung'].= self::genTextVungOi(data_get($item, 'content'));
+			}
+			if(data_get($quiz, 'firstParagraph')){
+				$data['type_view'] = 3;
+				$data['firstParagraph'] = data_get($quiz, 'firstParagraph');
+				$data['secondParagraph'] = data_get($quiz, 'secondParagraph');
+				foreach(data_get($answer, 'solution_key') AS $row){
+					$data['dap_an'][$row->id]=$row->answer;
+				}
+			}else{
+				$data['lua_chon']=[];
+				$arr_option = data_get(data_get($quiz,'option'), 'items');
+				foreach($arr_option AS $op){
+					$data['lua_chon'][] =[
+						'id' => data_get($op, 'id'),
+						'noi_dung' => self::genTextVungOi(data_get($op,'answer'))
+					];
+				}
+				$data['dap_an']=[];
+				foreach(data_get($answer, 'solution_key') AS $row){
+					$data['dap_an'][$row->id]=$row->answer;
+				}
+			}
+
+			$data['loi_giai']= self::genTextVungOi(data_get($answer,'solution_detail'));
+
 		}
 		return $data;
 	}

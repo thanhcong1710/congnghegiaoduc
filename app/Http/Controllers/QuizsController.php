@@ -79,10 +79,10 @@ class QuizsController extends Controller
         $pagination = (object)$request->pagination;
         $page = isset($pagination->cpage) ? (int) $pagination->cpage : 1;
         $limit = isset($pagination->limit) ? (int) $pagination->limit : 20;
-        $limit = 50;
+        $limit = 20;
         $offset = $page == 1 ? 0 : $limit * ($page - 1);
         $limitation =  $limit > 0 ? " LIMIT $offset, $limit" : "";
-        $cond = " q.status = 1 AND q.question_type=2";
+        $cond = " q.status = 1 AND q.question_type=3 AND q._id='5c0237af8eff17d2eb8d1fba'";
 
         $total = u::first("SELECT count(q.id) AS total FROM vung_oi_question AS q WHERE $cond ");
         $list = u::query("SELECT q.*
