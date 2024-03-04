@@ -29,7 +29,7 @@
  * @import "components/buttons";
  * @import "components/forms";
  */
- @tailwind components;
+@tailwind components;
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -57,3 +57,240 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+.option-key {
+    float: left;
+    width: 25px;
+    text-transform: uppercase;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.option-content {
+    float: left;
+    width: calc(100% - 25px);
+    line-height: 20px;
+}
+
+.ques-item .vs-radio {
+    position: absolute;
+    top: 0;
+}
+
+.ques-item .vs-radio--label {
+    margin-left: 25px;
+}
+
+.ques-parent {
+    border: 2px solid #ccc;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.label-show-answer i {
+    cursor: pointer;
+    color: #1d56e0;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.content-show-answer {
+    padding: 10px 15px;
+    border: 2px solid #057d2180;
+    border-radius: 8px;
+    margin-top: 4px;
+}
+
+.content-show-answer p {
+    margin-bottom: 2px;
+}
+
+.ans-ques-type-2.main-content-quiz {
+    font-size: 16px;
+    width: 100%;
+    display: block;
+    max-width: 686px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.ans-ques-type-2 .option-choicce>span {
+    margin-right: 20px;
+}
+
+.ans-ques-type-2 .option-choicce>span {
+    display: inline-block;
+}
+
+.ans-ques-type-2 .font-roboto-b {
+    font-family: Roboto-regular;
+    font-weight: 700;
+}
+
+.ans-ques-type-2 .text-right {
+    text-align: right;
+}
+
+.ans-ques-type-2 .content-quiz {
+    float: left;
+    width: calc(100% - 120px);
+    margin-right: 20px;
+    margin-top: 3px;
+}
+
+.ans-ques-type-2 .checkbox-question-2 {
+    float: left;
+    width: 50px;
+    text-align: center;
+    margin: 0px;
+    margin-top: 4px;
+}
+
+.ans-ques-type-2 .vs-checkbox--input:disabled+.vs-checkbox {
+    opacity: 1
+}
+
+.ans-ques-type-1 .vs-radio--input:disabled+.vs-radio {
+    opacity: 1
+}
+
+.ans-ques-type-3 .list-item .solution-fill-item {
+    margin: 10px 5px;
+}
+
+.ans-ques-type-3 .solution-fill-item {
+    display: inline-block;
+    padding: 0 10px;
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+    text-align: center;
+    background: #f1ead9;
+    line-height: 27px;
+    cursor: pointer;
+    vertical-align: bottom;
+    margin: 0 5px 5px;
+    vertical-align: baseline;
+    margin-right: 5px !important;
+}
+
+.ans-ques-type-3 .fill-box-question {
+    margin: 10px 0px;
+}
+
+.ans-ques-type-3 .fill-answer .empty-box {
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+    min-width: 66px;
+    height: 29px;
+    border: 1px solid #c1c1c1 !important;
+    opacity: 1 !important;
+    margin: 10px 5px;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+
+.ans-ques-type-3 .fill-answer .empty-box.answer-correct {
+    border: 1px solid #0ab60a !important;
+}
+
+.ans-ques-type-4 .row-lego {
+    margin-bottom: 35px;
+    display: flex;
+    width: 100%;
+}
+
+.ans-ques-type-4 .row-lego .col-lego:first-child {
+    margin-right: 30px;
+}
+
+.ans-ques-type-4 .item-lego-target {
+    height: 100%;
+    background-repeat: repeat-y;
+}
+
+.ans-ques-type-4 .item-lego-target {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAA+CAYAAAD57jEFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkM4ODUwNDFCN0NDMTFFODlBRkNBRUUzQTEwNjMwODMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkM4ODUwNDJCN0NDMTFFODlBRkNBRUUzQTEwNjMwODMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGQzg4NTAzRkI3Q0MxMUU4OUFGQ0FFRTNBMTA2MzA4MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGQzg4NTA0MEI3Q0MxMUU4OUFGQ0FFRTNBMTA2MzA4MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Ps26GT4AAAHFSURBVHja7FTNSsNAEJ6kqa3WqnhQQc8ePeSs+ASefAN/TvoAIvgcHhRPBT15UF+g6ElohB5UhCJohVaLto1J2vytM5tWaposiCehA8t+k/2YbL6ZfFKhULAhiEdceVz7qqreQE9I9eo9I2C7PpiWB41Ph7key+GjLSTrnNR4DUjdYJi9fbShabgapktINGUIhSQBTE2mYHxUUTE9jKzUW/GpYoLjskUZYoIqTmSTBNdjSRQj6QRty0KSkuDHs0ISA35dR0hq2z5tRSEJtaLtNJbUwiq64VYRHkSSbMeHSq3lIdxExZtKWEDsHbw3HMtnbA0J5/wra/VgCLCpYLU83/PZBaY7SLj7lqKuO+UOvsa1h4e3feqXHoosVOkM093eSj8aHHGnE3ouRzV1bjo9rCSknKZpK8JRIZ3KVauCcD5WzPSQDNmMMkNaCdsyluEyrgpJqSQ/XhCSJPoSgKSQ5Hp8VF6EJJP3GPKxJBIWW0bwKJZEjcff6RhVv1KiKtAfjANHfrDBp4B19HbQC4x+LzA5qVQ26MU0VM+4LqNcpXunoS4OpAnp9Sfr0U1XQyy2HmzuwHoG1jOwnv9sPdu/sp4vAQYAlcOxp5m4yPMAAAAASUVORK5CYII=);
+    background-position: 100%;
+    padding-right: 8px;
+}
+
+.ans-ques-type-4 .col-lego {
+    flex: 1;
+}
+
+.ans-ques-type-4 .item-lego-target>div {
+    border: 2px dashed transparent;
+}
+
+.ans-ques-type-4 .item-lego-target div {
+    background-color: #f1ead8;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0;
+    height: 100%;
+}
+
+.ans-ques-type-4 .lego-question-item>div {
+    cursor: pointer;
+    border-radius: 4px;
+    vertical-align: middle;
+    padding: 15px 10px 15px;
+    min-height: 52px;
+}
+
+.ans-ques-type-4 .item-lego-source>div {
+    height: 100%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 2px dashed transparent;
+    background-color: #c8e6f2;
+    margin-bottom: 0;
+}
+
+.ans-ques-type-4 .item-lego-source {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAA+CAIAAACZTs1sAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjgxMjhBMTRCN0NGMTFFODhERUY5NEVGRERFQjVFMUQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjgxMjhBMTVCN0NGMTFFODhERUY5NEVGRERFQjVFMUQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyODEyOEExMkI3Q0YxMUU4OERFRjk0RUZEREVCNUUxRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyODEyOEExM0I3Q0YxMUU4OERFRjk0RUZEREVCNUUxRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjQqhugAAAF4SURBVHja7JPLTsJAGIVptdDSVGyN3CRSg8RH8HH1NbytTFRcCAtNC4lcQqGowNArBdLWqUWhk1mwNeEs55uT/5LzExe3TxRFsSzLCwJN07FfEa7rTaypMgJSd0AxbC6XI0kyAL7vh19cz3uUWwowiuIJZCsQ6kFqDUznqFAgY1GdnxXduWPbNuqAkpUPaQBQB1ReSEEHBrB0fLFYYIDn+wRBYMBIt+CkmOL3b++Gv4M6vjSzMwQ8z0cccDfXL5KQyXIctwRwH3Xls9pU0tnsXioV7KpSb1uzuTrW4jSTzmQSiUTo3m2oQ4ZhCkXx72m59sDhzFSgI45VDbiiWrO3qrHeFTDtm6oc6Wp9jquaXDotbzw5VDl/aOg6BhxwrOM4GBAGAQMsZw6ThgH9sZZMJlEAJ33t9Pd5HgXPjQ4Zp6EDSWK7B4xjUQySCLOr2dPucCJ11Uh2L+8qsAfoRdJO+j+KEWhvG59BD5jL4tsz2J7BPz2DbwEGAMGTlUwCuTiXAAAAAElFTkSuQmCC);
+    background-position: 0;
+    padding-left: 8px;
+}
+
+.ans-ques-type-4 .mergeDiv.row-lego .col-lego:first-child {
+    margin-right: 0;
+}
+
+.ans-ques-type-4 .mergeDiv.row-lego .col-lego .item-lego-target {
+    border-right: 3px dashed #ccc;
+}
+
+.ans-ques-type-4 .mergeDiv.row-lego .col-lego>div {
+    background: none;
+    padding: 0;
+}
+
+.ans-ques-type-4 .mergeDiv.row-lego .col-lego:last-child {
+    margin-left: 0;
+    margin-right: 70px;
+}
+
+.ans-ques-type-5 .list-item .solution-fill-item {
+    margin: 10px 5px;
+}
+
+.ans-ques-type-5 .solution-fill-item {
+    display: inline-block;
+    padding: 0 10px;
+    border: 1px solid #c1c1c1;
+    border-radius: 3px;
+    text-align: center;
+    background: #f1ead9;
+    line-height: 27px;
+    cursor: pointer;
+    vertical-align: bottom;
+    margin: 0 5px 5px;
+    vertical-align: baseline;
+    margin-right: 5px !important;
+}
+
+.ans-ques-type-5 .solution-fill-item.answer-correct {
+    border: 1px solid #0ab60a;
+}

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         '\App\Console\Commands\JobsProcessRecord',
         '\App\Console\Commands\JobsProcessCrawlVungOi',
+        '\App\Console\Commands\JobsConvertContentVungOi',
         //
     ];
 

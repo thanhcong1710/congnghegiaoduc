@@ -281,18 +281,83 @@ class UtilityServiceProvider extends ServiceProvider
 				foreach(data_get($answer, 'solution_key') AS $row){
 					$data['dap_an'][$row->id]=$row->answer;
 				}
-			}else{
-				$data['lua_chon']=[];
-				$arr_option = data_get(data_get($quiz,'option'), 'items');
-				foreach($arr_option AS $op){
-					$data['lua_chon'][] =[
-						'id' => data_get($op, 'id'),
-						'noi_dung' => self::genTextVungOi(data_get($op,'answer'))
-					];
+			}elseif(data_get($quiz, 'targets')){
+				$data['type_view'] = 4;
+				$data['targets'] = data_get($quiz, 'targets');
+				foreach($data['targets']->items AS $k=> $row){
+					$data['targets']->items[$k]->text_content = self::genTextVungOi(data_get($row,'content'));
 				}
-				$data['dap_an']=[];
+				$data['sources'] = data_get($quiz, 'sources');
+				foreach($data['sources']->items AS $k=> $row){
+					$data['sources']->items[$k]->text_content = self::genTextVungOi(data_get($row,'content'));
+				}
 				foreach(data_get($answer, 'solution_key') AS $row){
-					$data['dap_an'][$row->id]=$row->answer;
+					foreach($data['sources']->items AS $k=> $row_s){
+						if($row_s->index == $row->answer->index){
+							$data['dap_an'][$row->id] = $k;
+						}	
+					}
+				}
+			}elseif(data_get($quiz, 'paragraph')){
+				$obj_evt = data_get(data_get($quiz, 'paragraph'),'obj_evt');
+				if(data_get($obj_evt, 'type') == 'sort'){
+					$data['type_view'] = 5;
+					$data['paragraph'] = data_get($quiz, 'paragraph');
+					foreach($data['paragraph']->items AS $k=> $row){
+						$data['paragraph']->items[$k]->text_content = self::genTextVungOi(data_get($row,'content'));
+					}
+
+					foreach(data_get($answer, 'solution_key') AS $row){
+						foreach($data['paragraph']->items AS $k=> $row_p){
+							if($row->id == $row_p->id){
+								$data['dap_an'][$row->answer->index] = $row_p;
+							}
+						}
+					}
+				}else{
+					die('paragraph');
+				}
+			}else{
+				try {
+					$data['lua_chon']=[];
+					$arr_option = data_get(data_get($quiz,'option'), 'items');
+					if( $arr_option[0]->obj_type == 'choiceTextHightLight'){
+						$data['type_view'] = 6;
+						foreach($arr_option AS $op){
+							$data['lua_chon'][] =[
+								'id' => data_get($op, 'id'),
+								'noi_dung' => self::genTextVungOi(data_get($op,'answer'))
+							];
+						}
+						foreach(data_get($answer, 'solution_key') AS $row){
+							$data['dap_an'][$row->id]=$row->answer;
+						}
+					}elseif($arr_option[0]->obj_type == 'choiceButton'){
+						$data['type_view'] = 7;
+						foreach($arr_option AS $op){
+							$data['lua_chon'][] =[
+								'id' => data_get($op, 'id'),
+								'noi_dung' => self::genTextVungOi(data_get($op,'answer'))
+							];
+						};
+						foreach(data_get($answer, 'solution_key') AS $row){
+							$data['dap_an'][$row->id]=$row->answer;
+						}
+					}else{
+							foreach($arr_option AS $op){
+								$data['lua_chon'][] =[
+									'id' => data_get($op, 'id'),
+									'noi_dung' => self::genTextVungOi(data_get($op,'answer'))
+								];
+							}
+							$data['dap_an']=[];
+							foreach(data_get($answer, 'solution_key') AS $row){
+								$data['dap_an'][$row->id]=$row->answer;
+							}
+						
+					}
+				} catch (\Throwable $th) {
+					dd($quiz_info->id);
 				}
 			}
 

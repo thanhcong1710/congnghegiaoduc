@@ -66,8 +66,8 @@
             </div>
 
             <!-- view quiz type 3 -->
-            <div class="ans-ques-type-3">
-              <div class="text-center fill-box-question text-left" v-if="item.type_view == 3">
+            <div class="ans-ques-type-3" v-if="item.type_view == 3">
+              <div class="text-center fill-box-question text-left">
                 <div class="solution">
                   <div class="list-item paragraph-components">
                       <div class="solution-fill-item inline-block box-text" draggable="true" v-for="(item_fp, index_fp) in item.firstParagraph.items" :key="index_fp">
@@ -92,6 +92,78 @@
                     <br v-if="item_sp.obj_type == 'breakDown'">
                   </span>
                 </div>
+              </div>
+            </div>
+
+            <!-- view quiz type 4 -->
+            <div class="ans-ques-type-4 mt-8" v-if="item.type_view == 4">
+              <div class="row-lego" id="match-side" v-for="(item_tg, index_tg) in item.targets.items" :key="index_tg">
+                <div class="col-lego">
+                    <div class="text lego-question-item text-center item-lego-target" >
+                        <div v-html="item_tg.text_content"></div>
+                    </div>
+                </div>
+                <div class="col-lego" style="opacity: 1;">
+                    <div class="text lego-question-item text-center  item-lego-source dragEnd" draggable="true">
+                        <div v-html="item.sources.items[index_tg].text_content"></div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="ans-ques-type-4 mt-8" v-if="item.type_view == 4">
+              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
+              <div class="mergeDiv row-lego" id="match-side" v-for="(item_tg, index_tg) in item.targets.items" :key="index_tg">
+                  <div class="col-lego">
+                      <div class="text lego-question-item text-center item-lego-target">
+                          <div v-html="item_tg.text_content"></div>
+                      </div>
+                  </div>
+                  <div class="col-lego" style="opacity: 1;">
+                      <div class="text lego-question-item text-center  item-lego-source dragEnd" draggable="true">
+                          <div v-html="item.sources.items[item.dap_an[item_tg.id]].text_content"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <!-- view quiz type 5 -->
+            <div class="ans-ques-type-5 mt-8" v-if="item.type_view == 5">
+              <div class="text-center list-item paragraph-components">
+                <span class="box_container" v-for="(item_pg, index_pg) in item.paragraph.items" :key="index_pg">
+                  <div class="solution-fill-item inline-block box-text">
+                      <div v-html="item_pg.text_content"></div>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div class="ans-ques-type-5 mt-8" v-if="item.type_view == 5">
+              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
+              <div class="text-center list-item paragraph-components">
+                  <span class="box_container" v-for="(item_da, index_da) in item.dap_an" :key="index_da">
+                    <div class="solution-fill-item inline-block box-text answer-correct">
+                        <div v-html="item_da.text_content"></div>
+                    </div>
+                  </span>
+                </div>
+            </div>
+
+            <!-- view quiz type 6 -->
+            <div class="ans-ques-type-6" v-if="item.type_view == 6">
+              <div class=" mt-4 select-text-question" >
+                <div class="inline-block " clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc" v-html="item_lc.noi_dung">
+                </div>
+              </div>
+              <p style="margin-top:10px; margin-bottom:5px; font-weight: 600;">Đáp án</p>
+              <div class="mt-4 select-text-question">
+                <div clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc" v-html="item_lc.noi_dung"  :class="item.dap_an[item_lc.id] ? 'inline-block bg-hightlight selected' : 'inline-block' " >
+                </div>
+              </div>
+            </div>
+
+            <!-- view quiz type 7 -->
+            <div class="ans-ques-type-7 mt-4" v-if="item.type_view == 7">
+              <div class="option-answers yes-no-question choice-button" clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
+                <a :class=" item.dap_an[item_lc.id] ? 'active bg-latte font-size-20' : 'bg-latte font-size-20'"><span v-html="item_lc.noi_dung"></span></a>
               </div>
             </div>
             
@@ -185,121 +257,42 @@
   }
 </script>
 <style>
-.option-key{
-  float: left;
-  width: 25px;
-  text-transform: uppercase;
-  font-size: 15px;
-  line-height: 20px;  
-}
-.option-content{
-  float: left;
-  width: calc(100% - 25px);
-  line-height: 20px;
-}
-.ques-item .vs-radio{
-  position: absolute;
-  top:0;
-}
-.ques-item .vs-radio--label {
-    margin-left: 25px;
-}
-.ques-parent {
-  border: 2px solid #ccc;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-}
-.label-show-answer i{
-  cursor: pointer;
-  color: #1d56e0;
-  font-size: 15px;
-  text-decoration: underline;
-}
-.content-show-answer {
-  padding: 10px 15px;
-  border: 2px solid #057d2180;
-  border-radius: 8px;
-  margin-top: 4px;
-}
-.content-show-answer p{
-  margin-bottom: 2px;
-}
-
-.ans-ques-type-2.main-content-quiz {
-  font-size: 16px;
-  width: 100%;
-  display: block;
-  max-width: 686px;
-  overflow: hidden;
-  margin: auto;
-}
-.ans-ques-type-2 .option-choicce>span {
-    margin-right: 20px;
-}
-.ans-ques-type-2 .option-choicce>span {
-    display: inline-block; 
-}
-.ans-ques-type-2 .font-roboto-b {
-    font-family: Roboto-regular;
-    font-weight: 700;
-}
-.ans-ques-type-2 .text-right {
-    text-align: right;
-}
-.ans-ques-type-2 .content-quiz{
-  float: left;
-  width: calc(100% - 120px);
-  margin-right: 20px;
-  margin-top: 3px;
-}
-.ans-ques-type-2 .checkbox-question-2{
-  float: left;
-  width: 50px;
-  text-align: center;
-  margin: 0px;
-  margin-top: 4px;
-}
-
-.ans-ques-type-2 .vs-checkbox--input:disabled+.vs-checkbox{
-  opacity:1
-}
-.ans-ques-type-1 .vs-radio--input:disabled+.vs-radio{
-  opacity:1
-}
-
-.ans-ques-type-3 .list-item .solution-fill-item {
-    margin: 10px 5px;
-}
-.ans-ques-type-3 .solution-fill-item {
+.ans-ques-type-6 .select-text-question p {
     display: inline-block;
-    padding: 0 10px;
-    border: 1px solid #c1c1c1;
-    border-radius: 3px;
-    text-align: center;
-    background: #f1ead9;
-    line-height: 27px;
+    margin-right: 0;
+    padding: 3px 2px;
+    margin-bottom: 3px;
     cursor: pointer;
-    vertical-align: bottom;
-    margin: 0 5px 5px;
-    vertical-align: baseline;
-    margin-right: 5px !important;
+    border: 0.5px solid #fff;
+    box-shadow: 0 0.5px #fff;
 }
-.ans-ques-type-3 .fill-box-question{
-  margin: 10px 0px;
+.ans-ques-type-6 .select-text-question .selected p {
+    background: #d2e9c3;
+    border-radius: 4px;
+    border: 0.5px solid #5eb34f;
+    box-shadow: 0 0.5px #47a518;
 }
-.ans-ques-type-3 .fill-answer .empty-box {
-    cursor: pointer;
-    border-radius: 3px;
+
+.ans-ques-type-7 .option-answers.yes-no-question a {
     display: inline-block;
-    min-width: 66px;
-    height: 29px;
-    border: 1px solid #c1c1c1 !important;
-    opacity: 1 !important;
-    margin: 10px 5px;
-    padding: 0 10px;
-    vertical-align: middle;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    margin: 0 5px 20px;
+    cursor: pointer;
 }
-.ans-ques-type-3 .fill-answer .empty-box.answer-correct{
-  border: 1px solid #0ab60a !important;
+.ans-ques-type-7 .choice-button a {
+    width: 100% !important;
+    padding: 6px !important;
+}
+.ans-ques-type-7 .font-size-20 {
+    font-size: 20px;
+    line-height: 26px;
+    color: #252525;
+}
+.ans-ques-type-7 .bg-latte {
+    background: #f1ead8;
+}
+.ans-ques-type-7 .option-answers .bg-latte.active {
+    background: rgba(138, 197, 62, .7294117647058823);
 }
 </style>
