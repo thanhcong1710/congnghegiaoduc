@@ -149,21 +149,60 @@
 
             <!-- view quiz type 6 -->
             <div class="ans-ques-type-6" v-if="item.type_view == 6">
-              <div class=" mt-4 select-text-question" >
-                <div class="inline-block " clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc" v-html="item_lc.noi_dung">
+                <div class=" mt-4 text-center select-text-question" >
+                  <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
+                  <div class="inline-block " clickable="true" v-html="item_lc.noi_dung"></div>
+                  <br v-if="item_lc.obj_type == 'breakDown'">
+                  </span>
                 </div>
-              </div>
-              <p style="margin-top:10px; margin-bottom:5px; font-weight: 600;">Đáp án</p>
-              <div class="mt-4 select-text-question">
-                <div clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc" v-html="item_lc.noi_dung"  :class="item.dap_an[item_lc.id] ? 'inline-block bg-hightlight selected' : 'inline-block' " >
+                <p style="margin-top:10px; margin-bottom:5px; font-weight: 600;">Đáp án</p>
+                <div class="mt-4 text-center select-text-question">
+                  <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
+                    <div clickable="true" v-html="item_lc.noi_dung"  :class="item.dap_an[item_lc.id] ? 'inline-block bg-hightlight selected' : 'inline-block' " ></div>
+                    <br v-if="item_lc.obj_type == 'breakDown'">
+                  </span>
                 </div>
-              </div>
             </div>
 
             <!-- view quiz type 7 -->
             <div class="ans-ques-type-7 mt-4" v-if="item.type_view == 7">
               <div class="option-answers yes-no-question choice-button" clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
                 <a :class=" item.dap_an[item_lc.id] ? 'active bg-latte font-size-20' : 'bg-latte font-size-20'"><span v-html="item_lc.noi_dung"></span></a>
+              </div>
+            </div>
+
+            <!-- view quiz type 8 -->
+            <div class="ans-ques-type-8 mt-4" v-if="item.type_view == 8">
+              <div class="text-center">
+                <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
+                  <span class="rich_text inline-block item-img" v-if="item_lc.obj_type == 'richText'">
+                          <span :id="item_lc.id">
+                              <span v-html="item_lc.noi_dung"></span>
+                          </span>
+                      </span>
+                      <span class="InputText-input-text" v-if="item_lc.obj_type == 'inputText'">
+                        <a class="Input_text InputText"></a>
+                        <input type="text" class="inline-block txt " :id="item_lc.id" size="3" value="">
+                      </span>
+                      <br v-if="item_lc.obj_type == 'breakDown'">
+                </span>
+              </div>
+            </div>
+            <div class="ans-ques-type-8 mt-4" v-if="item.type_view == 8">
+              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
+              <div class="text-center">
+                <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
+                  <span class="rich_text inline-block item-img" v-if="item_lc.obj_type == 'richText'">
+                          <span :id="item_lc.id">
+                              <span v-html="item_lc.noi_dung"></span>
+                          </span>
+                      </span>
+                      <span class="InputText-input-text correct" v-if="item_lc.obj_type == 'inputText'">
+                        <a class="Input_text InputText"></a>
+                        <input type="text" class="inline-block txt " :id="item_lc.id" size="3" :value="item.dap_an[item_lc.id]">
+                      </span>
+                      <br v-if="item_lc.obj_type == 'breakDown'">
+                </span>
               </div>
             </div>
             
@@ -294,5 +333,29 @@
 }
 .ans-ques-type-7 .option-answers .bg-latte.active {
     background: rgba(138, 197, 62, .7294117647058823);
+}
+
+.ans-ques-type-8 .InputText-input-text {
+    display: inline-block;
+    z-index: 1;
+    position: relative;
+}
+.ans-ques-type-8 input.txt {
+    color: #555 !important;
+    min-width: 50px !important;
+    max-width: 99.99% !important;
+    transition: width .25s;
+    text-align: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    border: 1px solid #a1a1a1 !important;
+}
+.ans-ques-type-8 .InputText-input-text input {
+    height: 28px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.ans-ques-type-8 .InputText-input-text.correct input.txt{
+  border: 1px solid #5eb34f !important;
 }
 </style>
