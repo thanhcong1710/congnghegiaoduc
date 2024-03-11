@@ -59,7 +59,7 @@ export default [
         i18n: 'Bài kiểm tra',
         submenu: [
           {
-            url: null,
+            url: '/admin/tests',
             name: 'tests',
             slug: 'tests',
             i18n: 'Thêm mới'

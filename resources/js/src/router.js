@@ -197,6 +197,36 @@ const router = new Router({
             authRequired: true
           }
         },
+        {
+          path: '/admin/tests',
+          name: 'tests',
+          component: () => import('@/views/tests/list.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Bài kiểm tra', active: true }
+            ],
+            pageTitle: 'Bài kiểm tra',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
+
+        {
+          path: '/admin/tests/:id',
+          name: 'test-detail-view',
+          component: () => import('@/views/tests/detail.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Bài kiểm tra', url: '/' },
+              { title: 'Chi tiết', active: true },
+            ],
+            pageTitle: 'Chi tiết bài kiểm tra',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

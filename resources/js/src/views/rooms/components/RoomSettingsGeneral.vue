@@ -45,25 +45,25 @@
         <h5 class="mb-6">Thiết lập người dùng</h5>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Cho phép ghi hình lại phòng họp</label> <vs-switch v-model="room.cf_record" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Cho phép ghi hình lại phòng họp</label> <vs-switch v-model="room.cf_record" @input="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Cho phép bất kỳ người dùng nào bắt đầu cuộc họp này</label> <vs-switch v-model="room.cf_user_start" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Cho phép bất kỳ người dùng nào bắt đầu cuộc họp này</label> <vs-switch v-model="room.cf_user_start" @input="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Tất cả người dùng tham gia với tư cách là người kiểm duyệt</label> <vs-switch v-model="room.cf_moderator" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Tất cả người dùng tham gia với tư cách là người kiểm duyệt</label> <vs-switch v-model="room.cf_moderator" @input="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>
         <div class="mb-4">
           <div class=w-full>
-            <label style=" width: calc(100% - 50px); float:left">Tắt tiếng người dùng khi họ tham gia</label> <vs-switch v-model="room.cf_join_voice" @click="updateConfigRoom" style="float:left; margin-left: 5px;"/>
+            <label style=" width: calc(100% - 50px); float:left">Tắt tiếng người dùng khi họ tham gia</label> <vs-switch v-model="room.cf_join_voice" @input="updateConfigRoom" style="float:left; margin-left: 5px;"/>
           </div>
           <div style="clear:both"></div>
         </div>

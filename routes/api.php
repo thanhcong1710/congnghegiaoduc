@@ -87,6 +87,15 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('create', 'TopicsController@create');
             Route::post('delete', 'TopicsController@delete');
             Route::post('list', 'TopicsController@list');
+            Route::get('list-all-user', 'TopicsController@listAllUser');
+        });
+        Route::prefix('tests')->group(function () {
+            Route::post('list', 'TestsController@list');
+            Route::get('info/{id}', 'TestsController@info');
+            Route::post('create', 'TestsController@create');
+            Route::get('delete/{id}', 'TestsController@delete');
+            Route::post('update', 'TestsController@update');
+            Route::post('quizs/{id}', 'TestsController@getQuizs');
         });
     });
 });

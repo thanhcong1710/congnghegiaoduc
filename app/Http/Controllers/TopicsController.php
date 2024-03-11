@@ -59,12 +59,32 @@ class TopicsController extends Controller
         return response()->json($result);
     }
 
-    public function delete(Request $request){
-        u::updateSimpleRow(array(
-            'status'=>0,
-            'updated_at'=>date('Y-m-d H:i:s'),
-            'updator_id'=>Auth::user()->id
-        ), array('id'=>$request->id), 'qz_topics');
-        return response()->json("ok");
+    public function deleteRoom(Request $request){
+        $room_info = u::first("SELECT * FROM qz_tests WHERE id = $request->id AND creator_id = ".Auth::user()->id);
+        if($room_info){
+            u::updateSimpleRow(array(
+                'status'=>0,
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'updator_id'=>Auth::user()->id
+            ), array('id'=>$request->id), 'qz_tests');
+            $result = [
+                'status' => 1,
+                'message' => 'Xóa phòng họp thành công',
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phòng họp không tồn tại',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function listAllUser(Request $request){
+        $cond = " t.status = 1 AND t.user_id = ".Auth::user()->id;
+        $list = u::query("SELECT t.*
+            FROM qz_topics AS t 
+            WHERE $cond ORDER BY t.title");
+        return response()->json($list);
     }
 }
