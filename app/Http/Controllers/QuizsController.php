@@ -41,33 +41,6 @@ class QuizsController extends Controller
         return response()->json($data);
     }
 
-    // public function chapterDetail(Request $request)
-    // {
-    //     $chapter_info = u::first("SELECT c.*, s.id AS lms_subject_id, s.name AS subject_name, s.grade_id,
-    //             (SELECT name FROM vung_oi_grades WHERE id=s.grade_id) AS grade_name 
-    //         FROM vung_oi_chapter AS c 
-    //             LEFT JOIN vung_oi_subject AS s ON s._id=c.subject_id
-    //         WHERE c.id = $request->chapter_id");
-        
-    //     $pagination = (object)$request->pagination;
-    //     $page = isset($pagination->cpage) ? (int) $pagination->cpage : 1;
-    //     $limit = isset($pagination->limit) ? (int) $pagination->limit : 20;
-    //     $offset = $page == 1 ? 0 : $limit * ($page - 1);
-    //     $limitation =  $limit > 0 ? " LIMIT $offset, $limit" : "";
-    //     $cond = " q.status = 1 AND q.chapter_id='$chapter_info->_id'";
-
-    //     $total = u::first("SELECT count(q.id) AS total FROM vung_oi_question AS q WHERE $cond ");
-    //     $list = u::query("SELECT q.*
-    //         FROM vung_oi_question AS q 
-    //         WHERE $cond ORDER BY q.difficult_degree ,q.id DESC $limitation");
-    //     foreach($list AS $k=>$ques){
-    //         $list[$k]= u::convertQuestionVungOi($ques);
-    //     }
-    //     $data = u::makingPagination($list, $total->total, $page, $limit);
-    //     $data->chapter_info = $chapter_info;
-    //     return response()->json($data);
-    // }
-
     public function chapterDetail(Request $request)
     {
         $chapter_info = u::first("SELECT c.*, s.id AS lms_subject_id, s.name AS subject_name, s.grade_id,
@@ -79,28 +52,16 @@ class QuizsController extends Controller
         $pagination = (object)$request->pagination;
         $page = isset($pagination->cpage) ? (int) $pagination->cpage : 1;
         $limit = isset($pagination->limit) ? (int) $pagination->limit : 20;
-        $limit = 50;
         $offset = $page == 1 ? 0 : $limit * ($page - 1);
         $limitation =  $limit > 0 ? " LIMIT $offset, $limit" : "";
-        $cond = " q.status = 1 AND q.question_type=3 AND q.type=19 ";
+        $cond = " q.status = 1 AND q.chapter_id='$chapter_info->_id'";
 
         $total = u::first("SELECT count(q.id) AS total FROM vung_oi_question AS q WHERE $cond ");
         $list = u::query("SELECT q.*
             FROM vung_oi_question AS q 
-            WHERE $cond ORDER BY q.id DESC $limitation");
-
-        $check_parent = '';
+            WHERE $cond ORDER BY q.difficult_degree ,q.id DESC $limitation");
         foreach($list AS $k=>$ques){
             $list[$k]= u::convertQuestionVungOi($ques);
-            $parent = data_get($list[$k], 'parent');
-            $parent_id = data_get($parent, 'id');
-            if($parent_id){
-                if( $check_parent != $parent_id){
-                    $check_parent = $parent_id;
-                }else{
-                    unset($list[$k]['parent']);
-                }
-            }
         }
         $data = u::makingPagination($list, $total->total, $page, $limit);
         $data->chapter_info = $chapter_info;

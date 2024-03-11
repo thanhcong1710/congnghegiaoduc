@@ -149,7 +149,7 @@ class RoomsController extends Controller
             u::updateSimpleRow($data_update, array('id'=>$request->id), 'rooms');
             $result = [
                 'status' => 1,
-                'message' => 'Cập nhật thông tin phòn họp thành công',
+                'message' => 'Cập nhật thông tin phòng họp thành công',
             ];  
         }else{
             $result = [

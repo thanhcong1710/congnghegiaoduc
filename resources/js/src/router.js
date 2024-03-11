@@ -183,6 +183,20 @@ const router = new Router({
             authRequired: true
           }
         },
+        {
+          path: '/admin/topics',
+          name: 'topics',
+          component: () => import('@/views/quizs/topics.vue'),
+          meta: {
+            breadcrumb: [
+              { title: 'Home', url: '/' },
+              { title: 'Chuyên đề', active: true },
+            ],
+            pageTitle: 'Chuyên đề',
+            rule: 'editor',
+            authRequired: true
+          }
+        },
         
         // =============================================================================
         // LAW MAIN PAGE LAYOUTS

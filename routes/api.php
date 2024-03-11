@@ -82,5 +82,11 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('chapters', 'QuizsController@chapters');
             Route::post('chapter-detail', 'QuizsController@chapterDetail');
         });
+
+        Route::prefix('topics')->group(function () {
+            Route::post('create', 'TopicsController@create');
+            Route::post('delete', 'TopicsController@delete');
+            Route::post('list', 'TopicsController@list');
+        });
     });
 });
