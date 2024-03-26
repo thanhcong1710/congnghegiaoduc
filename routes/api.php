@@ -90,12 +90,14 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::get('list-all-user', 'TopicsController@listAllUser');
         });
         Route::prefix('tests')->group(function () {
+            Route::get('all', 'TestsController@all');
             Route::post('list', 'TestsController@list');
             Route::get('info/{id}', 'TestsController@info');
             Route::post('create', 'TestsController@create');
             Route::get('delete/{id}', 'TestsController@delete');
             Route::post('update', 'TestsController@update');
             Route::post('quizs/{id}', 'TestsController@getQuizs');
+            Route::post('add-quiz', 'TestsController@addQuizToTest');
         });
     });
 });

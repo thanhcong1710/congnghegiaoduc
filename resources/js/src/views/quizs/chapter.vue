@@ -34,178 +34,38 @@
         </vs-dropdown-menu>
       </vs-dropdown>
       <vx-card no-shadow>
+
+      <vs-alert active="true" class="mb-3">
+        <div>
+          Đã chọn <strong>{{check_list.length}}</strong> câu hỏi
+          <button class="vs-component vs-button vs-button-success vs-button-filled" @click="showModalAddQuiz()">
+            Thêm vào bài kiểm tra</button>
+        </div>
+      </vs-alert>
+        
         <div class="ques-item" v-for="(item, index) in questions" :key="index">
-          <div class="mb-base">
-            <div class="ques-parent" v-if="item.parent && item.parent.noi_dung" v-html="item.parent.noi_dung"></div>
-            <div><strong style="font-size:16px;font-weight:600;">Câu {{index + 1 + (pagination.cpage - 1) * pagination.limit}}</strong></div>
-            <div v-html="item.noi_dung"></div>
-            <!-- view quiz type 1 -->
-            <div class="vx-row ans-ques-type-1" v-if="item.type_view == 1">
-              <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 mt-2"  v-for="(item_op, index_op) in item.lua_chon" :key="index_op">
-                <vs-radio v-model="item.dap_an" :vs-value="item_op.answer_key" :vs-name="'quiz_'+item.id" :disabled="true">
-                  <div class="option-key">{{item_op.answer_key}}.</div>
-                  <div class="option-content" v-html="item_op.noi_dung"></div>
-                </vs-radio> 
-              </div>
-            </div>
-
-            <!-- view quiz type 2 -->
-            <div class="main-content-quiz ans-ques-type-2" v-if="item.type_view == 2">
-              <div>
-                  <p class="option-choicce font-roboto-b text-right"><span>ĐÚNG</span><span>SAI</span></p>
-                  <div class="choice_answer radio-list-horizontal">
-                      <div class="item"  v-for="(item_op, index_op) in item.lua_chon" :key="index_op">
-                          <div class="content-quiz">
-                              <div v-html="item_op.noi_dung"></div>
-                          </div>
-                          <vs-checkbox class="checkbox-question-2" :checked="item.dap_an[item_op.id]" disabled="true"></vs-checkbox>
-                          <vs-checkbox class="checkbox-question-2" :checked="!item.dap_an[item_op.id]" disabled="true"></vs-checkbox>
-                      </div>
-                  </div>
-              </div>
-            </div>
-
-            <!-- view quiz type 3 -->
-            <div class="ans-ques-type-3" v-if="item.type_view == 3">
-              <div class="text-center fill-box-question text-left">
-                <div class="solution">
-                  <div class="list-item paragraph-components">
-                      <div class="solution-fill-item inline-block box-text" draggable="true" v-for="(item_fp, index_fp) in item.firstParagraph.items" :key="index_fp">
-                          <div>{{item_fp.content}}</div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="fill-answer">
-                <div class="text-center list-item paragraph-components" >
-                  <span v-for="(item_sp, index_sp) in item.secondParagraph.items" :key="index_sp">
-                    <span class="rich_text inline-block item-img" v-if="item_sp.obj_type == 'richText'">
-                        <span :id="item_sp.id">
-                            <span>{{item_sp.content}}</span>
-                        </span>
-                    </span>
-                    <span class="empty-box inline-block box-text answer-correct" v-if="item_sp.obj_type == 'boxText'">
-                        <span :id="item_sp.id">
-                          {{item.dap_an[item_sp.id]}}
-                        </span>
-                    </span>
-                    <br v-if="item_sp.obj_type == 'breakDown'">
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- view quiz type 4 -->
-            <div class="ans-ques-type-4 mt-8" v-if="item.type_view == 4">
-              <div class="row-lego" id="match-side" v-for="(item_tg, index_tg) in item.targets.items" :key="index_tg">
-                <div class="col-lego">
-                    <div class="text lego-question-item text-center item-lego-target" >
-                        <div v-html="item_tg.text_content"></div>
-                    </div>
-                </div>
-                <div class="col-lego" style="opacity: 1;">
-                    <div class="text lego-question-item text-center  item-lego-source dragEnd" draggable="true">
-                        <div v-html="item.sources.items[index_tg].text_content"></div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="ans-ques-type-4 mt-8" v-if="item.type_view == 4">
-              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
-              <div class="mergeDiv row-lego" id="match-side" v-for="(item_tg, index_tg) in item.targets.items" :key="index_tg">
-                  <div class="col-lego">
-                      <div class="text lego-question-item text-center item-lego-target">
-                          <div v-html="item_tg.text_content"></div>
-                      </div>
-                  </div>
-                  <div class="col-lego" style="opacity: 1;">
-                      <div class="text lego-question-item text-center  item-lego-source dragEnd" draggable="true">
-                          <div v-html="item.sources.items[item.dap_an[item_tg.id]].text_content"></div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-
-            <!-- view quiz type 5 -->
-            <div class="ans-ques-type-5 mt-8" v-if="item.type_view == 5">
-              <div class="text-center list-item paragraph-components">
-                <span class="box_container" v-for="(item_pg, index_pg) in item.paragraph.items" :key="index_pg">
-                  <div class="solution-fill-item inline-block box-text">
-                      <div v-html="item_pg.text_content"></div>
-                  </div>
-                </span>
-              </div>
-            </div>
-            <div class="ans-ques-type-5 mt-8" v-if="item.type_view == 5">
-              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
-              <div class="text-center list-item paragraph-components">
-                  <span class="box_container" v-for="(item_da, index_da) in item.dap_an" :key="index_da">
-                    <div class="solution-fill-item inline-block box-text answer-correct">
-                        <div v-html="item_da.text_content"></div>
-                    </div>
-                  </span>
-                </div>
-            </div>
-
-            <!-- view quiz type 6 -->
-            <div class="ans-ques-type-6" v-if="item.type_view == 6">
-                <div class=" mt-4 text-center select-text-question" >
-                  <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
-                  <div class="inline-block " clickable="true" v-html="item_lc.noi_dung"></div>
-                  <br v-if="item_lc.obj_type == 'breakDown'">
-                  </span>
-                </div>
-                <p style="margin-top:10px; margin-bottom:5px; font-weight: 600;">Đáp án</p>
-                <div class="mt-4 text-center select-text-question">
-                  <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
-                    <div clickable="true" v-html="item_lc.noi_dung"  :class="item.dap_an[item_lc.id] ? 'inline-block bg-hightlight selected' : 'inline-block' " ></div>
-                    <br v-if="item_lc.obj_type == 'breakDown'">
-                  </span>
-                </div>
-            </div>
-
-            <!-- view quiz type 7 -->
-            <div class="ans-ques-type-7 mt-4" v-if="item.type_view == 7">
-              <div class="option-answers yes-no-question choice-button" clickable="true" v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
-                <a :class=" item.dap_an[item_lc.id] ? 'active bg-latte font-size-20' : 'bg-latte font-size-20'"><span v-html="item_lc.noi_dung"></span></a>
-              </div>
-            </div>
-
-            <!-- view quiz type 8 -->
-            <div class="ans-ques-type-8 mt-4" v-if="item.type_view == 8">
-              <div class="text-center">
-                <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
-                  <span class="rich_text inline-block item-img" v-if="item_lc.obj_type == 'richText'">
-                          <span :id="item_lc.id">
-                              <span v-html="item_lc.noi_dung"></span>
-                          </span>
-                      </span>
-                      <span class="InputText-input-text" v-if="item_lc.obj_type == 'inputText'">
-                        <a class="Input_text InputText"></a>
-                        <input type="text" class="inline-block txt " :id="item_lc.id" size="3" value="">
-                      </span>
-                      <br v-if="item_lc.obj_type == 'breakDown'">
-                </span>
-              </div>
-            </div>
-            <div class="ans-ques-type-8 mt-4" v-if="item.type_view == 8">
-              <p style="margin-bottom:10px; font-weight: 600;">Đáp án</p>
-              <div class="text-center">
-                <span v-for="(item_lc, index_lc) in item.lua_chon" :key="index_lc">
-                  <span class="rich_text inline-block item-img" v-if="item_lc.obj_type == 'richText'">
-                          <span :id="item_lc.id">
-                              <span v-html="item_lc.noi_dung"></span>
-                          </span>
-                      </span>
-                      <span class="InputText-input-text correct" v-if="item_lc.obj_type == 'inputText'">
-                        <a class="Input_text InputText"></a>
-                        <input type="text" class="inline-block txt " :id="item_lc.id" size="3" :value="item.dap_an[item_lc.id]">
-                      </span>
-                      <br v-if="item_lc.obj_type == 'breakDown'">
-                </span>
-              </div>
-            </div>
+          <div class="ques-parent" v-if="item.parent && item.parent.noi_dung" v-html="item.parent.noi_dung"></div>
+          <div class="vs-component con-vs-checkbox vs-checkbox-primary vs-checkbox-default">
+            <input type="checkbox" v-model="check_list" :value="item.id" class="vs-checkbox--input" >
+            <span class="checkbox_x vs-checkbox" style="border: 2px solid rgb(180, 180, 180);">
+              <span class="vs-checkbox--check">
+                <i class="vs-icon notranslate icon-scale vs-checkbox--icon  material-icons null">check</i>
+              </span>
+            </span>
+            <span class="con-slot-label"><strong style="font-size:16px;font-weight:600;">Câu
+                {{index + 1 + (pagination.cpage - 1) * pagination.limit}}</strong>
+            </span>
+          </div>
             
+          <div class="mb-base pl-8">
+            <template-type-1 :item="item" v-if="item.type_view == 1"/>
+            <template-type-2 :item="item" v-if="item.type_view == 2"/>
+            <template-type-3 :item="item" v-if="item.type_view == 3"/>
+            <template-type-4 :item="item" v-if="item.type_view == 4"/>
+            <template-type-5 :item="item" v-if="item.type_view == 5"/>
+            <template-type-6 :item="item" v-if="item.type_view == 6"/>
+            <template-type-7 :item="item" v-if="item.type_view == 7"/>
+            <template-type-8 :item="item" v-if="item.type_view == 8"/>
             <div class="mt-2 label-show-answer">
               <i @click="toggleAnswer(index)">Xem lời giải chi tiết</i> 
              </div>
@@ -221,16 +81,57 @@
         :total="Math.ceil(pagination.total / pagination.limit)"
         :max="7"
         v-model="pagination.cpage" @change="changePage()"/>
+    
+    <vs-popup title="Thêm vào bài kiểm tra" :active.sync="popup.active">
+      <div class="vx-col w-full mt-2">
+        <v-select
+              id="topic-options"
+              v-model="popup.test_id"
+              :dir="$vs.rtl? 'rtl' : 'ltr'"
+              :options="testOptions"
+              :reduce="val => val.id"
+              :clearable="true"
+              label="title"
+              input-id="topic-options"
+              placeholder="Chọn bài kiểm tra"
+            />
+      </div>
+      <span class="text-danger text-sm">{{ popup.error }}</span>
+      <div class="vx-col w-full mt-5 text-right">
+        <vs-button color="dark" type="border" @click="popup.active = false">Hủy</vs-button>
+        <vs-button color="primary" type="filled" @click="addQuizToTest()">Thêm</vs-button>
+      </div>
+    </vs-popup>
   </div>
 
 </template>
 <script>
+  import TemplateType1 from './template/type1.vue'
+  import TemplateType2 from './template/type2.vue'
+  import TemplateType3 from './template/type3.vue'
+  import TemplateType4 from './template/type4.vue'
+  import TemplateType5 from './template/type5.vue'
+  import TemplateType6 from './template/type6.vue'
+  import TemplateType7 from './template/type7.vue'
+  import TemplateType8 from './template/type8.vue'
   import axios from '../../http/axios.js'
+  import vSelect from 'vue-select'
   export default {
     components: {
+      vSelect,
+      TemplateType1,
+      TemplateType2,
+      TemplateType3,
+      TemplateType4,
+      TemplateType5,
+      TemplateType6,
+      TemplateType7,
+      TemplateType8
     },
     data() {
       return {
+        check_list: [
+        ],
         questions: [],
         chapter_info:'',
         limitSource: [10, 20, 50, 100],
@@ -248,6 +149,12 @@
           limit: 20,
           pages: [],
           init: 0
+        },
+        testOptions:[],
+        popup:{
+          active: false,
+          test_id :'',
+          error:''
         },
       }
     },
@@ -288,9 +195,60 @@
       },
       toggleAnswer(index){
         this.questions[index].show_loi_giai = ! this.questions[index].show_loi_giai
-      }
+      },
+      getTestByUser(){
+        this.$vs.loading()
+        axios.g ('/api/tests/all')
+          .then((response) => {
+            this.testOptions = response.data
+            this.$vs.loading.close();
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$vs.loading.close();
+          })
+      },
+      showModalAddQuiz(){
+        this.popup.active = true
+        this.popup.error =""
+        this.popup.test_id =""
+      },
+      addQuizToTest(){
+        if(!this.check_list.length){
+          this.popup.error = "Chọn câu hỏi để thêm vào bài kiểm tra."
+          return false
+        }
+        if(!this.popup.test_id){
+          this.popup.error = "Chọn bài kiểm tra."
+          return false
+        }
+        this.$vs.loading()
+        axios.p('/api/tests/add-quiz', {
+            test_id: this.popup.test_id,
+            list_quiz: this.check_list,
+            type: 1
+          })
+          .then((response) => {
+            this.popup.active=false
+            this.check_list = []
+            this.$vs.loading.close()
+            this.$vs.notify({
+                title: 'Thành Công',
+                text: response.data.message,
+                color: 'success',
+                iconPack: 'feather',
+                icon: 'icon-check'
+              })
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$vs.loading.close();
+          })
+
+        }
     },
     created() {
+      this.getTestByUser()
       this.getData()
     }
   }

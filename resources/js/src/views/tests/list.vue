@@ -38,7 +38,7 @@
                             <feather-icon icon="FileTextIcon" svgClasses="h-8 w-8"></feather-icon></span>
                         <div class="truncate">
                             <h5 class="mb-1">{{item.title}}</h5> 
-                            <span>30 phút 15 câu hỏi</span>
+                            <span>{{item.duration}} phút {{item.total_quiz}} câu hỏi</span>
                         </div>
                     </div>
                     <vs-divider />
