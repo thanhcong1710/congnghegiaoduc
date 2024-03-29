@@ -10,7 +10,7 @@
             <span class="con-slot-label"><strong style="font-size:16px;font-weight:600;">Câu
                 {{index + 1 + (pagination.cpage - 1) * pagination.limit}}</strong>
             </span>
-            <vs-button color="danger" type="border" size="small" style="float:right">Xóa</vs-button>
+            <vs-button color="danger" @click="openConfirmDelete(item)" type="border" size="small" style="float:right">Xóa</vs-button>
           </div>
             
           <div class="mb-base">
@@ -78,6 +78,7 @@
           pages: [],
           init: 0
         },
+        delete_id:''
       }
     },
     created() {
@@ -125,6 +126,39 @@
         this.pagination.cpage = 1
         this.pagination.limit = limit
         this.getData();
+      },
+      openConfirmDelete(item) {
+        this.delete_id = item.id
+        this.$vs.dialog({
+          type: 'confirm',
+          color: 'danger',
+          title: `Xóa câu hỏi`,
+          text: 'Bạn chắc chắn muốn bỏ câu hỏi trên khỏi bài kiểm tra',
+          accept: this.deleteQuiz,
+          acceptText: 'Xóa',
+          cancelText: 'Hủy'
+        })
+      },
+      deleteQuiz() {
+        this.$vs.loading()
+        axios.p(`/api/tests/quiz-delete`, {
+          quiz_map_id: this.delete_id
+        })
+        .then((response) => {
+          this.$vs.loading.close()
+          this.getData();
+          this.$vs.notify({
+            title: 'Thành Công',
+            text: response.data.message,
+            iconPack: 'feather',
+            icon: 'icon-alert-circle',
+            color: 'success'
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$vs.loading.close();
+        })
       },
     }
   }

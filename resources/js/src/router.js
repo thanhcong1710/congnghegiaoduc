@@ -219,7 +219,7 @@ const router = new Router({
           meta: {
             breadcrumb: [
               { title: 'Home', url: '/' },
-              { title: 'Bài kiểm tra', url: '/' },
+              { title: 'Bài kiểm tra', url: '/admin/tests' },
               { title: 'Chi tiết', active: true },
             ],
             pageTitle: 'Chi tiết bài kiểm tra',
@@ -244,6 +244,22 @@ const router = new Router({
         // =============================================================================
         // PAGES
         // =============================================================================
+        {
+          path: '/tests/join/:code',
+          name: 'test-join',
+          component: () => import('@/views/guest/tests/join.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/tests/take/:code',
+          name: 'test-take',
+          component: () => import('@/views/guest/tests/take.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
         {
           path: '/rooms/:code',
           name: 'room-join',

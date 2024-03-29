@@ -37,6 +37,13 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('trial', 'RoomsController@trialRoom');
     });
 
+    Route::prefix('test')->group(function () {
+        Route::get('info/{code}', 'TestsController@infoByCode');
+        Route::post('join', 'TestsController@joinTest');
+        Route::get('session-info/{code}', 'TestsController@infoSessionByCode');
+        Route::get('session-quiz/{test_id}', 'TestsController@getQuizSessionByTest');
+    });
+
     Route::prefix('auth')->group(function () {
         Route::post('login', 'AuthController@login');
         Route::post('register', 'AuthController@register');
@@ -98,6 +105,7 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('update', 'TestsController@update');
             Route::post('quizs/{id}', 'TestsController@getQuizs');
             Route::post('add-quiz', 'TestsController@addQuizToTest');
+            Route::post('quiz-delete', 'TestsController@deleteQuizFromTest');
         });
     });
 });

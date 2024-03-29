@@ -44,8 +44,8 @@
                     <vs-divider />
                     <div class="p-6 pb-0 pt-0">
                        <div class="flex flex-wrap justify-between mb-3">
-                          <feather-icon style="cursor: pointer" @click="copyTextJoinLink(item.join_link, 'Link tham gia cuộc họp')" icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
-                          <vs-button  @click="join(item)">Bắt đầu</vs-button>
+                          <feather-icon style="cursor: pointer" @click="copyTextJoinLink(item.join_link, 'Link kiểm tra')" icon="CopyIcon" svgClasses="h-9 w-9"></feather-icon>
+                          <vs-button  @click="join(item)">Giao bài</vs-button>
                         </div>
                     </div>
                 </div>

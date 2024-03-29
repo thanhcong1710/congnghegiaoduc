@@ -28,6 +28,9 @@ class TestsController extends Controller
         $list = u::query("SELECT t.*, (SELECT count(id) FROM  qz_test_quizs WHERE test_id=t.id AND status=1) AS total_quiz
             FROM qz_tests AS t
             WHERE $cond ORDER BY t.id DESC $limitation");
+        foreach($list AS $k=>$row){
+            $list[$k]->join_link = config('app.url').'/tests/join/'.$row->code;
+        }
         $data = u::makingPagination($list, $total->total, $page, $limit);
         return response()->json($data);
     }
@@ -48,6 +51,7 @@ class TestsController extends Controller
         }else{
             u::insertSimpleRow(array(
                 'topic_id' => data_get($request, 'topic_id'),
+                'code' => Auth::user()->id."_".uniqid(),
                 'user_id' => Auth::user()->id,
                 'title' => data_get($request, 'title'),
                 'status' => 1,
@@ -136,7 +140,7 @@ class TestsController extends Controller
             $limit = isset($pagination->limit) ? (int) $pagination->limit : 20;
             $offset = $page == 1 ? 0 : $limit * ($page - 1);
             $limitation =  $limit > 0 ? " LIMIT $offset, $limit" : "";
-            $cond = " m.test_id = ".$test_info->id;
+            $cond = " m.status=1 AND m.test_id = ".$test_info->id;
             $total = u::first("SELECT count(m.id) AS total FROM qz_test_quizs AS m WHERE $cond ");
             $list = u::query("SELECT m.*
                 FROM qz_test_quizs AS m 
@@ -214,5 +218,114 @@ class TestsController extends Controller
             'message' => 'Thêm thành công '.$total_add.' câu hỏi. '.($duplicate > 0 ? 'Bị trùng '.$duplicate.' câu hỏi' :''),
         ];
         return response()->json($result);
+    }
+
+    public function deleteQuizFromTest(Request $request){
+        $quiz_map_id = data_get($request, 'quiz_map_id');
+        u::updateSimpleRow(array(
+            'status' => 0,
+            'updated_at' => date('Y-m-d H:i:s'),
+            'updator_id' => Auth::user()->id
+        ), array('id'=>$quiz_map_id), 'qz_test_quizs');
+        $result = [
+            'status' => 1,
+            'message' => 'Xóa câu hỏi khỏi bài kiểm tra thành công',
+        ];
+        return response()->json($result);
+    }
+
+    public function infoByCode(Request $request){
+        $test_info = u::first("SELECT q.* , 
+                (SELECT count(id) FROM  qz_test_quizs WHERE test_id=q.id AND status=1) AS total_quiz
+            FROM qz_tests AS q 
+            WHERE q.status =1 AND q.code = '".$request->code."'");
+        if($test_info){
+            $result = [
+                'status' => 1,
+                'message' => 'Thành công',
+                'data' => $test_info
+            ];  
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link kiểm tra không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+    
+    public function joinTest(Request $request){
+        $test_info = u::first("SELECT * FROM qz_tests WHERE `status`=1 AND code = '".$request->code."'");
+        if($test_info){
+            $client_name = data_get($request, 'name');
+            $client_ip = $request->ip();
+            $session_info = u::first("SELECT * FROM qz_test_sessions WHERE test_id= $test_info->id AND `status`=0 AND client_ip = '$client_ip' AND client_name='$client_name'");
+            if($session_info){
+                $code = data_get($session_info, 'code');
+            }else{
+                $code = $test_info->id."_".uniqid();
+                u::insertSimpleRow(array(
+                    'code' => $code,
+                    'test_id' => $test_info->id,
+                    'client_ip' => $client_ip,
+                    'client_name' => $client_name,
+                    'status' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'start_time' => date('Y-m-d H:i:s')
+                ), 'qz_test_sessions');
+            }
+            
+            $result = [
+                'status' => 1,
+                'message' => 'Ok',
+                'redirect_url' => config('app.url')."/tests/take/".$code
+            ];
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link tham gia không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function infoSessionByCode(Request $request){
+        $test_session_info = u::first("SELECT s.id AS test_session_id,s.start_time,s.total_time,s.end_time, t.id AS test_id, t.*
+            FROM qz_test_sessions AS s
+            LEFT JOIN qz_tests AS t ON t.id=s.test_id
+            WHERE s.status=0 AND s.code = '".$request->code."'");
+        if($test_session_info){
+            $tmp_time = time() - strtotime($test_session_info->start_time);
+            $test_session_info->left_time = (int)$test_session_info->duration * 60 - (int)$test_session_info->total_time - (int)$tmp_time;
+            $test_session_info->left_time = $test_session_info->left_time > 0 ? $test_session_info->left_time : 0;
+            $result = [
+                'status' => 1,
+                'message' => 'ok',
+                'data' => $test_session_info
+            ];
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link làm bài không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function getQuizSessionByTest(Request $request){
+        $cond = " m.status=1 AND m.test_id = ".$request->test_id;
+        $list = u::query("SELECT m.*
+            FROM qz_test_quizs AS m 
+            WHERE $cond ORDER BY m.stt DESC, m.id DESC");
+        foreach($list AS $k=>$ques){
+            if($ques->quiz_type == 1){
+                $quiz = u::first("SELECT * FROM vung_oi_question WHERE id = $ques->quiz_id");
+                $quiz_data = u::convertQuestionVungOi($quiz);
+                unset($quiz_data['loi_giai']);
+                unset($quiz_data['dap_an']);
+            }
+            $list[$k]->quiz_info = $quiz_data;
+        }
+        return response()->json($list);
     }
 }

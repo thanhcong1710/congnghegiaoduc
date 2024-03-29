@@ -37,13 +37,13 @@ export default [
         name: 'rooms',
         slug: 'rooms',
         icon: 'VideoIcon',
-        i18n: 'Phòng họp online',
+        i18n: 'Phòng học online',
         submenu: [
           {
             url: '/admin/rooms',
             name: 'rooms',
             slug: 'rooms',
-            i18n: 'Thêm mới'
+            i18n: 'DS phòng học'
           },
           {
             url: '/admin/records',
@@ -62,7 +62,7 @@ export default [
             url: '/admin/tests',
             name: 'tests',
             slug: 'tests',
-            i18n: 'Thêm mới'
+            i18n: 'DS bài kiểm tra'
           },
           {
             url: '/admin/topics',
