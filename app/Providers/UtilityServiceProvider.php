@@ -448,4 +448,26 @@ class UtilityServiceProvider extends ServiceProvider
 		}
 		return $result;
 	}
+
+	public static function getResultAnswerQuiz($quiz_id, $quiz_type, $user_answer){
+		if($quiz_type == 1){
+			$data = self::getResultAnswerQuizVungOi($quiz_id, $user_answer);
+		}
+		return $data;
+	}
+
+	public static function getResultAnswerQuizVungOi($quiz_id, $user_answer){
+		$question_info = self::first("SELECT answer, question_type FROM vung_oi_question WHERE id =$quiz_id");
+		if($question_info){
+			if($question_info->question_type == 1){
+				$answer = json_decode($question_info->answer);
+				if($user_answer == data_get($answer, 'solution_key')){
+					return 1;
+				}
+			}
+			return 2;
+		}else{
+			return 2;
+		}
+	}
 }

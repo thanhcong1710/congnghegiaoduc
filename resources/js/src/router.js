@@ -261,6 +261,14 @@ const router = new Router({
           }
         },
         {
+          path: '/tests/result/:code',
+          name: 'test-result',
+          component: () => import('@/views/guest/tests/result.vue'),
+          meta: {
+            rule: 'editor'
+          }
+        },
+        {
           path: '/rooms/:code',
           name: 'room-join',
           component: () => import('@/views/rooms/join.vue'),

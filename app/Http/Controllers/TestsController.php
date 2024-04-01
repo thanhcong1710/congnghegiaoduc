@@ -323,9 +323,91 @@ class TestsController extends Controller
                 $quiz_data = u::convertQuestionVungOi($quiz);
                 unset($quiz_data['loi_giai']);
                 unset($quiz_data['dap_an']);
+                $answer_info = u::first("SELECT * FROM qz_test_session_quizs WHERE test_session_id = $request->test_session_id AND test_quiz_id = $ques->id");
+                $quiz_data['user_answer'] = $answer_info ? data_get($answer_info, 'answer') : '';
             }
             $list[$k]->quiz_info = $quiz_data;
         }
         return response()->json($list);
+    }
+
+    public function addAnswerQuizByUser(Request $request){
+        $answer_info = u::first("SELECT * FROM qz_test_session_quizs WHERE test_session_id = $request->test_session_id AND test_quiz_id = $request->test_quiz_id");
+        if($answer_info){
+            u::updateSimpleRow(array(
+                'answer' => $request->answer,
+                'updated_at' => date('Y-m-d H:i:s')
+            ), array('id'=>$answer_info->id), 'qz_test_session_quizs');
+        } else{
+            u::insertSimpleRow(array(
+                'test_session_id' => $request->test_session_id,
+                'test_quiz_id' => $request->test_quiz_id,
+                'quiz_id' => $request->quiz_id,
+                'quiz_type' => $request->quiz_type,
+                'answer' => $request->answer,
+                'created_at' => date('Y-m-d H:i:s'),
+            ), 'qz_test_session_quizs');
+        }
+        return response()->json('ok');
+    }
+
+    public function endTest(Request $request){
+        $test_session_info = u::first("SELECT * FROM qz_test_sessions WHERE `status`=0 AND id = '".$request->test_session_id."'");
+        if($test_session_info){
+            $quizs = data_get($request, 'quizs');
+            $total_correct = 0;
+            foreach($quizs AS $row){
+                $test_quiz_id = data_get($row, 'id');
+                $test_session_quiz_info = u::first("SELECT * FROM qz_test_session_quizs WHERE test_session_id = $request->test_session_id AND test_quiz_id = $test_quiz_id");
+                $user_answer = data_get(data_get($row, 'quiz_info'), 'user_answer');
+                if($user_answer){
+                    $answer_result = u::getResultAnswerQuiz(data_get($row, 'quiz_id'), data_get($row, 'quiz_type'), $user_answer);
+                }else{
+                    $answer_result = 3;
+                }
+                if($test_session_quiz_info){
+                    u::updateSimpleRow(array(
+                        'answer' => $user_answer,
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'status' => 1,
+                        'result' => $answer_result
+                    ), array('id'=>$test_session_quiz_info->id), 'qz_test_session_quizs');
+                }else{
+                    u::insertSimpleRow(array(
+                        'test_session_id' => $request->test_session_id,
+                        'test_quiz_id' => data_get($row, 'id'),
+                        'quiz_id' => data_get($row, 'quiz_id'),
+                        'quiz_type' => data_get($row, 'quiz_type'),
+                        'answer' => $user_answer,
+                        'status' => 1,
+                        'result' => $answer_result,
+                        'created_at' => date('Y-m-d H:i:s'),
+                    ), 'qz_test_session_quizs');
+                }
+                if($answer_result == 1){
+                    $total_correct ++;
+                }
+            }
+            u::updateSimpleRow(array(
+                'end_time' => date('Y-m-d H:i:s'),
+                'total_time' => time() - strtotime($test_session_info->start_time),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'total_quiz' => count($quizs),
+                'total_quiz_correct' => $total_correct ++
+            ), array('id'=>$test_session_info->id), 'qz_test_sessions');
+            
+            $result = [
+                'status' => 1,
+                'message' => 'Ok',
+                'redirect_url' => config('app.url')."/tests/result/".$test_session_info->code
+            ];
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Phiên kiểm tra không hợp lệ',
+            ];
+        }
+        return response()->json($result);
     }
 }

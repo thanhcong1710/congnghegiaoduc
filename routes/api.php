@@ -41,7 +41,9 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('info/{code}', 'TestsController@infoByCode');
         Route::post('join', 'TestsController@joinTest');
         Route::get('session-info/{code}', 'TestsController@infoSessionByCode');
-        Route::get('session-quiz/{test_id}', 'TestsController@getQuizSessionByTest');
+        Route::get('session-quiz/{test_id}/{test_session_id}', 'TestsController@getQuizSessionByTest');
+        Route::post('answer-quiz', 'TestsController@addAnswerQuizByUser');
+        Route::post('end', 'TestsController@endTest');
     });
 
     Route::prefix('auth')->group(function () {

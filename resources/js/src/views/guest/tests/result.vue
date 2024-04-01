@@ -187,7 +187,7 @@
           quizs: this.quizs
         })
         .then((response) => {
-          window.location.href = response.data.redirect_url;
+          
         })
         .catch((error) => {
           console.log(error);
