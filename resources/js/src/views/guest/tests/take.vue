@@ -221,35 +221,3 @@
     },
   }
 </script>
-<style>
-.vx-card.test-overview .vx-card__collapsible-content .vx-card__body{
-  padding: 0px;
-}
-.test-overview .quiz-icon{
-  background: #f1f1f1;
-  border-radius: 50%;
-  margin: 5px;
-  cursor: pointer;
-  width: 35px;
-  text-align: center;
-  height: 35px;
-  padding-top: 7px;
-  float: left;
-}
-.test-overview .quiz-icon.primary{
-  background: #7467f0
-}
-.test-overview .box-select-quiz{
-  padding: 30px 20px;
-  overflow: hidden;
-}
-.test-overview .box-note{
-  overflow: hidden;
-}
-.test-overview .box-note .text-quiz{
-  padding-top: 14px;
-}
-body{
-  color:#161616
-}
-</style>

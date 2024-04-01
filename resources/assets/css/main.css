@@ -294,3 +294,47 @@
 .ans-ques-type-5 .solution-fill-item.answer-correct {
     border: 1px solid #0ab60a;
 }
+
+body {
+    font-family: OpenSans, sans-serif !important;
+    color: #252525 !important;
+}
+
+.vx-card.test-overview .vx-card__collapsible-content .vx-card__body {
+    padding: 0px;
+}
+
+.test-overview .quiz-icon {
+    background: #f1f1f1;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    width: 35px;
+    text-align: center;
+    height: 35px;
+    padding-top: 7px;
+    float: left;
+}
+
+.test-overview .quiz-icon.primary {
+    background: #7467f0
+}
+.test-overview .quiz-icon.error {
+    background: #bc0606
+}
+.test-overview .quiz-icon.success {
+    background: #03a416
+}
+
+.test-overview .box-select-quiz {
+    padding: 30px 20px;
+    overflow: hidden;
+}
+
+.test-overview .box-note {
+    overflow: hidden;
+}
+
+.test-overview .box-note .text-quiz {
+    padding-top: 14px;
+}

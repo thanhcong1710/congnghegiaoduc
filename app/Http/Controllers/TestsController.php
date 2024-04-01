@@ -259,9 +259,17 @@ class TestsController extends Controller
         if($test_info){
             $client_name = data_get($request, 'name');
             $client_ip = $request->ip();
-            $session_info = u::first("SELECT * FROM qz_test_sessions WHERE test_id= $test_info->id AND `status`=0 AND client_ip = '$client_ip' AND client_name='$client_name'");
+            $session_info = u::first("SELECT * FROM qz_test_sessions WHERE test_id= $test_info->id AND client_ip = '$client_ip' AND client_name='$client_name' ORDER BY id DESC");
             if($session_info){
                 $code = data_get($session_info, 'code');
+                if($session_info->status == 1){
+                    $result = [
+                        'status' => 1,
+                        'message' => 'Ok',
+                        'redirect_url' => config('app.url')."/tests/result/".$code
+                    ];
+                    return response()->json($result);
+                }
             }else{
                 $code = $test_info->id."_".uniqid();
                 u::insertSimpleRow(array(
@@ -409,5 +417,40 @@ class TestsController extends Controller
             ];
         }
         return response()->json($result);
+    }
+
+    public function resultSessionByCode(Request $request){
+        $test_session_info = u::first("SELECT s.id AS test_session_id,s.start_time, s.client_name, s.total_time,s.end_time, s.total_quiz, s.total_quiz_correct, t.id AS test_id, t.*
+            FROM qz_test_sessions AS s
+            LEFT JOIN qz_tests AS t ON t.id=s.test_id
+            WHERE s.status=1 AND s.code = '".$request->code."'");
+        if($test_session_info){
+            $result = [
+                'status' => 1,
+                'message' => 'ok',
+                'data' => $test_session_info
+            ];
+        }else{
+            $result = [
+                'status' => 0,
+                'message' => 'Link kết quả không hợp lệ',
+            ];
+        }
+        return response()->json($result);
+    }
+
+    public function getQuizSessionResultByTest(Request $request){
+        $list = u::query("SELECT q.*
+            FROM qz_test_session_quizs AS q
+                LEFT JOIN qz_test_quizs AS m ON m.id = q.test_quiz_id 
+            WHERE q.test_session_id = $request->test_session_id ORDER BY m.stt DESC, m.id DESC");
+        foreach($list AS $k=>$ques){
+            if($ques->quiz_type == 1){
+                $quiz = u::first("SELECT * FROM vung_oi_question WHERE id = $ques->quiz_id");
+                $quiz_data = u::convertQuestionVungOi($quiz);
+            }
+            $list[$k]->quiz_info = $quiz_data;
+        }
+        return response()->json($list);
     }
 }

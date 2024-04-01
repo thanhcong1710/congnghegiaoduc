@@ -9557,6 +9557,65 @@
   border: 1px solid #0ab60a;
 }
 
+body {
+  font-family: OpenSans, sans-serif !important;
+  color: #252525 !important;
+}
+
+[dir] .vx-card.test-overview .vx-card__collapsible-content .vx-card__body {
+  padding: 0px;
+}
+
+.test-overview .quiz-icon {
+  width: 35px;
+  height: 35px;
+}
+
+[dir] .test-overview .quiz-icon {
+  background: #f1f1f1;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 7px;
+}
+
+[dir=ltr] .test-overview .quiz-icon {
+    float: left;
+}
+
+[dir=rtl] .test-overview .quiz-icon {
+  float: right;
+}
+
+[dir] .test-overview .quiz-icon.primary {
+  background: #7467f0
+}
+
+[dir] .test-overview .quiz-icon.error {
+  background: #bc0606
+}
+
+[dir] .test-overview .quiz-icon.success {
+  background: #03a416
+}
+
+.test-overview .box-select-quiz {
+  overflow: hidden;
+}
+
+[dir] .test-overview .box-select-quiz {
+  padding: 30px 20px;
+}
+
+.test-overview .box-note {
+  overflow: hidden;
+}
+
+[dir] .test-overview .box-note .text-quiz {
+  padding-top: 14px;
+}
+
 @media (min-width: 576px) {
   .sm\:container {
     width: 100%;
