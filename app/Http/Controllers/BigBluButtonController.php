@@ -16,6 +16,7 @@ use BigBlueButton\Parameters\EndMeetingParameters;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
+
 class BigBluButtonController extends Controller
 {
     public function createRoom(Request $request)
