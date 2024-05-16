@@ -13,6 +13,6 @@ class ApplicationController extends Controller
         return view('application');
     }
     public function __invoke(){
-        return view('index');
+        return view('index_erp');
     }
 }

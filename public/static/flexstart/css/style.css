@@ -41,7 +41,7 @@ h6 {
 # Sections
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 36px 0;
   overflow: hidden;
 }
 
@@ -2421,4 +2421,62 @@ section {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+.css-16kd4k3 {
+  width: 24px;
+  height: 24px;
+  color: rgb(0, 171, 85);
+}
+.css-cu1lgt {
+    width: 24px;
+    height: 24px;
+    color: rgb(0, 184, 217);
+}
+.css-en2zhc {
+    width: 24px;
+    height: 24px;
+    color: rgb(105, 108, 255);
+}
+.css-wdm41g {
+    width: 24px;
+    height: 24px;
+    color: rgb(255, 171, 0);
+}
+.css-en2zhc {
+    width: 24px;
+    height: 24px;
+    color: rgb(105, 108, 255);
+}
+.css-1d9yyid {
+    width: 24px;
+    height: 24px;
+    color: rgb(255, 86, 48);
+}
+.iconify{
+  margin-left: 4px;
+}
+.button-box-item.btn-get-started{
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 43, 54);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-image: none;
+    overflow: hidden;
+    z-index: 0;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: none;
+    padding: 10px 15px;
+    box-shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px, rgba(145, 158, 171, 0.14) 0px 4px 5px 0px, rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+}
+.hero h1 {
+  font-size: 36px;
+}
+.hero h2{
+  text-align: justify; font-size: 22px; margin-bottom: 10px;
+}
+.clients .clients-slider .swiper-slide img{
+  opacity: 1;
+}
+.testimonials .swiper-slide{
+  opacity: 0.8;
 }
