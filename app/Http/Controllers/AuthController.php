@@ -250,4 +250,18 @@ class AuthController extends Controller
             'message' => "Đã gửi lại email kích hoạt tài khoản đến địa chỉ $request->email"
         ], 200);
     }
+
+    public function registerTrial(Request $request){
+        u::insertSimpleRow(array(
+            'company' => data_get($request, 'branch_name'),
+            'phone' => data_get($request, 'phone'),
+            'contact_name' => data_get($request, 'name'),
+            'created_at'=>date('Y-m-d H:i:s'),
+            'note'=> data_get($request, 'code'),
+        ),'contacts');
+        return response()->json([
+            'status' => 1,
+            'message' => "ok"
+        ], 200);
+    }
 }

@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Công nghệ giáo dục - EduERP</title>
-  <meta content="Công nghệ giáo dục - EduERP cung cấp giải pháp toàn diện giúp vận hành, quản lý chuỗi trung tâm giáo dục. Hỗ trợ nâng cấp phát triển may đo theo yêu cầu." name="description">
+  <meta content="Công nghệ giáo dục - EduERP cung cấp giải pháp toàn diện giúp vận hành, quản lý chuỗi trung tâm giáo dục. Hỗ trợ nâng cấp phát triển may đo phần mềm theo yêu cầu." name="description">
   <meta content="BigBlueButton, Elearning, Lớp học ảo, Cuộc họp video, Meeting room, CRM, LMS, ERP" name="keywords">
 
   <!-- Favicons -->
@@ -381,7 +381,7 @@
           </div>
 
           <div class="col-lg-6">
-            <form id="#formElement" method="post" class="php-email-form">
+            <form class="php-email-form">
               <div class="row gy-4">
 
                 <div class="col-md-12">
@@ -396,8 +396,9 @@
                   <input type="text" class="form-control" name="branch_name"  id="input_branch_name" placeholder="Tên trung tâm" required>
                 </div>
 
+                <p style="color:red" id="mess_error"></p>
                 <div class="col-md-12 text-center">
-                  <button type="submit">Đăng ký tư vấn</button>
+                  <button class ="button-form" type="button" onclick="registerTrial()" id="button_submit">Đăng ký tư vấn</button>
                 </div>
 
               </div>
@@ -423,7 +424,7 @@
             <a href="#" class="logo d-flex align-items-center">
               <img src="../static/logo.png" alt="" style="max-height: 56px">
             </a>
-            <p style="text-align: justify;max-width: 446px;">Cung cấp giải pháp toàn diện giúp vận hành, quản lý chuỗi trung tâm giáo dục. Hỗ trợ kết nối đồng bộ dữ liệu với các hệ thống.</p>
+            <p style="text-align: justify;max-width: 446px;">Cung cấp giải pháp toàn diện giúp vận hành, quản lý chuỗi trung tâm giáo dục. Hỗ trợ nâng cấp phát triển may đo phần mềm theo yêu cầu.</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -435,9 +436,9 @@
             <h4>Liên kết</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="#home">Trang chủ</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#about">Giải pháp</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#pricing">Bảng giá</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#documents">Hướng dẫn</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Giải pháp</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Bảng giá</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Hướng dẫn</a></li>
             </ul>
           </div>
 
@@ -467,23 +468,6 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML87RVSPD0"></script>
   <script>
-    $("form#formElement").submit(function(){
-      $.ajax({
-          type: "POST",
-          url: postDataUrl,
-          data: {
-            
-          },
-          processData: false,
-          contentType: false,
-          dataType: "json",
-          success: function(data, textStatus, jqXHR) {
-            //process data
-          },
-          error: function(data, textStatus, jqXHR) {
-            //process error msg
-          },
-  });
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -497,7 +481,7 @@
   <script src="../static/flexstart/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../static/flexstart/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../static/flexstart/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../static/flexstart/vendor/php-email-form/validate.js"></script>
+  <!-- <script src="../static/flexstart/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
   <script src="../static/flexstart/js/main.js"></script>
@@ -516,6 +500,43 @@
       }
     }
   });
+  function registerTrial(){
+    $('#mess_error').html('')
+    var name = $('#input_name').val()
+    var phone = $('#input_phone').val()
+    var branch_name = $('#input_branch_name').val()
+    if( name==''){
+      $('#mess_error').html('Vui lòng nhập họ tên')
+      return false
+    }
+    if( phone==''){
+      $('#mess_error').html('Vui lòng nhập số điện thoại')
+      return false
+    }
+    if( branch_name==''){
+      $('#mess_error').html('Vui lòng nhập tên trung tâm')
+      return false
+    }
+    $('#button_submit').attr('disabled','disabled');
+    $.ajax({
+        type: "POST",
+        url: '<?php echo env('APP_URL')?>/api/register-trial',
+        data: {
+          name : name,
+          phone : phone,
+          branch_name : branch_name,
+          code: localStorage.getItem("registerCode")
+        },
+        success: function(data, textStatus, jqXHR) {
+          alert('Đăng ký tư vấn thành công, chúng tôi sẽ liên hệ tư vấn trong thời gian sớm nhất.')
+          // location.reload();
+          //process data
+        },
+        error: function(data, textStatus, jqXHR) {
+          //process error msg
+        },
+    });
+  }
   </script>
 <style>
 
