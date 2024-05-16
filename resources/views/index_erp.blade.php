@@ -393,7 +393,7 @@
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="branch_name"  id="input_branch_name" placeholder="Tên trung tâm" required>
+                  <input type="text" class="form-control" name="branch_name"  id="input_branch_name" placeholder="Tên trường, trung tâm" required>
                 </div>
 
                 <p style="color:red" id="mess_error"></p>
@@ -529,7 +529,7 @@
         },
         success: function(data, textStatus, jqXHR) {
           alert('Đăng ký tư vấn thành công, chúng tôi sẽ liên hệ tư vấn trong thời gian sớm nhất.')
-          // location.reload();
+          location.reload();
           //process data
         },
         error: function(data, textStatus, jqXHR) {
