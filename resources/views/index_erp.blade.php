@@ -103,7 +103,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="MuiBox-root css-1d9yyid iconify iconify--solar" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="m18.18 8.04l.463-.464a1.966 1.966 0 1 1 2.781 2.78l-.463.464M18.18 8.04s.058.984.927 1.853s1.854.927 1.854.927M18.18 8.04l-4.26 4.26c-.29.288-.434.433-.558.592c-.146.188-.271.39-.374.606c-.087.182-.151.375-.28.762l-.413 1.24l-.134.401m8.8-5.081l-4.26 4.26c-.29.29-.434.434-.593.558c-.188.146-.39.271-.606.374c-.182.087-.375.151-.762.28l-1.24.413l-.401.134m0 0l-.401.134a.53.53 0 0 1-.67-.67l.133-.402m.938.938l-.938-.938"></path><path stroke-linecap="round" d="M8 13h2.5M8 9h6.5M8 17h1.5M19.828 3.172C18.657 2 16.771 2 13 2h-2C7.229 2 5.343 2 4.172 3.172C3 4.343 3 6.229 3 10v4c0 3.771 0 5.657 1.172 6.828C5.343 22 7.229 22 11 22h2c3.771 0 5.657 0 6.828-1.172c.944-.943 1.127-2.348 1.163-4.828"></path></g></svg>
               </button>
           </div>
-          <div data-aos="fade-up" data-aos-delay="200">
+          <div>
             <div class="text-center text-lg-start">
               <a  href="#contact" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Đăng ký tư vấn miễn phí ngay</span>
@@ -112,7 +112,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+        <div class="col-lg-6 hero-img">
           <img src="../static/flexstart/img/hero-img.png" class="img-fluid" alt="">
         </div>
       </div>
@@ -124,10 +124,10 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container" >
         <div class="row gx-0">
 
-          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
             <div class="content">
               <h2>Vấn đề trung tâm của bạn đang gặp phải?</h2>
               <p>
@@ -145,7 +145,7 @@
             </div>
           </div>
 
-          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+          <div class="col-lg-6 d-flex align-items-center" >
             <img src="../static/flexstart/img/about.jpg" class="img-fluid" alt="">
           </div>
 
@@ -157,7 +157,7 @@
     <!-- ======= Values Section ======= -->
     <section id="values" class="values">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container" >
 
         <header class="section-header">
           <p>GIÁ TRỊ MANG LẠI CHO DOANH NGHIỆP</p>
@@ -165,21 +165,21 @@
 
         <div class="row">
 
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-4" >
             <div class="box">
               <img src="../static/flexstart/img/values-3.png" class="img-fluid" alt="">
               <h3>Quản lý toàn diện trên một hệ thống duy nhất</h3>
               <p style="text-align: justify;">Phần mềm quản lý dành riêng cho các trung tâm ngoại ngữ, trường viện đào tạo, giúp quản lý kết nối, tương tác, chăm sóc học viên hiệu quả từ việc tạo ra quy trình chăm sóc tự động, sự phối hợp của các phòng ban trên cùng một hệ thống. </p>
             </div>
           </div>
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-4 mt-4 mt-lg-0" >
             <div class="box">
               <img src="../static/flexstart/img/values-1.png" class="img-fluid" alt="">
               <h3>Kết nối học viên và phụ huynh hiệu quả</h3>
               <p  style="text-align: justify;">Dễ dàng theo dõi tình hình hoàn thành bài tập & kiểm tra từ đó đánh giá được tiến bộ của học sinh một cách toàn diện và liên tục, giúp học sinh học tập hiệu quả hơn. </p>
             </div>
           </div>
-          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-4 mt-4 mt-lg-0" >
             <div class="box">
               <img src="../static/flexstart/img/values-2.png" class="img-fluid" alt="">
               <h3>Tối ưu triệt để chi phí, thời gian & nguồn lực</h3>
@@ -201,21 +201,21 @@
     <!-- ======= Features Section ======= -->
     <section id="features" class="features">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container">
         <!-- Feature Icons -->
-        <div class="row feature-icons" data-aos="fade-up" style="margin-top: 0px;">
+        <div class="row feature-icons">
           <h3>Sự phối hợp chặt chẽ của các phòng ban trên một hệ thống</h3>
 
           <div class="row">
 
-            <div class="col-xl-4 text-center" data-aos="fade-right" data-aos-delay="100">
+            <div class="col-xl-4 text-center">
               <img src="../static/flexstart/img/features-3.png" class="img-fluid p-4" alt="">
             </div>
 
             <div class="col-xl-8 d-flex content">
               <div class="row align-self-center gy-4">
 
-                <div class="col-md-12 icon-box" data-aos="fade-up">
+                <div class="col-md-12 icon-box">
                   <i class="ri-command-line"></i>
                   <div>
                     <h4>BỘ PHẬN TUYỂN SINH chăm sóc ngay khi có lead</h4>
@@ -223,7 +223,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 icon-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-12 icon-box" >
                   <i class="ri-command-line"></i>
                   <div>
                     <h4>BỘ PHẬN CSKH chăm sóc học viên toàn diện suốt quá trình học</h4>
@@ -231,7 +231,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 icon-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-12 icon-box">
                   <i class="ri-command-line"></i>
                   <div>
                     <h4>BỘ PHẬN GIÁO VỤ quản lý đa nhiệm, hiệu quả</h4>
@@ -239,7 +239,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 icon-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-12 icon-box">
                   <i class="ri-command-line"></i>
                   <div>
                     <h4>BAN GIÁM ĐỐC dễ dàng thiết lập quy trình quản lý chuyên nghiệp</h4>
@@ -260,7 +260,7 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <header class="section-header">
           <p>Đối tác của chúng tôi</p>
@@ -285,13 +285,13 @@
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <header class="section-header">
           <p>Doanh nghiệp tin tưởng, mọi người yêu thích</p>
         </header>
 
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonials-slider swiper">
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
@@ -366,7 +366,7 @@
 
     <section id="contact" class="contact">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container">
       <header class="section-header">
           <p>Đăng ký tư vấn miễn phí</p>
           <p style="font-size: 16px; font-weight: normal;line-height: 18px;">2.000+ giáo viên và trung tâm đã tự động hóa quy trình quản lý và tối ưu chi phí thành công.</p>
