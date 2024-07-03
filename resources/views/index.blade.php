@@ -459,7 +459,7 @@
               199 Hồ Tùng Mậu<br>
               Nam Từ Liêm, Hà Nội<br>
               <strong>Phone:</strong> 038 9941 902<br>
-              <strong>Email:</strong> info@congnghegiaoduc.com<br>
+              <strong>Email:</strong> info.congnghegiaoduc@gmail.com<br>
             </p>
 
           </div>
