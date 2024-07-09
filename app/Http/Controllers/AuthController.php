@@ -259,6 +259,12 @@ class AuthController extends Controller
             'created_at'=>date('Y-m-d H:i:s'),
             'note'=> data_get($request, 'code'),
         ),'contacts');
+        $content = data_get($request, 'phone'). " - ". data_get($request, 'name'). " - " .data_get($request, 'branch_name')." - " .data_get($request, 'code');
+        Mail::send('mail.test', array('title'=>'Có tài khoản đăng ký tư vấn', 'content' =>$content), function($message) {
+            $subject = "[Công nghệ giáo dục] Đăng ký tư vấn mới";
+            $message->to('thanhcong1710@gmail.com')->subject($subject);
+        });
+        
         return response()->json([
             'status' => 1,
             'message' => "ok"

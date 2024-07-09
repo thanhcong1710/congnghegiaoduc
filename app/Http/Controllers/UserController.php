@@ -64,11 +64,6 @@ class UserController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'creator_id'=>Auth::user()->id
         ), 'contacts');
-        $content = $request->phone. " - ". $request->company. " - " .$request->contact_name." - " .$request->note;
-        Mail::send('mail.test', array('title'=>'Có tài khoản đăng ký tư vấn', 'content' =>$content), function($message) {
-            $subject = "[Công nghệ giáo dục] Đăng ký tư vấn mới";
-            $message->to('thanhcong1710@gmail.com')->subject($subject);
-        });
         return response()->json([
             'status' => 1,
             'message' => 'Đăng ký tư vấn thành công. Chúng tôi sẽ liên hệ tư vấn trong thời gian sớm nhất'
