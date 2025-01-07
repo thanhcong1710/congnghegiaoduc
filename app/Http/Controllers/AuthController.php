@@ -252,13 +252,13 @@ class AuthController extends Controller
     }
 
     public function registerTrial(Request $request){
-        u::insertSimpleRow(array(
-            'company' => data_get($request, 'branch_name'),
-            'phone' => data_get($request, 'phone'),
-            'contact_name' => data_get($request, 'name'),
-            'created_at'=>date('Y-m-d H:i:s'),
-            'note'=> data_get($request, 'code'),
-        ),'contacts');
+        // u::insertSimpleRow(array(
+        //     'company' => data_get($request, 'branch_name'),
+        //     'phone' => data_get($request, 'phone'),
+        //     'contact_name' => data_get($request, 'name'),
+        //     'created_at'=>date('Y-m-d H:i:s'),
+        //     'note'=> data_get($request, 'code'),
+        // ),'contacts');
         $content = data_get($request, 'phone'). " - ". data_get($request, 'name'). " - " .data_get($request, 'branch_name')." - " .data_get($request, 'code');
         Mail::send('mail.test', array('title'=>'Có tài khoản đăng ký tư vấn', 'content' =>$content), function($message) {
             $subject = "[Công nghệ giáo dục] Đăng ký tư vấn mới";
